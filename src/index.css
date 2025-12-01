@@ -20,6 +20,12 @@
   --color-dark-border: #3c402d;
   --color-accent-teal: #47a8a5;
 
+  /* GamePage colors */
+  --color-card-dark: #1c1e14;
+  --color-border-dark-game: #2e3029;
+  --color-highlight-green: #9eb83b;
+  --color-teal: #47a8a5;
+
   /* Font Family */
   --font-display: "Lexend", sans-serif;
 

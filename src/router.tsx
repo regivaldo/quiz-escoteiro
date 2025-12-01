@@ -4,6 +4,7 @@ import PrivateTemplate from "./templates/PrivateTemplate";
 import PublicTemplate from "./templates/PublicTemplate";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
+import GamePage from "./pages/GamePage";
 
 const router = createBrowserRouter([
     {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
             {
                 index: true,
                 Component: HomePage,
+            },
+            {
+                path: "game",
+                Component: GamePage,
             },
         ],
     },
