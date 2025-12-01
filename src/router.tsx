@@ -6,7 +6,7 @@ import RegisterPage from "./pages/RegisterPage";
 
 const router = createBrowserRouter([
     {
-        path: "/",
+        path: "/a",
         Component: PrivateTemplate,
         children: [
             {
@@ -16,11 +16,15 @@ const router = createBrowserRouter([
         ],
     },
     {
-        path: "/p",
+        path: '/',
         Component: PublicTemplate,
         children: [
             {
                 index: true,
+                Component: HomePage,
+            },
+            {
+                path: 'registro',
                 Component: RegisterPage,
             },
         ],
