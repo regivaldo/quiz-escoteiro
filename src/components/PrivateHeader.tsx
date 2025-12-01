@@ -1,9 +1,13 @@
+import { useTheme } from '../contexts/ThemeContext';
+
 const PrivateHeader = () => {
+    const { isDarkMode, toggleTheme } = useTheme();
+
     return (
-        <header className="sticky top-0 z-10 w-full bg-bg-dark/80 backdrop-blur-sm">
-            <div className="container mx-auto flex items-center justify-between whitespace-nowrap border-b border-solid border-border-dark-subtle px-4 sm:px-6 lg:px-8 py-3">
+        <header className="sticky top-0 z-10 w-full bg-white/80 dark:bg-bg-dark/80 backdrop-blur-sm">
+            <div className="container mx-auto flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-300 dark:border-border-dark-subtle px-4 sm:px-6 lg:px-8 py-3">
                 {/* Logo and Title */}
-                <div className="flex items-center gap-4 text-gray-100">
+                <div className="flex items-center gap-4 text-gray-900 dark:text-gray-100">
                     <div className="size-8 text-primary">
                         <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
                             <g clipPath="url(#clip0_6_319)">
@@ -14,19 +18,19 @@ const PrivateHeader = () => {
                             </defs>
                         </svg>
                     </div>
-                    <h2 className="text-lg font-bold tracking-[-0.015em] text-gray-100">Quiz Escoteiro</h2>
+                    <h2 className="text-lg font-bold tracking-[-0.015em] text-gray-900 dark:text-gray-100">Quiz Escoteiro</h2>
                 </div>
 
                 {/* Navigation Links (hidden on mobile) */}
                 <div className="hidden sm:flex flex-1 justify-end gap-8">
                     <div className="flex items-center gap-9">
-                        <a className="text-sm font-medium text-gray-200 hover:text-highlight-green transition-colors" href="#">
+                        <a className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition-colors" href="#">
                             Início
                         </a>
-                        <a className="text-sm font-medium text-gray-200 hover:text-highlight-green transition-colors" href="#">
+                        <a className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition-colors" href="#">
                             Meu Perfil
                         </a>
-                        <a className="text-sm font-medium text-gray-200 hover:text-highlight-green transition-colors" href="#">
+                        <a className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition-colors" href="#">
                             Ranking
                         </a>
                     </div>
@@ -34,7 +38,18 @@ const PrivateHeader = () => {
 
                 {/* User Actions */}
                 <div className="flex items-center gap-4">
-                    <button className="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-gray-700/50 text-gray-200 hover:bg-gray-700 transition-colors">
+                    {/* Theme Toggle */}
+                    <button
+                        onClick={toggleTheme}
+                        className="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700/50 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
+                        aria-label={isDarkMode ? 'Ativar modo claro' : 'Ativar modo escuro'}
+                    >
+                        <span className="material-symbols-outlined">
+                            {isDarkMode ? 'light_mode' : 'dark_mode'}
+                        </span>
+                    </button>
+
+                    <button className="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700/50 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors">
                         <span className="material-symbols-outlined">settings</span>
                     </button>
                     <div

@@ -1,4 +1,8 @@
+import { useTheme } from '../contexts/ThemeContext';
+
 const Header = () => {
+    const { isDarkMode, toggleTheme } = useTheme();
+
     return (
         <header className="absolute top-0 left-0 right-0 z-20">
             <div className="container mx-auto flex items-center justify-between p-4 sm:p-6">
@@ -7,6 +11,17 @@ const Header = () => {
                     <span>Quiz Escoteiro</span>
                 </a>
                 <div className="flex items-center gap-2 sm:gap-4">
+                    {/* Theme Toggle */}
+                    <button
+                        onClick={toggleTheme}
+                        className="flex h-10 w-10 items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10"
+                        aria-label={isDarkMode ? 'Ativar modo claro' : 'Ativar modo escuro'}
+                    >
+                        <span className="material-symbols-outlined">
+                            {isDarkMode ? 'light_mode' : 'dark_mode'}
+                        </span>
+                    </button>
+
                     <a
                         className="rounded-lg px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-white/10 sm:text-base"
                         href="#"
