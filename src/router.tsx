@@ -5,6 +5,7 @@ import PublicTemplate from "./templates/PublicTemplate";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import GamePage from "./pages/GamePage";
+import AskPage from "./pages/AskPage";
 
 const router = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
             {
                 path: "game",
                 Component: GamePage,
+            },
+            {
+                path: "ask",
+                Component: AskPage,
             },
         ],
     },

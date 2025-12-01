@@ -26,6 +26,12 @@
   --color-highlight-green: #9eb83b;
   --color-teal: #47a8a5;
 
+  /* AskPage colors */
+  --color-feedback-incorrect: #e57373;
+  --color-text-light: #333333;
+  --color-surface-light: #ffffff;
+  --color-surface-dark-ask: #2c2e24;
+
   /* Font Family */
   --font-display: "Lexend", sans-serif;
 
@@ -39,7 +45,7 @@
 /* Material Symbols Outlined */
 .material-symbols-outlined {
   font-variation-settings:
-    'FILL' 0,
+    'FILL' 1,
     'wght' 400,
     'GRAD' 0,
     'opsz' 24;
