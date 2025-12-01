@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage";
 import PrivateTemplate from "./templates/PrivateTemplate";
 import PublicTemplate from "./templates/PublicTemplate";
 import RegisterPage from "./pages/RegisterPage";
+import LoginPage from "./pages/LoginPage";
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
             {
                 path: 'registro',
                 Component: RegisterPage,
+            },
+            {
+                path: 'login',
+                Component: LoginPage,
             },
         ],
     }
