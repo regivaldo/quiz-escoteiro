@@ -1,1 +1,27 @@
 @import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-primary: #9eb83b;
+  --color-secondary: #47a8a5;
+  --color-background-light: #f7f8f6;
+  --color-background-dark: #1c1e14;
+
+  /* Font Family */
+  --font-display: "Lexend", sans-serif;
+
+  /* Border Radius */
+  --radius-DEFAULT: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+}
+
+/* Material Symbols Outlined */
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
