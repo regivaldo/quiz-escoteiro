@@ -18,7 +18,7 @@ const ResultPage = () => {
                 </div>
 
                 {/* Results Card */}
-                <div className="mt-8 overflow-hidden rounded-xl bg-white dark:bg-[#2a2d21] shadow-lg dark:shadow-black/30">
+                <div className="mt-8 overflow-hidden rounded-xl bg-white dark:bg-surface-dark shadow-lg dark:shadow-black/30">
                     {/* Score Section */}
                     <div className="p-6 text-center sm:p-8">
                         <p className="text-sm font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">

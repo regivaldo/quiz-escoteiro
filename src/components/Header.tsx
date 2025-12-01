@@ -14,7 +14,7 @@ const Header = () => {
                         Login
                     </a>
                     <a
-                        className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-primary px-4 py-2 text-sm font-bold text-background-dark shadow-md transition-transform hover:scale-105 sm:px-6 sm:text-base"
+                        className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-primary px-4 py-2 text-sm font-bold text-bg-dark shadow-md transition-transform hover:scale-105 sm:px-6 sm:text-base"
                         href="#"
                     >
                         <span className="truncate">Registrar</span>

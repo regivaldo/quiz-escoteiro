@@ -24,7 +24,7 @@ const ProfilePage = () => {
             <div className="flex w-full max-w-4xl flex-col gap-8 px-6">
                 {/* Page Heading */}
                 <div className="flex flex-wrap items-center justify-between gap-4">
-                    <h2 className="text-4xl font-black tracking-tighter text-text-light dark:text-text-dark">
+                    <h2 className="text-4xl font-black tracking-tighter text-text-on-light dark:text-text-on-dark">
                         Meu Perfil
                     </h2>
                     <button className="flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-red-500/10 px-4 py-2 text-sm font-bold text-red-500 transition-colors hover:bg-red-500/20 dark:bg-red-400/20 dark:text-red-400 dark:hover:bg-red-400/30">
@@ -34,7 +34,7 @@ const ProfilePage = () => {
                 </div>
 
                 {/* Profile Header */}
-                <div className="flex rounded-xl border border-gray-200 bg-white p-6 dark:border-border-dark-profile dark:bg-surface-dark-profile">
+                <div className="flex rounded-xl border border-gray-200 bg-white p-6 dark:border-border-dark dark:bg-surface-dark">
                     <div className="flex w-full flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
                         <div className="flex items-center gap-5">
                             <div
@@ -43,7 +43,7 @@ const ProfilePage = () => {
                                 aria-label="Avatar do usuário"
                             />
                             <div className="flex flex-col">
-                                <p className="text-2xl font-bold text-text-light dark:text-text-dark">
+                                <p className="text-2xl font-bold text-text-on-light dark:text-text-on-dark">
                                     {user.name}
                                 </p>
                                 <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -59,7 +59,7 @@ const ProfilePage = () => {
                 </div>
 
                 {/* Section Header for Stats */}
-                <h3 className="text-2xl font-bold tracking-tight text-text-light dark:text-text-dark">
+                <h3 className="text-2xl font-bold tracking-tight text-text-on-light dark:text-text-on-dark">
                     Minhas Estatísticas
                 </h3>
 
@@ -68,7 +68,7 @@ const ProfilePage = () => {
                     {stats.map((stat, index) => (
                         <div
                             key={index}
-                            className="flex flex-col gap-2 rounded-xl border border-gray-200 bg-white p-6 dark:border-border-dark-profile dark:bg-surface-dark-profile"
+                            className="flex flex-col gap-2 rounded-xl border border-gray-200 bg-white p-6 dark:border-border-dark dark:bg-surface-dark"
                         >
                             <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                                 <span className={`material-symbols-outlined text-${stat.color} text-xl`}>
@@ -76,7 +76,7 @@ const ProfilePage = () => {
                                 </span>
                                 <p className="text-base font-medium">{stat.label}</p>
                             </div>
-                            <p className="text-3xl font-bold text-text-light dark:text-text-dark">
+                            <p className="text-3xl font-bold text-text-on-light dark:text-text-on-dark">
                                 {stat.value}
                             </p>
                         </div>
@@ -84,14 +84,14 @@ const ProfilePage = () => {
                 </div>
 
                 {/* Section Header for History */}
-                <h3 className="text-2xl font-bold tracking-tight text-text-light dark:text-text-dark">
+                <h3 className="text-2xl font-bold tracking-tight text-text-on-light dark:text-text-on-dark">
                     Histórico de Quizzes
                 </h3>
 
                 {/* History Table */}
-                <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-border-dark-profile dark:bg-surface-dark-profile">
+                <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-border-dark dark:bg-surface-dark">
                     <div className="overflow-x-auto">
-                        <table className="min-w-full divide-y divide-gray-200 text-sm dark:divide-border-dark-profile">
+                        <table className="min-w-full divide-y divide-gray-200 text-sm dark:divide-border-dark">
                             <thead className="bg-gray-50 dark:bg-white/5">
                                 <tr>
                                     <th className="px-6 py-3 text-left font-medium text-gray-500 dark:text-gray-400" scope="col">
@@ -105,10 +105,10 @@ const ProfilePage = () => {
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-gray-200 dark:divide-border-dark-profile">
+                            <tbody className="divide-y divide-gray-200 dark:divide-border-dark">
                                 {quizHistory.map((quiz, index) => (
                                     <tr key={index}>
-                                        <td className="whitespace-nowrap px-6 py-4 font-medium text-text-light dark:text-text-dark">
+                                        <td className="whitespace-nowrap px-6 py-4 font-medium text-text-on-light dark:text-text-on-dark">
                                             {quiz.name}
                                         </td>
                                         <td className="whitespace-nowrap px-6 py-4 text-gray-700 dark:text-gray-300">

@@ -34,7 +34,7 @@ const HomePage = () => {
                 </section>
 
                 {/* About Section */}
-                <section className="w-full bg-background-dark py-16 sm:py-24">
+                <section className="w-full bg-bg-dark py-16 sm:py-24">
                     <div className="container mx-auto max-w-5xl px-4">
                         <div className="flex flex-col items-center text-center">
                             <h2 className="text-4xl font-bold tracking-tight text-primary mb-4">

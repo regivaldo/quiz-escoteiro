@@ -4,21 +4,21 @@ const GamePage = () => {
             icon: "military_tech",
             title: "Promessa Escoteira",
             description: "Os pilares do movimento escoteiro.",
-            color: "highlight-green",
+            color: "primary",
             href: "#"
         },
         {
             icon: "gavel",
             title: "Lei Escoteira",
             description: "Os dez artigos que guiam os escoteiros.",
-            color: "teal",
+            color: "secondary",
             href: "#"
         },
         {
             icon: "cruelty_free",
             title: "Promessa do Lobinho",
             description: "O início da jornada no escotismo.",
-            color: "highlight-green",
+            color: "primary",
             href: "#"
         }
     ];
@@ -88,7 +88,7 @@ const GamePage = () => {
                         {allCategories.map((category, index) => (
                             <a
                                 key={index}
-                                className="flex items-center justify-between p-4 bg-card-dark border border-border-dark-game rounded-lg hover:bg-[#25281e] hover:border-highlight-green transition-colors"
+                                className="flex items-center justify-between p-4 bg-bg-dark border border-border-dark-subtle rounded-lg hover:bg-[#25281e] hover:border-primary transition-colors"
                                 href="#"
                             >
                                 <span className="font-medium text-gray-300">{category}</span>

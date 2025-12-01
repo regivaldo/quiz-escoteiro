@@ -20,15 +20,15 @@ const router = createBrowserRouter([
                 Component: HomePage,
             },
             {
-                path: "game",
+                path: "categorias",
                 Component: GamePage,
             },
             {
-                path: "ask",
+                path: "quiz",
                 Component: AskPage,
             },
             {
-                path: "result",
+                path: "resulto",
                 Component: ResultPage,
             },
             {
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
                 Component: RankingPage,
             },
             {
-                path: "profile",
+                path: "perfil",
                 Component: ProfilePage,
             },
         ],

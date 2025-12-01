@@ -1,51 +1,56 @@
 @import "tailwindcss";
 
 @theme {
-  /* Colors */
-  --color-primary: #9eb83b;
-  --color-secondary: #47a8a5;
-  --color-background-light: #f7f8f6;
-  --color-background-dark: #1c1e14;
+  /* ========================================
+     CORES PRINCIPAIS
+     ======================================== */
+  --color-primary: #9eb83b;           /* Verde escoteiro */
+  --color-secondary: #47a8a5;         /* Azul-turquesa */
+  --color-error: #e57373;             /* Vermelho para erros/incorreto */
 
-  /* New colors for RegisterPage */
-  --color-surface-dark: #1c2327;
-  --color-text-dark: #e3e3e3;
-  --color-border-dark: #333a3e;
-  --color-placeholder-dark: #6b7280;
+  /* ========================================
+     BACKGROUNDS
+     ======================================== */
+  --color-bg-light: #f7f8f6;          /* Fundo claro */
+  --color-bg-dark: #1c1e14;           /* Fundo escuro */
 
-  /* LoginPage colors */
-  --color-dark-card: #25281a;
-  --color-dark-text: #fbfbf9;
-  --color-dark-subtle-text: #a1ab83;
-  --color-dark-border: #3c402d;
-  --color-accent-teal: #47a8a5;
+  /* ========================================
+     SUPERFÍCIES (Cards, Containers)
+     ======================================== */
+  /* Superfícies claras */
+  --color-surface-light: #ffffff;     /* Branco puro para cards claros */
+  --color-surface-light-subtle: #eff1e9; /* Cinza-verde claro suave */
 
-  /* GamePage colors */
-  --color-card-dark: #1c1e14;
-  --color-border-dark-game: #2e3029;
-  --color-highlight-green: #9eb83b;
-  --color-teal: #47a8a5;
+  /* Superfícies escuras */
+  --color-surface-dark: #2a2d21;      /* Cinza-verde escuro padrão */
+  --color-surface-dark-alt: #25281a;  /* Variação levemente diferente */
 
-  /* AskPage colors */
-  --color-feedback-incorrect: #e57373;
-  --color-text-light: #333333;
-  --color-surface-light: #ffffff;
-  --color-surface-dark-ask: #2c2e24;
+  /* ========================================
+     TEXTO
+     ======================================== */
+  /* Texto claro (em fundos escuros) */
+  --color-text-on-dark: #f7f8f6;      /* Texto principal em fundos escuros */
+  --color-text-on-dark-muted: #a1ab83; /* Texto secundário em fundos escuros */
 
-  /* RankingPage colors */
-  --color-subtle-light: #eff1e9;
-  --color-subtle-dark: #2a2d21;
-  --color-border-light: #e0e3d4;
-  --color-border-dark-ranking: #383c2b;
+  /* Texto escuro (em fundos claros) */
+  --color-text-on-light: #1c1e14;     /* Texto principal em fundos claros */
+  --color-text-on-light-muted: #6b7280; /* Texto secundário em fundos claros */
 
-  /* ProfilePage colors */
-  --color-surface-dark-profile: #1e1e1e;
-  --color-border-dark-profile: #2d2d2d;
+  /* ========================================
+     BORDAS
+     ======================================== */
+  --color-border-light: #e0e3d4;      /* Borda em fundos claros */
+  --color-border-dark: #383c2b;       /* Borda padrão em fundos escuros */
+  --color-border-dark-subtle: #2e3029; /* Borda mais sutil */
 
-  /* Font Family */
+  /* ========================================
+     TIPOGRAFIA
+     ======================================== */
   --font-display: "Lexend", sans-serif;
 
-  /* Border Radius */
+  /* ========================================
+     BORDER RADIUS
+     ======================================== */
   --radius-DEFAULT: 0.25rem;
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
