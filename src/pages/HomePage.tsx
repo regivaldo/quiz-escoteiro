@@ -9,7 +9,7 @@ const HomePage = () => {
                 {/* Hero Section */}
                 <section className="relative flex min-h-screen flex-col items-center justify-center px-4 py-20 pt-32 text-center">
                     <div
-                        className="absolute inset-0 bg-cover bg-center opacity-10"
+                        className="absolute inset-0 bg-cover bg-center opacity-10 dark:opacity-10"
                         style={{
                             backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCzCbFnHx2u7aJoZGPT1k5cW56bbgqUEG16PY9VOet--1pxbekeIoAGbrfTYS4ewxpWHCvE_2Jzvquf9PYbc8-3NSy6V8WT2EgV22-PZrrmZ8cvBi6B3mqqUuo1RcOAHor0rvhek6nryC-WShNttXsMpi4bj21tBwSvzLdlJitgBKRcXw8185XjjfYu-cK7UaPflErl9Cvnp0NrBHwViCzNEvZoEDMDxVcrbVounVgiwkRPiiCLY-Udai1d_zK8Jj3SkvbwVFGVS1T1')"
                         }}
