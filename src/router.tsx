@@ -7,6 +7,8 @@ import LoginPage from "./pages/LoginPage";
 import GamePage from "./pages/GamePage";
 import AskPage from "./pages/AskPage";
 import ResultPage from "./pages/ResultPage";
+import RankingPage from "./pages/RankingPage";
+import ProfilePage from "./pages/ProfilePage";
 
 const router = createBrowserRouter([
     {
@@ -28,6 +30,14 @@ const router = createBrowserRouter([
             {
                 path: "result",
                 Component: ResultPage,
+            },
+            {
+                path: "ranking",
+                Component: RankingPage,
+            },
+            {
+                path: "profile",
+                Component: ProfilePage,
             },
         ],
     },

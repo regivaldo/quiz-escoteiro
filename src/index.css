@@ -32,6 +32,16 @@
   --color-surface-light: #ffffff;
   --color-surface-dark-ask: #2c2e24;
 
+  /* RankingPage colors */
+  --color-subtle-light: #eff1e9;
+  --color-subtle-dark: #2a2d21;
+  --color-border-light: #e0e3d4;
+  --color-border-dark-ranking: #383c2b;
+
+  /* ProfilePage colors */
+  --color-surface-dark-profile: #1e1e1e;
+  --color-border-dark-profile: #2d2d2d;
+
   /* Font Family */
   --font-display: "Lexend", sans-serif;
 
