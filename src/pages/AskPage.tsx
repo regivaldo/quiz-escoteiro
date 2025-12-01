@@ -1,49 +1,53 @@
 const AskPage = () => {
     // Mock data - in real app this would come from props/state
-    const currentQuestion = 5;
-    const totalQuestions = 10;
-    const progress = (currentQuestion / totalQuestions) * 100;
-    const timeRemaining = "01:30";
-    const question = "Qual é o lema do Ramo Escoteiro?";
+    const currentQuestion = 5
+    const totalQuestions = 10
+    const progress = (currentQuestion / totalQuestions) * 100
+    const timeRemaining = '01:30'
+    const question = 'Qual é o lema do Ramo Escoteiro?'
 
     const options = [
-        { id: "A", text: "Sempre Alerta", state: "incorrect" },
-        { id: "B", text: "Servir", state: "correct" },
-        { id: "C", text: "Estar Preparado", state: "default" },
-        { id: "D", text: "O Melhor Possível", state: "default" }
-    ];
+        { id: 'A', text: 'Sempre Alerta', state: 'incorrect' },
+        { id: 'B', text: 'Servir', state: 'correct' },
+        { id: 'C', text: 'Estar Preparado', state: 'default' },
+        { id: 'D', text: 'O Melhor Possível', state: 'default' },
+    ]
 
     const getOptionClasses = (state: string) => {
-        if (state === "incorrect") {
-            return "bg-error/20 dark:bg-error/30 text-text-on-light dark:text-text-on-dark ring-2 ring-error";
+        if (state === 'incorrect') {
+            return 'bg-error/20 dark:bg-error/30 text-text-on-light dark:text-text-on-dark ring-2 ring-error'
         }
-        if (state === "correct") {
-            return "bg-primary/20 dark:bg-primary/30 text-text-on-light dark:text-text-on-dark ring-2 ring-primary";
+        if (state === 'correct') {
+            return 'bg-primary/20 dark:bg-primary/30 text-text-on-light dark:text-text-on-dark ring-2 ring-primary'
         }
-        return "bg-bg-light dark:bg-bg-dark hover:bg-secondary/20 dark:hover:bg-secondary/30 ring-1 ring-inset ring-black/10 dark:ring-white/10 hover:ring-secondary";
-    };
+        return 'bg-bg-light dark:bg-bg-dark hover:bg-secondary/20 dark:hover:bg-secondary/30 ring-1 ring-inset ring-black/10 dark:ring-white/10 hover:ring-secondary'
+    }
 
     const getOptionIcon = (state: string, id: string) => {
-        if (state === "incorrect") {
+        if (state === 'incorrect') {
             return (
                 <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-error text-white">
-                    <span className="material-symbols-outlined text-sm">close</span>
+                    <span className="material-symbols-outlined text-sm">
+                        close
+                    </span>
                 </div>
-            );
+            )
         }
-        if (state === "correct") {
+        if (state === 'correct') {
             return (
                 <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary text-white">
-                    <span className="material-symbols-outlined text-sm">done</span>
+                    <span className="material-symbols-outlined text-sm">
+                        done
+                    </span>
                 </div>
-            );
+            )
         }
         return (
             <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-black/10 dark:bg-white/10">
                 <span className="text-sm font-bold">{id}</span>
             </div>
-        );
-    };
+        )
+    }
 
     return (
         <div className="relative flex min-h-screen w-full flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
@@ -66,7 +70,9 @@ const AskPage = () => {
 
                         {/* Timer */}
                         <div className="flex items-center gap-2 rounded-lg bg-surface-light dark:bg-surface-dark p-2 shadow-sm">
-                            <span className="material-symbols-outlined text-primary text-xl">timer</span>
+                            <span className="material-symbols-outlined text-primary text-xl">
+                                timer
+                            </span>
                             <p className="text-lg font-bold tracking-tight text-text-on-light dark:text-text-on-dark">
                                 {timeRemaining}
                             </p>
@@ -98,13 +104,15 @@ const AskPage = () => {
                     <div className="mt-8 flex w-full justify-center">
                         <button className="flex min-w-[84px] w-full max-w-xs cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-12 px-5 bg-secondary text-white text-base font-bold leading-normal tracking-[0.015em] transition-transform hover:scale-[1.02] active:scale-[0.98]">
                             <span className="truncate">Próxima Pergunta</span>
-                            <span className="material-symbols-outlined">arrow_forward</span>
+                            <span className="material-symbols-outlined">
+                                arrow_forward
+                            </span>
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default AskPage;
+export default AskPage

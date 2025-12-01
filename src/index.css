@@ -1,71 +1,71 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @variant dark (&:is(.dark *));
 
 @theme {
-   /* ========================================
+    /* ========================================
      CORES PRINCIPAIS (não mudam com tema)
      ======================================== */
-   --color-primary: #9eb83b;
-   /* Verde escoteiro */
-   --color-secondary: #47a8a5;
-   /* Azul-turquesa */
-   --color-error: #e57373;
-   /* Vermelho para erros/incorreto */
+    --color-primary: #9eb83b;
+    /* Verde escoteiro */
+    --color-secondary: #47a8a5;
+    /* Azul-turquesa */
+    --color-error: #e57373;
+    /* Vermelho para erros/incorreto */
 
-   /* ========================================
+    /* ========================================
      CORES LIGHT MODE (padrão)
      ======================================== */
-   --color-background: #f7f8f6;
-   /* Fundo principal */
-   --color-surface: #ffffff;
-   /* Superfície (cards, containers) */
-   --color-surface-subtle: #eff1e9;
-   /* Superfície sutil */
-   --color-text: #1c1e14;
-   /* Texto principal */
-   --color-text-muted: #6b7280;
-   /* Texto secundário */
-   --color-border: #e0e3d4;
-   /* Bordas */
+    --color-background: #f7f8f6;
+    /* Fundo principal */
+    --color-surface: #ffffff;
+    /* Superfície (cards, containers) */
+    --color-surface-subtle: #eff1e9;
+    /* Superfície sutil */
+    --color-text: #1c1e14;
+    /* Texto principal */
+    --color-text-muted: #6b7280;
+    /* Texto secundário */
+    --color-border: #e0e3d4;
+    /* Bordas */
 
-   /* ========================================
+    /* ========================================
      TIPOGRAFIA
      ======================================== */
-   --font-display: "Lexend", sans-serif;
+    --font-display: 'Lexend', sans-serif;
 
-   /* ========================================
+    /* ========================================
      BORDER RADIUS
      ======================================== */
-   --radius-DEFAULT: 0.25rem;
-   --radius-lg: 0.75rem;
-   --radius-xl: 1rem;
-   --radius-full: 9999px;
+    --radius-DEFAULT: 0.25rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-full: 9999px;
 }
 
 /* ========================================
    DARK MODE - Sobrescreve cores quando .dark está presente
    ======================================== */
 .dark {
-   --color-background: #1c1e14;
-   /* Fundo principal escuro */
-   --color-surface: #2a2d21;
-   /* Superfície escura */
-   --color-surface-subtle: #25281a;
-   /* Superfície sutil escura */
-   --color-text: #f7f8f6;
-   /* Texto principal claro */
-   --color-text-muted: #a1ab83;
-   /* Texto secundário claro */
-   --color-border: #383c2b;
-   /* Bordas escuras */
+    --color-background: #1c1e14;
+    /* Fundo principal escuro */
+    --color-surface: #2a2d21;
+    /* Superfície escura */
+    --color-surface-subtle: #25281a;
+    /* Superfície sutil escura */
+    --color-text: #f7f8f6;
+    /* Texto principal claro */
+    --color-text-muted: #a1ab83;
+    /* Texto secundário claro */
+    --color-border: #383c2b;
+    /* Bordas escuras */
 }
 
 /* Material Symbols Outlined */
 .material-symbols-outlined {
-   font-variation-settings:
-      'FILL' 1,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 24;
+    font-variation-settings:
+        'FILL' 1,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
 }

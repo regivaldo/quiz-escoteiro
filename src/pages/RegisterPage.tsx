@@ -5,32 +5,51 @@ const RegisterPage = () => {
                 {/* Header */}
                 <header className="flex w-full items-center justify-start gap-4 whitespace-nowrap border-b border-solid border-border-dark px-8 py-5">
                     <div className="size-6 text-primary">
-                        <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <svg
+                            fill="none"
+                            viewBox="0 0 48 48"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
                             <g clipPath="url(#clip0_6_319)">
-                                <path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
+                                <path
+                                    d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z"
+                                    fill="currentColor"
+                                ></path>
                             </g>
                             <defs>
                                 <clipPath id="clip0_6_319">
-                                    <rect fill="white" height="48" width="48"></rect>
+                                    <rect
+                                        fill="white"
+                                        height="48"
+                                        width="48"
+                                    ></rect>
                                 </clipPath>
                             </defs>
                         </svg>
                     </div>
-                    <h2 className="text-lg font-bold leading-tight tracking-[-0.015em] text-text-on-dark">Quiz Escoteiro</h2>
+                    <h2 className="text-lg font-bold leading-tight tracking-[-0.015em] text-text-on-dark">
+                        Quiz Escoteiro
+                    </h2>
                 </header>
 
                 {/* Form Content */}
                 <div className="w-full p-8">
                     <div className="text-center">
-                        <h1 className="text-3xl font-bold leading-tight tracking-tight text-text-on-dark">Crie sua conta</h1>
-                        <p className="mt-2 text-base font-normal leading-normal text-gray-400">Sempre Alerta! Preencha seus dados para começar.</p>
+                        <h1 className="text-3xl font-bold leading-tight tracking-tight text-text-on-dark">
+                            Crie sua conta
+                        </h1>
+                        <p className="mt-2 text-base font-normal leading-normal text-gray-400">
+                            Sempre Alerta! Preencha seus dados para começar.
+                        </p>
                     </div>
 
                     <form className="mt-8 space-y-4">
                         {/* Nome e E-mail */}
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                             <label className="flex flex-col">
-                                <p className="pb-2 text-sm font-medium leading-normal text-text-on-dark">Nome</p>
+                                <p className="pb-2 text-sm font-medium leading-normal text-text-on-dark">
+                                    Nome
+                                </p>
                                 <input
                                     className="form-input h-12 w-full flex-1 resize-none overflow-hidden rounded-md border border-border-dark bg-surface-dark p-3 text-base font-normal leading-normal text-text-on-dark placeholder:text-text-on-light-muted focus:border-primary focus:outline-0 focus:ring-2 focus:ring-primary/20"
                                     placeholder="Digite seu nome completo"
@@ -38,7 +57,9 @@ const RegisterPage = () => {
                                 />
                             </label>
                             <label className="flex flex-col">
-                                <p className="pb-2 text-sm font-medium leading-normal text-text-on-dark">E-mail</p>
+                                <p className="pb-2 text-sm font-medium leading-normal text-text-on-dark">
+                                    E-mail
+                                </p>
                                 <input
                                     className="form-input h-12 w-full flex-1 resize-none overflow-hidden rounded-md border border-border-dark bg-surface-dark p-3 text-base font-normal leading-normal text-text-on-dark placeholder:text-text-on-light-muted focus:border-primary focus:outline-0 focus:ring-2 focus:ring-primary/20"
                                     placeholder="seuemail@exemplo.com"
@@ -50,7 +71,9 @@ const RegisterPage = () => {
                         {/* Grupo Escoteiro e Numeral */}
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                             <label className="flex flex-col md:col-span-2">
-                                <p className="pb-2 text-sm font-medium leading-normal text-text-on-dark">Grupo Escoteiro</p>
+                                <p className="pb-2 text-sm font-medium leading-normal text-text-on-dark">
+                                    Grupo Escoteiro
+                                </p>
                                 <input
                                     className="form-input h-12 w-full flex-1 resize-none overflow-hidden rounded-md border border-border-dark bg-surface-dark p-3 text-base font-normal leading-normal text-text-on-dark placeholder:text-text-on-light-muted focus:border-primary focus:outline-0 focus:ring-2 focus:ring-primary/20"
                                     placeholder="Ex: G.E. Lis de Ouro"
@@ -58,7 +81,9 @@ const RegisterPage = () => {
                                 />
                             </label>
                             <label className="flex flex-col">
-                                <p className="pb-2 text-sm font-medium leading-normal text-text-on-dark">Numeral</p>
+                                <p className="pb-2 text-sm font-medium leading-normal text-text-on-dark">
+                                    Numeral
+                                </p>
                                 <input
                                     className="form-input h-12 w-full flex-1 resize-none overflow-hidden rounded-md border border-border-dark bg-surface-dark p-3 text-base font-normal leading-normal text-text-on-dark placeholder:text-text-on-light-muted focus:border-primary focus:outline-0 focus:ring-2 focus:ring-primary/20"
                                     placeholder="Ex: 123/SP"
@@ -69,7 +94,9 @@ const RegisterPage = () => {
 
                         {/* Estado */}
                         <div className="flex flex-col">
-                            <p className="pb-2 text-sm font-medium leading-normal text-text-on-dark">Estado</p>
+                            <p className="pb-2 text-sm font-medium leading-normal text-text-on-dark">
+                                Estado
+                            </p>
                             <select className="form-select h-12 w-full flex-1 appearance-none rounded-md border border-border-dark bg-surface-dark p-3 text-base font-normal leading-normal text-text-on-dark focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20">
                                 <option>Selecione seu estado</option>
                                 <option value="AC">Acre</option>
@@ -105,28 +132,42 @@ const RegisterPage = () => {
                         {/* Senhas */}
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                             <label className="flex flex-col">
-                                <p className="pb-2 text-sm font-medium leading-normal text-text-on-dark">Senha</p>
+                                <p className="pb-2 text-sm font-medium leading-normal text-text-on-dark">
+                                    Senha
+                                </p>
                                 <div className="relative flex w-full items-center">
                                     <input
                                         className="form-input h-12 w-full flex-1 resize-none overflow-hidden rounded-md border border-border-dark bg-surface-dark p-3 pr-10 text-base font-normal leading-normal text-text-on-dark placeholder:text-text-on-light-muted focus:border-primary focus:outline-0 focus:ring-2 focus:ring-primary/20"
                                         placeholder="••••••••"
                                         type="password"
                                     />
-                                    <button className="absolute right-3 text-gray-400 hover:text-gray-200" type="button">
-                                        <span className="material-symbols-outlined text-xl">visibility</span>
+                                    <button
+                                        className="absolute right-3 text-gray-400 hover:text-gray-200"
+                                        type="button"
+                                    >
+                                        <span className="material-symbols-outlined text-xl">
+                                            visibility
+                                        </span>
                                     </button>
                                 </div>
                             </label>
                             <label className="flex flex-col">
-                                <p className="pb-2 text-sm font-medium leading-normal text-text-on-dark">Repetir Senha</p>
+                                <p className="pb-2 text-sm font-medium leading-normal text-text-on-dark">
+                                    Repetir Senha
+                                </p>
                                 <div className="relative flex w-full items-center">
                                     <input
                                         className="form-input h-12 w-full flex-1 resize-none overflow-hidden rounded-md border border-border-dark bg-surface-dark p-3 pr-10 text-base font-normal leading-normal text-text-on-dark placeholder:text-text-on-light-muted focus:border-primary focus:outline-0 focus:ring-2 focus:ring-primary/20"
                                         placeholder="••••••••"
                                         type="password"
                                     />
-                                    <button className="absolute right-3 text-gray-400 hover:text-gray-200" type="button">
-                                        <span className="material-symbols-outlined text-xl">visibility</span>
+                                    <button
+                                        className="absolute right-3 text-gray-400 hover:text-gray-200"
+                                        type="button"
+                                    >
+                                        <span className="material-symbols-outlined text-xl">
+                                            visibility
+                                        </span>
                                     </button>
                                 </div>
                             </label>
@@ -145,7 +186,10 @@ const RegisterPage = () => {
                     <div className="mt-6 text-center">
                         <p className="text-sm text-gray-400">
                             Já tenho conta.{' '}
-                            <a className="font-semibold text-secondary hover:underline" href="#">
+                            <a
+                                className="font-semibold text-secondary hover:underline"
+                                href="#"
+                            >
                                 Entrar
                             </a>
                         </p>
@@ -153,7 +197,7 @@ const RegisterPage = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default RegisterPage;
+export default RegisterPage

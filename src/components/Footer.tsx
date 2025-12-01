@@ -19,7 +19,7 @@ const Footer = () => {
                 © 2024 Quiz Escoteiro. Todos os direitos reservados.
             </p>
         </footer>
-    );
-};
+    )
+}
 
-export default Footer;
+export default Footer

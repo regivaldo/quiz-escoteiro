@@ -1,5 +1,5 @@
-import Footer from "../components/Footer";
-import Header from "../components/Header"
+import Footer from '../components/Footer'
+import Header from '../components/Header'
 
 const HomePage = () => {
     return (
@@ -11,7 +11,8 @@ const HomePage = () => {
                     <div
                         className="absolute inset-0 bg-cover bg-center opacity-10 dark:opacity-10"
                         style={{
-                            backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCzCbFnHx2u7aJoZGPT1k5cW56bbgqUEG16PY9VOet--1pxbekeIoAGbrfTYS4ewxpWHCvE_2Jzvquf9PYbc8-3NSy6V8WT2EgV22-PZrrmZ8cvBi6B3mqqUuo1RcOAHor0rvhek6nryC-WShNttXsMpi4bj21tBwSvzLdlJitgBKRcXw8185XjjfYu-cK7UaPflErl9Cvnp0NrBHwViCzNEvZoEDMDxVcrbVounVgiwkRPiiCLY-Udai1d_zK8Jj3SkvbwVFGVS1T1')"
+                            backgroundImage:
+                                "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCzCbFnHx2u7aJoZGPT1k5cW56bbgqUEG16PY9VOet--1pxbekeIoAGbrfTYS4ewxpWHCvE_2Jzvquf9PYbc8-3NSy6V8WT2EgV22-PZrrmZ8cvBi6B3mqqUuo1RcOAHor0rvhek6nryC-WShNttXsMpi4bj21tBwSvzLdlJitgBKRcXw8185XjjfYu-cK7UaPflErl9Cvnp0NrBHwViCzNEvZoEDMDxVcrbVounVgiwkRPiiCLY-Udai1d_zK8Jj3SkvbwVFGVS1T1')",
                         }}
                         aria-label="Forest background with tall trees and sunlight filtering through."
                     />
@@ -22,7 +23,8 @@ const HomePage = () => {
                                 Quiz Escoteiro
                             </h1>
                             <h2 className="max-w-2xl text-lg font-normal leading-normal text-gray-600 dark:text-gray-300 sm:text-xl">
-                                Teste seus conhecimentos e prepare-se para a aventura!
+                                Teste seus conhecimentos e prepare-se para a
+                                aventura!
                             </h2>
                         </div>
 
@@ -40,7 +42,11 @@ const HomePage = () => {
                                 Sempre Alerta para o Conhecimento!
                             </h2>
                             <p className="max-w-3xl text-lg leading-relaxed text-gray-600 dark:text-gray-300 mb-12">
-                                Bem-vindo ao Quiz Escoteiro! Nossa missão é testar seus conhecimentos sobre o escotismo de uma forma divertida e educativa. Prepare sua mochila, afie sua mente e embarque nesta jornada de aprendizado e aventura.
+                                Bem-vindo ao Quiz Escoteiro! Nossa missão é
+                                testar seus conhecimentos sobre o escotismo de
+                                uma forma divertida e educativa. Prepare sua
+                                mochila, afie sua mente e embarque nesta jornada
+                                de aprendizado e aventura.
                             </p>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
@@ -55,7 +61,11 @@ const HomePage = () => {
                                         O Propósito
                                     </h3>
                                     <p className="text-gray-600 dark:text-gray-400">
-                                        Criamos este quiz para que você possa aprender, relembrar e se divertir com os mais variados temas do Movimento Escoteiro, desde nós e amarras até a história do nosso fundador.
+                                        Criamos este quiz para que você possa
+                                        aprender, relembrar e se divertir com os
+                                        mais variados temas do Movimento
+                                        Escoteiro, desde nós e amarras até a
+                                        história do nosso fundador.
                                     </p>
                                 </div>
 
@@ -70,7 +80,10 @@ const HomePage = () => {
                                         Para Quem?
                                     </h3>
                                     <p className="text-gray-600 dark:text-gray-400">
-                                        Para todos! Seja você Lobinho, Escoteiro, Sênior, Pioneiro, Chefe ou um entusiasta do escotismo, há um desafio esperando por você.
+                                        Para todos! Seja você Lobinho,
+                                        Escoteiro, Sênior, Pioneiro, Chefe ou um
+                                        entusiasta do escotismo, há um desafio
+                                        esperando por você.
                                     </p>
                                 </div>
                             </div>
@@ -80,7 +93,7 @@ const HomePage = () => {
             </main>
             <Footer />
         </>
-    );
-};
+    )
+}
 
-export default HomePage;
+export default HomePage

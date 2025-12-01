@@ -1,41 +1,41 @@
 const GamePage = () => {
     const featuredCategories = [
         {
-            icon: "military_tech",
-            title: "Promessa Escoteira",
-            description: "Os pilares do movimento escoteiro.",
-            color: "primary",
-            href: "#"
+            icon: 'military_tech',
+            title: 'Promessa Escoteira',
+            description: 'Os pilares do movimento escoteiro.',
+            color: 'primary',
+            href: '#',
         },
         {
-            icon: "gavel",
-            title: "Lei Escoteira",
-            description: "Os dez artigos que guiam os escoteiros.",
-            color: "secondary",
-            href: "#"
+            icon: 'gavel',
+            title: 'Lei Escoteira',
+            description: 'Os dez artigos que guiam os escoteiros.',
+            color: 'secondary',
+            href: '#',
         },
         {
-            icon: "cruelty_free",
-            title: "Promessa do Lobinho",
-            description: "O início da jornada no escotismo.",
-            color: "primary",
-            href: "#"
-        }
-    ];
+            icon: 'cruelty_free',
+            title: 'Promessa do Lobinho',
+            description: 'O início da jornada no escotismo.',
+            color: 'primary',
+            href: '#',
+        },
+    ]
 
     const allCategories = [
-        "Promessa do Lobinho",
-        "Promessa Escoteira",
-        "Promessa do Adulto",
-        "Lei do Lobinho",
-        "Lei Escoteira",
-        "Nós e Amarras",
-        "Sinalização",
-        "História do Escotismo",
-        "Orientações e Mapas",
-        "Vida ao Ar Livre",
-        "Primeiros Socorros"
-    ];
+        'Promessa do Lobinho',
+        'Promessa Escoteira',
+        'Promessa do Adulto',
+        'Lei do Lobinho',
+        'Lei Escoteira',
+        'Nós e Amarras',
+        'Sinalização',
+        'História do Escotismo',
+        'Orientações e Mapas',
+        'Vida ao Ar Livre',
+        'Primeiros Socorros',
+    ]
 
     return (
         <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
@@ -46,7 +46,8 @@ const GamePage = () => {
                         Seleção de Categorias
                     </h1>
                     <p className="text-lg text-gray-400">
-                        Comece pelos desafios mais populares ou explore todas as categorias.
+                        Comece pelos desafios mais populares ou explore todas as
+                        categorias.
                     </p>
                 </div>
 
@@ -59,7 +60,9 @@ const GamePage = () => {
                             href={category.href}
                         >
                             <div>
-                                <span className={`material-symbols-outlined text-4xl text-${category.color}`}>
+                                <span
+                                    className={`material-symbols-outlined text-4xl text-${category.color}`}
+                                >
                                     {category.icon}
                                 </span>
                                 <h3 className="text-2xl font-bold text-gray-100 mt-3">
@@ -69,7 +72,9 @@ const GamePage = () => {
                                     {category.description}
                                 </p>
                             </div>
-                            <div className={`mt-6 flex items-center gap-2 text-${category.color} font-bold`}>
+                            <div
+                                className={`mt-6 flex items-center gap-2 text-${category.color} font-bold`}
+                            >
                                 <span>Começar Agora</span>
                                 <span className="material-symbols-outlined transition-transform duration-300 group-hover:translate-x-1">
                                     arrow_forward
@@ -91,15 +96,19 @@ const GamePage = () => {
                                 className="flex items-center justify-between p-4 bg-bg-dark border border-border-dark-subtle rounded-lg hover:bg-[#25281e] hover:border-primary transition-colors"
                                 href="#"
                             >
-                                <span className="font-medium text-gray-300">{category}</span>
-                                <span className="material-symbols-outlined text-gray-500">chevron_right</span>
+                                <span className="font-medium text-gray-300">
+                                    {category}
+                                </span>
+                                <span className="material-symbols-outlined text-gray-500">
+                                    chevron_right
+                                </span>
                             </a>
                         ))}
                     </div>
                 </div>
             </div>
         </main>
-    );
-};
+    )
+}
 
-export default GamePage;
+export default GamePage

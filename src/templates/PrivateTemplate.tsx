@@ -1,6 +1,6 @@
-import { Outlet } from "react-router";
-import PrivateHeader from "../components/PrivateHeader";
-import PrivateFooter from "../components/PrivateFooter";
+import { Outlet } from 'react-router'
+import PrivateHeader from '../components/PrivateHeader'
+import PrivateFooter from '../components/PrivateFooter'
 
 const PrivateTemplate = () => {
     return (
@@ -9,7 +9,7 @@ const PrivateTemplate = () => {
             <Outlet />
             <PrivateFooter />
         </div>
-    );
-};
+    )
+}
 
-export default PrivateTemplate;
+export default PrivateTemplate
