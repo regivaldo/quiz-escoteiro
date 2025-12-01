@@ -1,83 +1,85 @@
 @import "tailwindcss";
 
+@variant dark (&:is(.dark *));
+
 @theme {
-   /* ========================================
+  /* ========================================
      CORES PRINCIPAIS
      ======================================== */
-   --color-primary: #9eb83b;
-   /* Verde escoteiro */
-   --color-secondary: #47a8a5;
-   /* Azul-turquesa */
-   --color-error: #e57373;
-   /* Vermelho para erros/incorreto */
+  --color-primary: #9eb83b;
+  /* Verde escoteiro */
+  --color-secondary: #47a8a5;
+  /* Azul-turquesa */
+  --color-error: #e57373;
+  /* Vermelho para erros/incorreto */
 
-   /* ========================================
+  /* ========================================
      BACKGROUNDS
      ======================================== */
-   --color-bg-light: #f7f8f6;
-   /* Fundo claro */
-   --color-bg-dark: #1c1e14;
-   /* Fundo escuro */
+  --color-bg-light: #f7f8f6;
+  /* Fundo claro */
+  --color-bg-dark: #1c1e14;
+  /* Fundo escuro */
 
-   /* ========================================
+  /* ========================================
      SUPERFÍCIES (Cards, Containers)
      ======================================== */
-   /* Superfícies claras */
-   --color-surface-light: #ffffff;
-   /* Branco puro para cards claros */
-   --color-surface-light-subtle: #eff1e9;
-   /* Cinza-verde claro suave */
+  /* Superfícies claras */
+  --color-surface-light: #ffffff;
+  /* Branco puro para cards claros */
+  --color-surface-light-subtle: #eff1e9;
+  /* Cinza-verde claro suave */
 
-   /* Superfícies escuras */
-   --color-surface-dark: #2a2d21;
-   /* Cinza-verde escuro padrão */
-   --color-surface-dark-alt: #25281a;
-   /* Variação levemente diferente */
+  /* Superfícies escuras */
+  --color-surface-dark: #2a2d21;
+  /* Cinza-verde escuro padrão */
+  --color-surface-dark-alt: #25281a;
+  /* Variação levemente diferente */
 
-   /* ========================================
+  /* ========================================
      TEXTO
      ======================================== */
-   /* Texto claro (em fundos escuros) */
-   --color-text-on-dark: #f7f8f6;
-   /* Texto principal em fundos escuros */
-   --color-text-on-dark-muted: #a1ab83;
-   /* Texto secundário em fundos escuros */
+  /* Texto claro (em fundos escuros) */
+  --color-text-on-dark: #f7f8f6;
+  /* Texto principal em fundos escuros */
+  --color-text-on-dark-muted: #a1ab83;
+  /* Texto secundário em fundos escuros */
 
-   /* Texto escuro (em fundos claros) */
-   --color-text-on-light: #1c1e14;
-   /* Texto principal em fundos claros */
-   --color-text-on-light-muted: #6b7280;
-   /* Texto secundário em fundos claros */
+  /* Texto escuro (em fundos claros) */
+  --color-text-on-light: #1c1e14;
+  /* Texto principal em fundos claros */
+  --color-text-on-light-muted: #6b7280;
+  /* Texto secundário em fundos claros */
 
-   /* ========================================
+  /* ========================================
      BORDAS
      ======================================== */
-   --color-border-light: #e0e3d4;
-   /* Borda em fundos claros */
-   --color-border-dark: #383c2b;
-   /* Borda padrão em fundos escuros */
-   --color-border-dark-subtle: #2e3029;
-   /* Borda mais sutil */
+  --color-border-light: #e0e3d4;
+  /* Borda em fundos claros */
+  --color-border-dark: #383c2b;
+  /* Borda padrão em fundos escuros */
+  --color-border-dark-subtle: #2e3029;
+  /* Borda mais sutil */
 
-   /* ========================================
+  /* ========================================
      TIPOGRAFIA
      ======================================== */
-   --font-display: "Lexend", sans-serif;
+  --font-display: "Lexend", sans-serif;
 
-   /* ========================================
+  /* ========================================
      BORDER RADIUS
      ======================================== */
-   --radius-DEFAULT: 0.25rem;
-   --radius-lg: 0.75rem;
-   --radius-xl: 1rem;
-   --radius-full: 9999px;
+  --radius-DEFAULT: 0.25rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
 }
 
 /* Material Symbols Outlined */
 .material-symbols-outlined {
-   font-variation-settings:
-      'FILL' 1,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 24;
+  font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
 }
