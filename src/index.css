@@ -7,6 +7,12 @@
   --color-background-light: #f7f8f6;
   --color-background-dark: #1c1e14;
 
+  /* New colors for RegisterPage */
+  --color-surface-dark: #1c2327;
+  --color-text-dark: #e3e3e3;
+  --color-border-dark: #333a3e;
+  --color-placeholder-dark: #6b7280;
+
   /* Font Family */
   --font-display: "Lexend", sans-serif;
 
