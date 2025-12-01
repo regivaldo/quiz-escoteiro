@@ -1,0 +1,101 @@
+const ResultPage = () => {
+    // Mock data - in real app this would come from props/state
+    const score = 85;
+    const correctAnswers = 17;
+    const incorrectAnswers = 3;
+    const totalQuestions = correctAnswers + incorrectAnswers;
+    const message = "Parabéns! Você demonstrou um ótimo conhecimento escoteiro!";
+
+    return (
+        <div className="relative flex min-h-screen w-full flex-col items-center justify-center p-4">
+            <div className="w-full max-w-2xl px-4 py-8">
+                {/* Header */}
+                <div className="text-center">
+                    <span className="text-6xl">🏆</span>
+                    <h1 className="mt-2 text-3xl font-bold leading-tight tracking-tight text-[#1c1e14] dark:text-[#f7f8f6] md:text-4xl">
+                        Resultados Finais do Quiz Escoteiro
+                    </h1>
+                </div>
+
+                {/* Results Card */}
+                <div className="mt-8 overflow-hidden rounded-xl bg-white dark:bg-[#2a2d21] shadow-lg dark:shadow-black/30">
+                    {/* Score Section */}
+                    <div className="p-6 text-center sm:p-8">
+                        <p className="text-sm font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                            Sua Pontuação Final
+                        </p>
+                        <div className="mt-4 flex items-baseline justify-center gap-2">
+                            <span className="text-7xl font-bold tracking-tighter text-primary">
+                                {score}
+                            </span>
+                            <span className="text-4xl font-semibold text-gray-400 dark:text-gray-500">
+                                %
+                            </span>
+                        </div>
+                        <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
+                            {message}
+                        </p>
+                    </div>
+
+                    {/* Statistics Grid */}
+                    <div className="grid grid-cols-1 border-t border-gray-200 dark:border-gray-700 sm:grid-cols-2">
+                        {/* Correct Answers */}
+                        <div className="flex flex-col items-center gap-2 border-b p-6 sm:border-b-0 sm:border-r dark:border-gray-700">
+                            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20 text-primary">
+                                <span className="material-symbols-outlined !text-3xl">check_circle</span>
+                            </div>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">
+                                Respostas Corretas
+                            </p>
+                            <p className="text-2xl font-semibold text-[#1c1e14] dark:text-[#f7f8f6]">
+                                {correctAnswers}
+                            </p>
+                        </div>
+
+                        {/* Incorrect Answers */}
+                        <div className="flex flex-col items-center gap-2 p-6">
+                            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-500/20 text-red-500 dark:bg-red-400/20 dark:text-red-400">
+                                <span className="material-symbols-outlined !text-3xl">cancel</span>
+                            </div>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">
+                                Respostas Incorretas
+                            </p>
+                            <p className="text-2xl font-semibold text-[#1c1e14] dark:text-[#f7f8f6]">
+                                {incorrectAnswers}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
+                    {/* Play Again */}
+                    <button className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-primary px-6 text-base font-bold text-[#1c1e14] shadow-md transition-transform hover:scale-105 active:scale-100 sm:w-auto">
+                        <span className="material-symbols-outlined !text-xl">replay</span>
+                        <span className="truncate">Jogar Novamente</span>
+                    </button>
+
+                    {/* Share */}
+                    <button className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-secondary px-6 text-base font-bold text-white shadow-md transition-transform hover:scale-105 active:scale-100 sm:w-auto">
+                        <span className="material-symbols-outlined !text-xl">share</span>
+                        <span className="truncate">Compartilhar Resultado</span>
+                    </button>
+
+                    {/* View Answers */}
+                    <button className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-gray-200 px-6 text-base font-bold text-gray-800 transition-colors hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 sm:w-auto">
+                        <span className="material-symbols-outlined !text-xl">visibility</span>
+                        <span className="truncate">Ver Respostas</span>
+                    </button>
+
+                    {/* Back to Home */}
+                    <button className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg border border-gray-300 bg-transparent px-6 text-base font-bold text-gray-700 transition-colors hover:bg-gray-100 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-800 sm:w-auto">
+                        <span className="material-symbols-outlined !text-xl">home</span>
+                        <span className="truncate">Voltar para o Início</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default ResultPage;
