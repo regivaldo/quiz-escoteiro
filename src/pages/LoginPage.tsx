@@ -1,3 +1,5 @@
+import Logo from "@/assets/logo.svg?react"
+
 const LoginPage = () => {
     return (
         <div className="flex min-h-screen w-full flex-col items-center justify-center p-4 sm:p-6">
@@ -5,9 +7,7 @@ const LoginPage = () => {
                 <div className="p-8 sm:p-10">
                     {/* Logo and Title */}
                     <div className="mb-6 flex flex-col items-center justify-center">
-                        <span className="material-symbols-outlined text-5xl text-primary mb-2">
-                            emoji_objects
-                        </span>
+                        <Logo className='w-10 h-10 object-contain' />
                         <h1 className="font-display text-text-on-dark tracking-tight text-2xl font-bold text-center">
                             Quiz Escoteiro
                         </h1>

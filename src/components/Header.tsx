@@ -1,11 +1,12 @@
 import { Link } from "react-router"
+import Logo from "@/assets/logo.svg?react"
 
 const Header = () => {
     return (
         <header className="absolute top-0 left-0 right-0 z-20">
             <div className="container mx-auto flex items-center justify-between p-4 sm:p-6">
                 <Link to="/" className="flex items-center gap-2 text-xl font-bold text-[#333]">
-                    <span className="material-symbols-outlined text-3xl text-primary">spool</span>
+                    <Logo className='w-6 h-6 object-contain' />
                     <span>Quiz Escoteiro</span>
                 </Link>
                 <div className="flex items-center gap-2 sm:gap-4">

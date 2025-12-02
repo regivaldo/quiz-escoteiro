@@ -12,6 +12,7 @@ import ProfilePage from './pages/ProfilePage'
 import AboutPage from './pages/AboutPage'
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage'
 import TermsOfUsePage from './pages/TermsOfUsePage'
+import NotFoundPage from './pages/NotFoundPage'
 
 const router = createBrowserRouter([
     {
@@ -20,10 +21,6 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                Component: HomePage,
-            },
-            {
-                path: 'categorias',
                 Component: GamePage,
             },
             {
@@ -31,7 +28,7 @@ const router = createBrowserRouter([
                 Component: AskPage,
             },
             {
-                path: 'resulto',
+                path: 'resultado',
                 Component: ResultPage,
             },
             {
@@ -73,6 +70,10 @@ const router = createBrowserRouter([
                 Component: LoginPage,
             },
         ],
+    },
+    {
+        path: '*',
+        Component: NotFoundPage,
     },
 ])
 
