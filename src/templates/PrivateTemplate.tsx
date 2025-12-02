@@ -4,7 +4,7 @@ import PrivateFooter from '../components/PrivateFooter'
 
 const PrivateTemplate = () => {
     return (
-        <div className="relative flex min-h-screen w-full flex-col bg-[#12140D] font-display text-gray-200">
+        <div className="relative flex min-h-screen w-full flex-col bg-background font-display text-text">
             <PrivateHeader />
             <Outlet />
             <PrivateFooter />

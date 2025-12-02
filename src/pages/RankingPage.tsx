@@ -52,15 +52,15 @@ const RankingPage = () => {
 
     const getRowClasses = (highlight?: string) => {
         if (highlight === 'primary') {
-            return 'border-b border-border-light bg-[#9EB83B]/20 font-bold text-text-on-light'
+            return 'border-b border-border bg-[#9EB83B]/20 font-bold text-text'
         }
         if (highlight === 'secondary') {
-            return 'border-b border-border-light bg-[#47A8A5]/20 font-semibold text-text-on-light'
+            return 'border-b border-border bg-[#47A8A5]/20 font-semibold text-text'
         }
         if (highlight === 'secondary-light') {
-            return 'border-b border-border-light bg-[#47A8A5]/10 font-semibold text-text-on-light'
+            return 'border-b border-border bg-[#47A8A5]/10 font-semibold text-text'
         }
-        return 'border-b border-border-light hover:bg-surface-light-subtle transition-colors'
+        return 'border-b border-border hover:bg-surface-subtle transition-colors'
     }
 
     return (
@@ -71,10 +71,10 @@ const RankingPage = () => {
                         {/* Page Header */}
                         <div className="flex flex-wrap items-end justify-between gap-4 px-4 py-2 md:px-6">
                             <div className="flex flex-col gap-1">
-                                <p className="text-3xl font-black tracking-tighter sm:text-4xl text-text-on-light">
+                                <p className="text-3xl font-black tracking-tighter sm:text-4xl text-text">
                                     Ranking do Quiz
                                 </p>
-                                <p className="text-text-on-light/70 text-base font-normal">
+                                <p className="text-text-muted text-base font-normal">
                                     Veja os melhores jogadores e sua posição
                                 </p>
                             </div>
@@ -82,8 +82,8 @@ const RankingPage = () => {
 
                         {/* Period Filter Tabs */}
                         <div className="px-4 md:px-6">
-                            <div className="flex h-12 w-full max-w-xl items-center justify-center rounded-lg bg-surface-light-subtle p-1">
-                                <label className="flex h-full flex-1 cursor-pointer items-center justify-center overflow-hidden rounded-md px-3 has-[:checked]:bg-bg-light has-[:checked]:shadow-sm has-[:checked]:text-text-on-light text-text-on-light/70 text-sm font-medium transition-colors">
+                            <div className="flex h-12 w-full max-w-xl items-center justify-center rounded-lg bg-surface-subtle p-1">
+                                <label className="flex h-full flex-1 cursor-pointer items-center justify-center overflow-hidden rounded-md px-3 has-[:checked]:bg-surface has-[:checked]:shadow-sm has-[:checked]:text-text text-text-muted text-sm font-medium transition-colors">
                                     <span className="truncate">Diário</span>
                                     <input
                                         className="sr-only"
@@ -92,7 +92,7 @@ const RankingPage = () => {
                                         value="Diário"
                                     />
                                 </label>
-                                <label className="flex h-full flex-1 cursor-pointer items-center justify-center overflow-hidden rounded-md px-3 has-[:checked]:bg-bg-light has-[:checked]:shadow-sm has-[:checked]:text-text-on-light text-text-on-light/70 text-sm font-medium transition-colors">
+                                <label className="flex h-full flex-1 cursor-pointer items-center justify-center overflow-hidden rounded-md px-3 has-[:checked]:bg-surface has-[:checked]:shadow-sm has-[:checked]:text-text text-text-muted text-sm font-medium transition-colors">
                                     <span className="truncate">Semanal</span>
                                     <input
                                         className="sr-only"
@@ -101,7 +101,7 @@ const RankingPage = () => {
                                         value="Semanal"
                                     />
                                 </label>
-                                <label className="flex h-full flex-1 cursor-pointer items-center justify-center overflow-hidden rounded-md px-3 has-[:checked]:bg-bg-light has-[:checked]:shadow-sm has-[:checked]:text-text-on-light text-text-on-light/70 text-sm font-medium transition-colors">
+                                <label className="flex h-full flex-1 cursor-pointer items-center justify-center overflow-hidden rounded-md px-3 has-[:checked]:bg-surface has-[:checked]:shadow-sm has-[:checked]:text-text text-text-muted text-sm font-medium transition-colors">
                                     <span className="truncate">Geral</span>
                                     <input
                                         className="sr-only"
@@ -111,7 +111,7 @@ const RankingPage = () => {
                                         defaultChecked
                                     />
                                 </label>
-                                <label className="flex h-full flex-1 cursor-pointer items-center justify-center overflow-hidden rounded-md px-3 has-[:checked]:bg-bg-light has-[:checked]:shadow-sm has-[:checked]:text-text-on-light text-text-on-light/70 text-sm font-medium transition-colors">
+                                <label className="flex h-full flex-1 cursor-pointer items-center justify-center overflow-hidden rounded-md px-3 has-[:checked]:bg-surface has-[:checked]:shadow-sm has-[:checked]:text-text text-text-muted text-sm font-medium transition-colors">
                                     <span className="truncate">
                                         Meu grupo escoteiro
                                     </span>
@@ -127,20 +127,20 @@ const RankingPage = () => {
 
                         {/* Ranking Table */}
                         <div className="px-4 py-3 md:px-6">
-                            <div className="flex overflow-hidden rounded-xl border border-border-light bg-bg-light">
+                            <div className="flex overflow-hidden rounded-xl border border-border bg-surface">
                                 <table className="w-full">
                                     <thead>
-                                        <tr className="border-b border-border-light bg-surface-light-subtle/50">
-                                            <th className="px-6 py-4 text-left w-24 text-sm font-semibold tracking-wider text-text-on-light">
+                                        <tr className="border-b border-border bg-surface-subtle/50">
+                                            <th className="px-6 py-4 text-left w-24 text-sm font-semibold tracking-wider text-text">
                                                 Posição
                                             </th>
-                                            <th className="px-6 py-4 text-left text-sm font-semibold tracking-wider text-text-on-light">
+                                            <th className="px-6 py-4 text-left text-sm font-semibold tracking-wider text-text">
                                                 Jogador
                                             </th>
-                                            <th className="px-6 py-4 text-left text-sm font-semibold tracking-wider text-text-on-light">
+                                            <th className="px-6 py-4 text-left text-sm font-semibold tracking-wider text-text">
                                                 Grupo Escoteiro
                                             </th>
-                                            <th className="px-6 py-4 text-right text-sm font-semibold tracking-wider text-text-on-light">
+                                            <th className="px-6 py-4 text-right text-sm font-semibold tracking-wider text-text">
                                                 Pontuação
                                             </th>
                                         </tr>
@@ -154,7 +154,7 @@ const RankingPage = () => {
                                                 )}
                                             >
                                                 <td
-                                                    className={`h-[72px] px-6 py-2 ${player.position === 1 ? 'text-lg' : ''} ${!player.highlight ? 'text-text-on-light/70' : ''}`}
+                                                    className={`h-[72px] px-6 py-2 ${player.position === 1 ? 'text-lg' : ''} ${!player.highlight ? 'text-text-muted' : ''}`}
                                                 >
                                                     {player.position}
                                                 </td>
@@ -169,7 +169,7 @@ const RankingPage = () => {
                                                     {player.group}
                                                 </td>
                                                 <td
-                                                    className={`h-[72px] px-6 py-2 text-right ${player.position === 1 ? 'text-base' : ''} ${!player.highlight ? 'text-text-on-light/70' : ''}`}
+                                                    className={`h-[72px] px-6 py-2 text-right ${player.position === 1 ? 'text-base' : ''} ${!player.highlight ? 'text-text-muted' : ''}`}
                                                 >
                                                     {player.score.toLocaleString()}
                                                 </td>
@@ -182,17 +182,17 @@ const RankingPage = () => {
 
                         {/* User Position Card */}
                         <div className="px-4 py-3 md:px-6">
-                            <div className="flex items-center gap-4 rounded-lg bg-surface-light-subtle px-6 min-h-16 justify-between border border-border-light">
+                            <div className="flex items-center gap-4 rounded-lg bg-surface-subtle px-6 min-h-16 justify-between border border-border">
                                 <div className="flex items-center gap-4">
-                                    <span className="material-symbols-outlined text-text-on-light/80">
+                                    <span className="material-symbols-outlined text-text-muted">
                                         person
                                     </span>
-                                    <p className="text-base font-medium flex-1 truncate text-text-on-light">
+                                    <p className="text-base font-medium flex-1 truncate text-text">
                                         Sua Posição
                                     </p>
                                 </div>
                                 <div className="shrink-0">
-                                    <p className="text-base font-semibold text-text-on-light">
+                                    <p className="text-base font-semibold text-text">
                                         #{userPosition.rank} -{' '}
                                         {userPosition.score.toLocaleString()}{' '}
                                         Pontos

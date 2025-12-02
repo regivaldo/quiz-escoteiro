@@ -43,7 +43,7 @@ const ProfilePage = () => {
             <div className="flex w-full max-w-4xl flex-col gap-8 px-6">
                 {/* Page Heading */}
                 <div className="flex flex-wrap items-center justify-between gap-4">
-                    <h2 className="text-4xl font-black tracking-tighter text-text-on-light">
+                    <h2 className="text-4xl font-black tracking-tighter text-text">
                         Meu Perfil
                     </h2>
                     <button className="flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-red-500/10 px-4 py-2 text-sm font-bold text-red-500 transition-colors hover:bg-red-500/20">
@@ -66,7 +66,7 @@ const ProfilePage = () => {
                                 aria-label="Avatar do usuário"
                             />
                             <div className="flex flex-col">
-                                <p className="text-2xl font-bold text-text-on-light">
+                                <p className="text-2xl font-bold text-text">
                                     {user.name}
                                 </p>
                                 <p className="text-sm text-gray-500">
@@ -84,7 +84,7 @@ const ProfilePage = () => {
                 </div>
 
                 {/* Section Header for Stats */}
-                <h3 className="text-2xl font-bold tracking-tight text-text-on-light">
+                <h3 className="text-2xl font-bold tracking-tight text-text">
                     Minhas Estatísticas
                 </h3>
 
@@ -105,7 +105,7 @@ const ProfilePage = () => {
                                     {stat.label}
                                 </p>
                             </div>
-                            <p className="text-3xl font-bold text-text-on-light">
+                            <p className="text-3xl font-bold text-text">
                                 {stat.value}
                             </p>
                         </div>
@@ -113,7 +113,7 @@ const ProfilePage = () => {
                 </div>
 
                 {/* Section Header for History */}
-                <h3 className="text-2xl font-bold tracking-tight text-text-on-light">
+                <h3 className="text-2xl font-bold tracking-tight text-text">
                     Histórico de Quizzes
                 </h3>
 
@@ -146,7 +146,7 @@ const ProfilePage = () => {
                             <tbody className="divide-y divide-gray-200">
                                 {quizHistory.map((quiz, index) => (
                                     <tr key={index}>
-                                        <td className="whitespace-nowrap px-6 py-4 font-medium text-text-on-light">
+                                        <td className="whitespace-nowrap px-6 py-4 font-medium text-text">
                                             {quiz.name}
                                         </td>
                                         <td className="whitespace-nowrap px-6 py-4 text-gray-700">
