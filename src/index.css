@@ -1,10 +1,8 @@
 @import 'tailwindcss';
 
-@variant dark (&:is(.dark *));
-
 @theme {
     /* ========================================
-     CORES PRINCIPAIS (não mudam com tema)
+     CORES PRINCIPAIS
      ======================================== */
     --color-primary: #9eb83b;
     /* Verde escoteiro */
@@ -14,7 +12,7 @@
     /* Vermelho para erros/incorreto */
 
     /* ========================================
-     CORES LIGHT MODE (padrão)
+     CORES
      ======================================== */
     --color-background: #f7f8f6;
     /* Fundo principal */
@@ -24,6 +22,8 @@
     /* Superfície sutil */
     --color-text: #1c1e14;
     /* Texto principal */
+    --color-text-dark: #171910;
+    /* Texto escuro */
     --color-text-muted: #6b7280;
     /* Texto secundário */
     --color-border: #e0e3d4;
@@ -41,24 +41,6 @@
     --radius-lg: 0.75rem;
     --radius-xl: 1rem;
     --radius-full: 9999px;
-}
-
-/* ========================================
-   DARK MODE - Sobrescreve cores quando .dark está presente
-   ======================================== */
-.dark {
-    --color-background: #1c1e14;
-    /* Fundo principal escuro */
-    --color-surface: #2a2d21;
-    /* Superfície escura */
-    --color-surface-subtle: #25281a;
-    /* Superfície sutil escura */
-    --color-text: #f7f8f6;
-    /* Texto principal claro */
-    --color-text-muted: #a1ab83;
-    /* Texto secundário claro */
-    --color-border: #383c2b;
-    /* Bordas escuras */
 }
 
 /* Material Symbols Outlined */

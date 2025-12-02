@@ -9,6 +9,9 @@ import AskPage from './pages/AskPage'
 import ResultPage from './pages/ResultPage'
 import RankingPage from './pages/RankingPage'
 import ProfilePage from './pages/ProfilePage'
+import AboutPage from './pages/AboutPage'
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage'
+import TermsOfUsePage from './pages/TermsOfUsePage'
 
 const router = createBrowserRouter([
     {
@@ -48,6 +51,18 @@ const router = createBrowserRouter([
             {
                 index: true,
                 Component: HomePage,
+            },
+            {
+                path: 'sobre',
+                Component: AboutPage,
+            },
+            {
+                path: 'termos-de-uso',
+                Component: TermsOfUsePage,
+            },
+            {
+                path: 'politica-de-privacidade',
+                Component: PrivacyPolicyPage,
             },
             {
                 path: 'registro',

@@ -43,10 +43,10 @@ const ProfilePage = () => {
             <div className="flex w-full max-w-4xl flex-col gap-8 px-6">
                 {/* Page Heading */}
                 <div className="flex flex-wrap items-center justify-between gap-4">
-                    <h2 className="text-4xl font-black tracking-tighter text-text-on-light dark:text-text-on-dark">
+                    <h2 className="text-4xl font-black tracking-tighter text-text-on-light">
                         Meu Perfil
                     </h2>
-                    <button className="flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-red-500/10 px-4 py-2 text-sm font-bold text-red-500 transition-colors hover:bg-red-500/20 dark:bg-red-400/20 dark:text-red-400 dark:hover:bg-red-400/30">
+                    <button className="flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-red-500/10 px-4 py-2 text-sm font-bold text-red-500 transition-colors hover:bg-red-500/20">
                         <span className="material-symbols-outlined text-base">
                             logout
                         </span>
@@ -55,7 +55,7 @@ const ProfilePage = () => {
                 </div>
 
                 {/* Profile Header */}
-                <div className="flex rounded-xl border border-gray-200 bg-white p-6 dark:border-border-dark dark:bg-surface-dark">
+                <div className="flex rounded-xl border border-gray-200 bg-white p-6">
                     <div className="flex w-full flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
                         <div className="flex items-center gap-5">
                             <div
@@ -66,10 +66,10 @@ const ProfilePage = () => {
                                 aria-label="Avatar do usuário"
                             />
                             <div className="flex flex-col">
-                                <p className="text-2xl font-bold text-text-on-light dark:text-text-on-dark">
+                                <p className="text-2xl font-bold text-text-on-light">
                                     {user.name}
                                 </p>
-                                <p className="text-sm text-gray-500 dark:text-gray-400">
+                                <p className="text-sm text-gray-500">
                                     {user.email}
                                 </p>
                             </div>
@@ -84,7 +84,7 @@ const ProfilePage = () => {
                 </div>
 
                 {/* Section Header for Stats */}
-                <h3 className="text-2xl font-bold tracking-tight text-text-on-light dark:text-text-on-dark">
+                <h3 className="text-2xl font-bold tracking-tight text-text-on-light">
                     Minhas Estatísticas
                 </h3>
 
@@ -93,9 +93,9 @@ const ProfilePage = () => {
                     {stats.map((stat, index) => (
                         <div
                             key={index}
-                            className="flex flex-col gap-2 rounded-xl border border-gray-200 bg-white p-6 dark:border-border-dark dark:bg-surface-dark"
+                            className="flex flex-col gap-2 rounded-xl border border-gray-200 bg-white p-6"
                         >
-                            <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+                            <div className="flex items-center gap-2 text-gray-600">
                                 <span
                                     className={`material-symbols-outlined text-${stat.color} text-xl`}
                                 >
@@ -105,7 +105,7 @@ const ProfilePage = () => {
                                     {stat.label}
                                 </p>
                             </div>
-                            <p className="text-3xl font-bold text-text-on-light dark:text-text-on-dark">
+                            <p className="text-3xl font-bold text-text-on-light">
                                 {stat.value}
                             </p>
                         </div>
@@ -113,46 +113,46 @@ const ProfilePage = () => {
                 </div>
 
                 {/* Section Header for History */}
-                <h3 className="text-2xl font-bold tracking-tight text-text-on-light dark:text-text-on-dark">
+                <h3 className="text-2xl font-bold tracking-tight text-text-on-light">
                     Histórico de Quizzes
                 </h3>
 
                 {/* History Table */}
-                <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-border-dark dark:bg-surface-dark">
+                <div className="overflow-hidden rounded-xl border border-gray-200 bg-white">
                     <div className="overflow-x-auto">
-                        <table className="min-w-full divide-y divide-gray-200 text-sm dark:divide-border-dark">
-                            <thead className="bg-gray-50 dark:bg-white/5">
+                        <table className="min-w-full divide-y divide-gray-200 text-sm">
+                            <thead className="bg-gray-50">
                                 <tr>
                                     <th
-                                        className="px-6 py-3 text-left font-medium text-gray-500 dark:text-gray-400"
+                                        className="px-6 py-3 text-left font-medium text-gray-500"
                                         scope="col"
                                     >
                                         Nome do Quiz
                                     </th>
                                     <th
-                                        className="px-6 py-3 text-left font-medium text-gray-500 dark:text-gray-400"
+                                        className="px-6 py-3 text-left font-medium text-gray-500"
                                         scope="col"
                                     >
                                         Pontuação
                                     </th>
                                     <th
-                                        className="px-6 py-3 text-left font-medium text-gray-500 dark:text-gray-400"
+                                        className="px-6 py-3 text-left font-medium text-gray-500"
                                         scope="col"
                                     >
                                         Data
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-gray-200 dark:divide-border-dark">
+                            <tbody className="divide-y divide-gray-200">
                                 {quizHistory.map((quiz, index) => (
                                     <tr key={index}>
-                                        <td className="whitespace-nowrap px-6 py-4 font-medium text-text-on-light dark:text-text-on-dark">
+                                        <td className="whitespace-nowrap px-6 py-4 font-medium text-text-on-light">
                                             {quiz.name}
                                         </td>
-                                        <td className="whitespace-nowrap px-6 py-4 text-gray-700 dark:text-gray-300">
+                                        <td className="whitespace-nowrap px-6 py-4 text-gray-700">
                                             {quiz.score}
                                         </td>
-                                        <td className="whitespace-nowrap px-6 py-4 text-gray-700 dark:text-gray-300">
+                                        <td className="whitespace-nowrap px-6 py-4 text-gray-700">
                                             {quiz.date}
                                         </td>
                                     </tr>
