@@ -1,3 +1,4 @@
+import { useUserStore } from "@/store/userStore";
 import { FloppyDiskIcon, MedalMilitaryIcon, PencilSimpleIcon, QuestionMarkIcon, SignOutIcon, StarIcon } from "@phosphor-icons/react"
 import { useState } from "react";
 import { useNavigate } from "react-router";
@@ -5,13 +6,7 @@ import { useNavigate } from "react-router";
 const ProfilePage = () => {
     const navigate = useNavigate();
     const [edit, showEdit] = useState<boolean>(false);
-
-    // Mock data - in real app this would come from props/state/API
-    const user = {
-        name: 'Usuário Escoteiro',
-        email: 'usuario@email.com',
-        avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA9tZfAFDSWsTBHBraVw-rr97TTIGOdIaNwNoXojAEbqC64bOr0OtNVLSOBrU4BvF1aaEW-xMk4bWDbezaaOfXktyFuC1xDHqLXkJj-_NKY1In4jSQFXlHgmuyAMTrFPuGIZu1vb6AfHMauCC6Lm80K8QDRL8tCVbxA80C_176weZhm92zIhdAHD1IO0nzkUJJDqpw0RJtr1ooTjJ97Sy0hDgn-IzJUu1VRGJbVqIKj9ZKyvffEkzlzujTacBLkCbwi7n-cAsCsVtaC',
-    }
+    const user = useUserStore((state) => state.user);
 
     const stats = [
         {
@@ -74,16 +69,16 @@ const ProfilePage = () => {
                             <div
                                 className="h-24 w-24 min-w-24 rounded-full bg-cover bg-center"
                                 style={{
-                                    backgroundImage: `url('${user.avatar}')`,
+                                    backgroundImage: `url('${user?.photoURL}')`,
                                 }}
                                 aria-label="Avatar do usuário"
                             />
                             <div className="flex flex-col">
                                 <p className={`text-2xl font-bold text-text ${edit ? 'border border-primary' : ''}`} contentEditable={edit}>
-                                    {user.name}
+                                    {user?.name}
                                 </p>
                                 <p className={`text-sm text-gray-500 ${edit ? 'border border-primary' : ''}`} contentEditable={edit}>
-                                    {user.email}
+                                    {user?.email}
                                 </p>
                             </div>
                         </div>

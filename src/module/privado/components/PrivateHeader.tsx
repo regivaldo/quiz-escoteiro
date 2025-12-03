@@ -1,11 +1,13 @@
 import Logo from '@/assets/logo.svg?react'
 import { NavLink } from 'react-router'
+import { useUserStore } from '@/store/userStore'
 
 const PrivateHeader = () => {
+    const user = useUserStore((state) => state.user);
+
     return (
         <header className="sticky top-0 z-10 w-full bg-white/80 backdrop-blur-sm">
             <div className="container mx-auto flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-300 px-4 sm:px-6 lg:px-8 py-3">
-                {/* Logo and Title */}
                 <div className="flex items-center gap-4 text-gray-900">
                     <div className="size-8">
                         <Logo className='w-full h-full object-contain' />
@@ -33,10 +35,7 @@ const PrivateHeader = () => {
                 <div className="flex items-center gap-4 ml-4">
                     <div
                         className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
-                        style={{
-                            backgroundImage:
-                                'url("https://lh3.googleusercontent.com/aida-public/AB6AXuDGG7can_AVpxn3amFahHz5JgrzKQ7PLZF6lbdcPwFnDt_kmr7Tz7A3T0ZRywtzGDTcH4kaTecG92t-wmFNI09x2RGtgHQFGiuq2LaeW9HGbuNLZeHXj7C45wtYRPADGMuGrHXc02rugNUZYpDLeKP5CyNU_LBNVvzV515ADWKDP7H_4VUS2WBRJCd0UmlWEN7l9BmHrsvJ4uxl3kM-WHtAOBEBEtkWutCPypdx4HBTc_hG19jN3mMswKE_MUpEI7VikPCx3v-IIly-")',
-                        }}
+                        style={{ backgroundImage: `url('${user?.photoURL}')` }}
                         aria-label="User avatar"
                     />
                 </div>
