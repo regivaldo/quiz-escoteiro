@@ -7,35 +7,6 @@ const PrivacyPolicyPage = () => {
             <div className="layout-container flex h-full grow flex-col">
                 <div className="px-4 md:px-10 lg:px-40 flex flex-1 justify-center py-5">
                     <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
-                        {/* Header */}
-                        <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#eff1e9] px-4 sm:px-10 py-3">
-                            <div className="flex items-center gap-4 text-text-dark">
-                                <div className="size-6 text-primary">
-                                    <Logo className='w-full h-full object-contain' />
-                                </div>
-                                <h2 className="text-text-dark text-lg font-bold leading-tight tracking-[-0.015em]">
-                                    Quiz Escoteiro
-                                </h2>
-                            </div>
-                            <div className="flex flex-1 justify-end gap-8">
-                                <div className="flex items-center gap-9">
-                                    <Link
-                                        className="text-text-dark text-sm font-medium leading-normal hover:text-primary"
-                                        to="/"
-                                    >
-                                        Início
-                                    </Link>
-                                    <Link
-                                        className="text-text-dark text-sm font-medium leading-normal"
-                                        to="/sobre"
-                                    >
-                                        Sobre
-                                    </Link>
-                                </div>
-                            </div>
-                        </header>
-
-                        {/* Main Content */}
                         <main className="flex-grow pt-10 pb-16 px-4">
                             <div className="prose prose-lg max-w-none">
                                 <h2 className="text-[#444] text-3xl font-bold mb-6">

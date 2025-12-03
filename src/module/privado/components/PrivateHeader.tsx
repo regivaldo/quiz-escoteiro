@@ -1,4 +1,5 @@
 import Logo from '@/assets/logo.svg?react'
+import { NavLink } from 'react-router'
 
 const PrivateHeader = () => {
     return (
@@ -14,37 +15,22 @@ const PrivateHeader = () => {
                     </h2>
                 </div>
 
-                {/* Navigation Links (hidden on mobile) */}
                 <div className="hidden sm:flex flex-1 justify-end gap-8">
                     <div className="flex items-center gap-9">
-                        <a
-                            className="text-sm font-medium text-gray-700 hover:text-primary transition-colors"
-                            href="#"
-                        >
+                        <NavLink to="/quiz" end className={({ isActive }) => isActive ? 'text-primary' : 'text-gray-700 hover:text-primary transition-colors'}>
                             Início
-                        </a>
-                        <a
-                            className="text-sm font-medium text-gray-700 hover:text-primary transition-colors"
-                            href="#"
-                        >
-                            Meu Perfil
-                        </a>
-                        <a
-                            className="text-sm font-medium text-gray-700 hover:text-primary transition-colors"
-                            href="#"
-                        >
+                        </NavLink>
+                        <NavLink to="/quiz/ranking" end className={({ isActive }) => isActive ? 'text-primary' : 'text-gray-700 hover:text-primary transition-colors'}>
                             Ranking
-                        </a>
+                        </NavLink>
+                        <NavLink to="/quiz/perfil" end className={({ isActive }) => isActive ? 'text-primary' : 'text-gray-700 hover:text-primary transition-colors'}>
+                            Meu Perfil
+                        </NavLink>
                     </div>
                 </div>
 
                 {/* User Actions */}
-                <div className="flex items-center gap-4">
-                    <button className="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors">
-                        <span className="material-symbols-outlined">
-                            settings
-                        </span>
-                    </button>
+                <div className="flex items-center gap-4 ml-4">
                     <div
                         className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
                         style={{

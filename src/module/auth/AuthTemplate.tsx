@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router'
 
-const PublicTemplate = () => {
+const AuthTemplate = () => {
     return (
         <div className="bg-bg-light font-display text-text-on-light min-h-screen">
             <Outlet />
@@ -8,4 +8,4 @@ const PublicTemplate = () => {
     )
 }
 
-export default PublicTemplate
+export default AuthTemplate

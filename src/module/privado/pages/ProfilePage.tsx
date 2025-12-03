@@ -1,4 +1,11 @@
+import { FloppyDiskIcon, MedalMilitaryIcon, PencilSimpleIcon, QuestionMarkIcon, SignOutIcon, StarIcon } from "@phosphor-icons/react"
+import { useState } from "react";
+import { useNavigate } from "react-router";
+
 const ProfilePage = () => {
+    const navigate = useNavigate();
+    const [edit, showEdit] = useState<boolean>(false);
+
     // Mock data - in real app this would come from props/state/API
     const user = {
         name: 'Usuário Escoteiro',
@@ -8,19 +15,19 @@ const ProfilePage = () => {
 
     const stats = [
         {
-            icon: 'star',
+            icon: <StarIcon size={24} />,
             label: 'Pontuação Total',
             value: '12,450',
             color: 'primary',
         },
         {
-            icon: 'quiz',
+            icon: <QuestionMarkIcon size={24} />,
             label: 'Quizzes Concluídos',
             value: '15',
             color: 'primary',
         },
         {
-            icon: 'workspace_premium',
+            icon: <MedalMilitaryIcon size={24} />,
             label: 'Conquistas',
             value: '8',
             color: 'primary',
@@ -38,6 +45,14 @@ const ProfilePage = () => {
         { name: 'Leis e Promessas', score: 1000, date: '05 de Julho, 2024' },
     ]
 
+    const handleEditProfile = () => {
+        showEdit(!edit);
+    }
+
+    const handleLogout = () => {
+        navigate('/');
+    }
+
     return (
         <main className="flex w-full flex-1 justify-center py-8 md:py-12">
             <div className="flex w-full max-w-4xl flex-col gap-8 px-6">
@@ -46,10 +61,8 @@ const ProfilePage = () => {
                     <h2 className="text-4xl font-black tracking-tighter text-text">
                         Meu Perfil
                     </h2>
-                    <button className="flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-red-500/10 px-4 py-2 text-sm font-bold text-red-500 transition-colors hover:bg-red-500/20">
-                        <span className="material-symbols-outlined text-base">
-                            logout
-                        </span>
+                    <button className="flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-red-500/10 px-4 py-2 text-sm font-bold text-red-500 transition-colors hover:bg-red-500/20" onClick={handleLogout}>
+                        <SignOutIcon size={24} />
                         Sair
                     </button>
                 </div>
@@ -66,19 +79,26 @@ const ProfilePage = () => {
                                 aria-label="Avatar do usuário"
                             />
                             <div className="flex flex-col">
-                                <p className="text-2xl font-bold text-text">
+                                <p className={`text-2xl font-bold text-text ${edit ? 'border border-primary' : ''}`} contentEditable={edit}>
                                     {user.name}
                                 </p>
-                                <p className="text-sm text-gray-500">
+                                <p className={`text-sm text-gray-500 ${edit ? 'border border-primary' : ''}`} contentEditable={edit}>
                                     {user.email}
                                 </p>
                             </div>
                         </div>
-                        <button className="flex min-w-[84px] cursor-pointer items-center justify-center gap-2 rounded-lg bg-secondary px-5 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90">
-                            <span className="material-symbols-outlined text-base">
-                                edit
-                            </span>
-                            <span className="truncate">Editar Perfil</span>
+                        <button className="flex min-w-[84px] cursor-pointer items-center justify-center gap-2 rounded-lg bg-secondary px-5 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90" onClick={handleEditProfile}>
+                            {edit ? (
+                                <>
+                                    <FloppyDiskIcon size={24} />
+                                    Salvar
+                                </>
+                            ) : (
+                                <>
+                                    <PencilSimpleIcon size={24} />
+                                    Editar Perfil
+                                </>
+                            )}
                         </button>
                     </div>
                 </div>

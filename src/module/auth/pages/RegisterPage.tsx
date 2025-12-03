@@ -1,4 +1,5 @@
 import Logo from "@/assets/logo.svg?react"
+import { Link } from "react-router"
 
 const RegisterPage = () => {
     return (
@@ -168,12 +169,12 @@ const RegisterPage = () => {
                     <div className="mt-6 text-center">
                         <p className="text-sm text-gray-400">
                             Já tenho conta.{' '}
-                            <a
+                            <Link
                                 className="font-semibold text-secondary hover:underline"
-                                href="#"
+                                to="/auth"
                             >
                                 Entrar
-                            </a>
+                            </Link>
                         </p>
                     </div>
                 </div>

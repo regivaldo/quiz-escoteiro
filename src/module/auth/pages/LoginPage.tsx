@@ -1,11 +1,19 @@
 import Logo from "@/assets/logo.svg?react"
+import { Link, useNavigate } from "react-router"
 
 const LoginPage = () => {
+    const navigate = useNavigate();
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        console.log('Entrar');
+        navigate('/quiz');
+    }
+
     return (
         <div className="flex min-h-screen w-full flex-col items-center justify-center p-4 sm:p-6">
             <div className="w-full max-w-md overflow-hidden rounded-xl bg-surface-dark-alt shadow-lg ring-1 ring-black/20">
                 <div className="p-8 sm:p-10">
-                    {/* Logo and Title */}
                     <div className="mb-6 flex flex-col items-center justify-center">
                         <Logo className='w-10 h-10 object-contain' />
                         <h1 className="font-display text-text-on-dark tracking-tight text-2xl font-bold text-center">
@@ -13,7 +21,6 @@ const LoginPage = () => {
                         </h1>
                     </div>
 
-                    {/* Welcome Message */}
                     <div className="text-center">
                         <h1 className="text-text-on-dark tracking-tight text-[32px] font-bold leading-tight">
                             Bem-vindo de volta!
@@ -23,9 +30,7 @@ const LoginPage = () => {
                         </p>
                     </div>
 
-                    {/* Login Form */}
-                    <form action="#" className="space-y-4" method="POST">
-                        {/* Email/Username Field */}
+                    <form action="#" className="space-y-4" method="POST" onSubmit={handleSubmit}>
                         <div>
                             <label
                                 className="text-text-on-dark text-sm font-medium leading-normal pb-2 block"
@@ -42,7 +47,6 @@ const LoginPage = () => {
                             />
                         </div>
 
-                        {/* Password Field */}
                         <div>
                             <label
                                 className="text-text-on-dark text-sm font-medium leading-normal pb-2 block"
@@ -59,7 +63,6 @@ const LoginPage = () => {
                             />
                         </div>
 
-                        {/* Submit Button */}
                         <div className="pt-4">
                             <button
                                 className="flex min-w-[84px] w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-bg-dark text-base font-bold leading-normal tracking-[0.015em] hover:brightness-110 active:brightness-95 transition-all duration-200"
@@ -70,23 +73,22 @@ const LoginPage = () => {
                         </div>
                     </form>
 
-                    {/* Footer Links */}
                     <div className="mt-6 text-center">
                         <p className="text-sm text-text-on-dark-muted">
                             Não tem uma conta?{' '}
-                            <a
+                            <Link
                                 className="font-semibold text-secondary hover:underline focus:outline-none focus:ring-2 focus:ring-secondary/50 rounded"
-                                href="/registro"
+                                to="/auth/registro"
                             >
                                 Crie uma agora
-                            </a>
+                            </Link>
                         </p>
-                        <a
+                        <Link
                             className="mt-2 block text-sm font-semibold text-secondary hover:underline focus:outline-none focus:ring-2 focus:ring-secondary/50 rounded"
-                            href="#"
+                            to="/auth/esqueci-senha"
                         >
                             Esqueceu a senha?
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

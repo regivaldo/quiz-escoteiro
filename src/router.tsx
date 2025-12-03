@@ -1,22 +1,24 @@
 import { createBrowserRouter } from 'react-router'
-import HomePage from './pages/HomePage'
-import PrivateTemplate from './templates/PrivateTemplate'
-import PublicTemplate from './templates/PublicTemplate'
-import RegisterPage from './pages/RegisterPage'
-import LoginPage from './pages/LoginPage'
-import GamePage from './pages/GamePage'
-import AskPage from './pages/AskPage'
-import ResultPage from './pages/ResultPage'
-import RankingPage from './pages/RankingPage'
-import ProfilePage from './pages/ProfilePage'
-import AboutPage from './pages/AboutPage'
-import PrivacyPolicyPage from './pages/PrivacyPolicyPage'
-import TermsOfUsePage from './pages/TermsOfUsePage'
-import NotFoundPage from './pages/NotFoundPage'
+import HomePage from './module/public/pages/HomePage'
+import RegisterPage from './module/auth/pages/RegisterPage'
+import LoginPage from './module/auth/pages/LoginPage'
+import GamePage from './module/privado/pages/GamePage'
+import AskPage from './module/privado/pages/AskPage'
+import ResultPage from './module/privado/pages/ResultPage'
+import RankingPage from './module/privado/pages/RankingPage'
+import ProfilePage from './module/privado/pages/ProfilePage'
+import AboutPage from './module/public/pages/AboutPage'
+import PrivacyPolicyPage from './module/public/pages/PrivacyPolicyPage'
+import TermsOfUsePage from './module/public/pages/TermsOfUsePage'
+import ContactPage from './module/public/pages/ContactPage'
+import NotFoundPage from './module/common/pages/NotFoundPage'
+import AuthTemplate from './module/auth/AuthTemplate'
+import PublicTemplate from './module/public/PublicTemplate'
+import PrivateTemplate from './module/privado/PrivateTemplate'
 
 const router = createBrowserRouter([
     {
-        path: '/a',
+        path: '/quiz',
         Component: PrivateTemplate,
         children: [
             {
@@ -24,7 +26,7 @@ const router = createBrowserRouter([
                 Component: GamePage,
             },
             {
-                path: 'quiz',
+                path: ':slug',
                 Component: AskPage,
             },
             {
@@ -38,6 +40,24 @@ const router = createBrowserRouter([
             {
                 path: 'perfil',
                 Component: ProfilePage,
+            },
+            {
+                path: 'contato',
+                Component: ContactPage,
+            },
+        ],
+    },
+    {
+        path: '/auth',
+        Component: AuthTemplate,
+        children: [
+            {
+                index: true,
+                Component: LoginPage,
+            },
+            {
+                path: 'registro',
+                Component: RegisterPage,
             },
         ],
     },
@@ -62,15 +82,12 @@ const router = createBrowserRouter([
                 Component: PrivacyPolicyPage,
             },
             {
-                path: 'registro',
-                Component: RegisterPage,
-            },
-            {
-                path: 'login',
-                Component: LoginPage,
+                path: 'contato',
+                Component: ContactPage,
             },
         ],
     },
+
     {
         path: '*',
         Component: NotFoundPage,

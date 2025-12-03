@@ -1,3 +1,5 @@
+import { ArrowRightIcon, CheckIcon, TimerIcon, XIcon } from "@phosphor-icons/react"
+
 const AskPage = () => {
     // Mock data - in real app this would come from props/state
     const currentQuestion = 5
@@ -27,18 +29,14 @@ const AskPage = () => {
         if (state === 'incorrect') {
             return (
                 <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-error text-white">
-                    <span className="material-symbols-outlined text-sm">
-                        close
-                    </span>
+                    <XIcon size={16} />
                 </div>
             )
         }
         if (state === 'correct') {
             return (
                 <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary text-white">
-                    <span className="material-symbols-outlined text-sm">
-                        done
-                    </span>
+                    <CheckIcon size={16} />
                 </div>
             )
         }
@@ -70,9 +68,7 @@ const AskPage = () => {
 
                         {/* Timer */}
                         <div className="flex items-center gap-2 rounded-lg bg-surface-subtle p-2 shadow-sm">
-                            <span className="material-symbols-outlined text-primary text-xl">
-                                timer
-                            </span>
+                            <TimerIcon size={24} className="text-primary text-xl" weight="fill" />
                             <p className="text-lg font-bold tracking-tight text-text">
                                 {timeRemaining}
                             </p>
@@ -104,9 +100,7 @@ const AskPage = () => {
                     <div className="mt-8 flex w-full justify-center">
                         <button className="flex min-w-[84px] w-full max-w-xs cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-12 px-5 bg-secondary text-white text-base font-bold leading-normal tracking-[0.015em] transition-transform hover:scale-[1.02] active:scale-[0.98]">
                             <span className="truncate">Próxima Pergunta</span>
-                            <span className="material-symbols-outlined">
-                                arrow_forward
-                            </span>
+                            <ArrowRightIcon size={24} />
                         </button>
                     </div>
                 </div>
