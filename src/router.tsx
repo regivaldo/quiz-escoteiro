@@ -2,6 +2,8 @@ import { createBrowserRouter } from 'react-router'
 import HomePage from './module/public/pages/HomePage'
 import RegisterPage from './module/auth/pages/RegisterPage'
 import LoginPage from './module/auth/pages/LoginPage'
+import ForgotPasswordPage from './module/auth/pages/ForgotPasswordPage'
+import ChangePasswordPage from './module/auth/pages/ChangePasswordPage'
 import GamePage from './module/privado/pages/GamePage'
 import AskPage from './module/privado/pages/AskPage'
 import ResultPage from './module/privado/pages/ResultPage'
@@ -58,6 +60,18 @@ const router = createBrowserRouter([
             {
                 path: 'registro',
                 Component: RegisterPage,
+            },
+            {
+                path: 'esqueci-senha',
+                Component: ForgotPasswordPage,
+            },
+            {
+                path: 'alterar-senha/:email',
+                Component: ChangePasswordPage,
+            },
+            {
+                path: 'alterar-senha/:email/:code',
+                Component: ChangePasswordPage,
             },
         ],
     },
