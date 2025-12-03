@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router'
-import PrivateHeader from '@/module/privado/components/PrivateHeader'
-import PrivateFooter from '@/module/privado/components/PrivateFooter'
+import PrivateHeader from '@/modules/private/components/PrivateHeader'
+import PrivateFooter from '@/modules/private/components/PrivateFooter'
 
 const PrivateTemplate = () => {
     return (

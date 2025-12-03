@@ -1,5 +1,5 @@
-import Footer from "@/module/public/components/Footer"
-import Header from "@/module/public/components/Header"
+import Footer from "@/modules/public/components/Footer"
+import Header from "@/modules/public/components/Header"
 import { Outlet } from "react-router"
 
 const PublicTemplate = () => {
