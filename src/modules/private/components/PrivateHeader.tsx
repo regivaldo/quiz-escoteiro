@@ -1,6 +1,6 @@
 import Logo from '@/assets/logo.svg?react'
 import { NavLink } from 'react-router'
-import { useUserStore } from '@/store/userStore'
+import { useUserStore } from '@/stores/userStore'
 
 const PrivateHeader = () => {
     const user = useUserStore((state) => state.user);

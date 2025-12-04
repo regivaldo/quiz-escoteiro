@@ -1,4 +1,4 @@
-import { useUserStore } from "@/store/userStore";
+import { useUserStore } from "@/stores/userStore";
 import { FloppyDiskIcon, MedalMilitaryIcon, PencilSimpleIcon, QuestionMarkIcon, SignOutIcon, StarIcon } from "@phosphor-icons/react"
 import { useState } from "react";
 import { useNavigate } from "react-router";
