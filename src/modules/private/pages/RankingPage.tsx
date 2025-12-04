@@ -1,3 +1,5 @@
+import { UserIcon } from "@phosphor-icons/react"
+
 const RankingPage = () => {
     // Mock data - in real app this would come from props/state/API
     const rankings = [
@@ -184,9 +186,7 @@ const RankingPage = () => {
                         <div className="px-4 py-3 md:px-6">
                             <div className="flex items-center gap-4 rounded-lg bg-surface-subtle px-6 min-h-16 justify-between border border-border">
                                 <div className="flex items-center gap-4">
-                                    <span className="material-symbols-outlined text-text-muted">
-                                        person
-                                    </span>
+                                    <UserIcon size={24} />
                                     <p className="text-base font-medium flex-1 truncate text-text">
                                         Sua Posição
                                     </p>

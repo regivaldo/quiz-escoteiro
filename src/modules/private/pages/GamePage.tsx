@@ -84,7 +84,7 @@ const GamePage = () => {
                             to={`/quiz/${category.slug}`}
                         >
                             <div>
-                                <span className={`material-symbols-outlined text-4xl ${getIconClasses(category.color)}`}>
+                                <span className={`text-4xl ${getIconClasses(category.color)}`}>
                                     {category.icon}
                                 </span>
                                 <h3 className="text-2xl font-bold text-[#171810] mt-3">

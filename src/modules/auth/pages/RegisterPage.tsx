@@ -1,4 +1,5 @@
 import Logo from "@/assets/logo.svg?react"
+import { EyeIcon } from "@phosphor-icons/react"
 import { Link } from "react-router"
 
 const RegisterPage = () => {
@@ -128,9 +129,7 @@ const RegisterPage = () => {
                                         className="absolute right-3 text-gray-400 hover:text-gray-200"
                                         type="button"
                                     >
-                                        <span className="material-symbols-outlined text-xl">
-                                            visibility
-                                        </span>
+                                        <EyeIcon size={24} />
                                     </button>
                                 </div>
                             </label>
@@ -148,9 +147,7 @@ const RegisterPage = () => {
                                         className="absolute right-3 text-gray-400 hover:text-gray-200"
                                         type="button"
                                     >
-                                        <span className="material-symbols-outlined text-xl">
-                                            visibility
-                                        </span>
+                                        <EyeIcon size={24} />
                                     </button>
                                 </div>
                             </label>

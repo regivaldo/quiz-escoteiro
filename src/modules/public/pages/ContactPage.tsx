@@ -1,3 +1,5 @@
+import { CaretDownIcon } from "@phosphor-icons/react"
+
 const ContactPage = () => {
     return (
         <>
@@ -70,9 +72,7 @@ const ContactPage = () => {
                                 <summary className="flex cursor-pointer list-none items-center justify-between text-base font-medium text-text-dark">
                                     <span>Quem pode jogar?</span>
                                     <span className="transition-transform duration-300 group-open:rotate-180">
-                                        <span className="material-symbols-outlined text-secondary">
-                                            expand_more
-                                        </span>
+                                        <CaretDownIcon size={16} weight="bold" className="text-secondary" />
                                     </span>
                                 </summary>
                                 <p className="mt-4 text-text-muted">
@@ -88,9 +88,7 @@ const ContactPage = () => {
                                         Escoteiros do Brasil?
                                     </span>
                                     <span className="transition-transform duration-300 group-open:rotate-180">
-                                        <span className="material-symbols-outlined text-secondary">
-                                            expand_more
-                                        </span>
+                                        <CaretDownIcon size={16} weight="bold" className="text-secondary" />
                                     </span>
                                 </summary>
                                 <p className="mt-4 text-text-muted">
@@ -107,9 +105,7 @@ const ContactPage = () => {
                                         Escoteiros do Brasil?
                                     </span>
                                     <span className="transition-transform duration-300 group-open:rotate-180">
-                                        <span className="material-symbols-outlined text-secondary">
-                                            expand_more
-                                        </span>
+                                        <CaretDownIcon size={16} weight="bold" className="text-secondary" />
                                     </span>
                                 </summary>
                                 <p className="mt-4 text-text-muted">
@@ -124,9 +120,7 @@ const ContactPage = () => {
                                         da UEB, posso usar o quiz?
                                     </span>
                                     <span className="transition-transform duration-300 group-open:rotate-180">
-                                        <span className="material-symbols-outlined text-secondary">
-                                            expand_more
-                                        </span>
+                                        <CaretDownIcon size={16} weight="bold" className="text-secondary" />
                                     </span>
                                 </summary>
                                 <p className="mt-4 text-text-muted">
@@ -142,9 +136,7 @@ const ContactPage = () => {
                                         quiz?
                                     </span>
                                     <span className="transition-transform duration-300 group-open:rotate-180">
-                                        <span className="material-symbols-outlined text-secondary">
-                                            expand_more
-                                        </span>
+                                        <CaretDownIcon size={16} weight="bold" className="text-secondary" />
                                     </span>
                                 </summary>
                                 <p className="mt-4 text-text-muted">
@@ -157,9 +149,7 @@ const ContactPage = () => {
                                         Posso jogar pelo telefone?
                                     </span>
                                     <span className="transition-transform duration-300 group-open:rotate-180">
-                                        <span className="material-symbols-outlined text-secondary">
-                                            expand_more
-                                        </span>
+                                        <CaretDownIcon size={16} weight="bold" className="text-secondary" />
                                     </span>
                                 </summary>
                                 <p className="mt-4 text-text-muted">

@@ -112,7 +112,7 @@ const ProfilePage = () => {
                         >
                             <div className="flex items-center gap-2 text-gray-600">
                                 <span
-                                    className={`material-symbols-outlined text-${stat.color} text-xl`}
+                                    className={`text-${stat.color} text-xl`}
                                 >
                                     {stat.icon}
                                 </span>

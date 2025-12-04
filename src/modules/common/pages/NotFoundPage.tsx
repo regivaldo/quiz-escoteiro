@@ -1,3 +1,4 @@
+import { CompassIcon, FlagIcon, MountainsIcon, TreeEvergreenIcon } from "@phosphor-icons/react";
 import { Link } from "react-router";
 
 export default function NotFoundPage() {
@@ -7,18 +8,10 @@ export default function NotFoundPage() {
             style={{ fontFamily: "Lexend, 'Noto Sans', sans-serif" }}
         >
             <div className="absolute inset-0 z-0">
-                <span className="material-symbols-outlined text-9xl text-gray-200/50 absolute top-[10%] left-[15%] -translate-x-1/2 -translate-y-1/2 rotate-[-15deg] opacity-50">
-                    explore
-                </span>
-                <span className="material-symbols-outlined text-8xl text-gray-200/50 absolute bottom-[15%] right-[20%] translate-x-1/2 translate-y-1/2 rotate-[20deg] opacity-50">
-                    forest
-                </span>
-                <span className="material-symbols-outlined text-7xl text-gray-200/50 absolute top-[20%] right-[10%] translate-x-1/2 -translate-y-1/2 rotate-[10deg] opacity-50">
-                    flag
-                </span>
-                <span className="material-symbols-outlined text-6xl text-gray-200/50 absolute bottom-[25%] left-[5%] -translate-x-1/2 translate-y-1/2 rotate-[-25deg] opacity-50">
-                    terrain
-                </span>
+                <CompassIcon className="text-gray-200 absolute top-[10%] left-[15%] -translate-x-1/2 -translate-y-1/2 rotate-[-15deg]" size={32} />
+                <TreeEvergreenIcon className="text-gray-200 absolute bottom-[15%] right-[20%] translate-x-1/2 translate-y-1/2 rotate-[20deg]" size={32} />
+                <FlagIcon className="text-gray-200 absolute top-[20%] right-[10%] translate-x-1/2 -translate-y-1/2 rotate-[10deg]" size={32} />
+                <MountainsIcon className="text-gray-200 absolute bottom-[25%] left-[5%] -translate-x-1/2 translate-y-1/2 rotate-[-25deg]" size={32} />
             </div>
             <div className="relative z-10 flex h-full grow flex-col items-center justify-center px-4 py-10">
                 <div className="flex flex-col items-center gap-6 text-center">
