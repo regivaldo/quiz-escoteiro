@@ -1,6 +1,3 @@
-import { Link } from 'react-router'
-import Logo from "@/assets/logo.svg?react"
-
 const PrivacyPolicyPage = () => {
     return (
         <div className="relative flex h-auto min-h-screen w-full flex-col bg-background-light">

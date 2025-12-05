@@ -1,5 +1,3 @@
-import { Link } from 'react-router'
-
 const TermsOfUsePage = () => {
     return (
         <div className="relative flex h-auto min-h-screen w-full flex-col bg-background-light">
