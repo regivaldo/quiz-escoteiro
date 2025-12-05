@@ -4,12 +4,12 @@ import Header from './components/Header'
 
 const AuthTemplate = () => {
     return (
-        <div className="bg-bg-light font-display text-text-on-light min-h-screen">
+        <main className="bg-bg-light font-display text-text-on-light min-h-screen">
             <Page>
                 <Header />
                 <Outlet />
             </Page>
-        </div>
+        </main>
     )
 }
 
