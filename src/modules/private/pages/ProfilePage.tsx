@@ -49,9 +49,8 @@ const ProfilePage = () => {
     }
 
     return (
-        <main className="flex w-full flex-1 justify-center py-8 md:py-12">
-            <div className="flex w-full max-w-4xl flex-col gap-8 px-6">
-                {/* Page Heading */}
+        <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+            <div className="max-w-4xl mx-auto flex flex-col gap-10">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                     <h2 className="text-4xl font-black tracking-tighter text-text">
                         Meu Perfil

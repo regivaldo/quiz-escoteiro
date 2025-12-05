@@ -1,11 +1,12 @@
-import { ArrowRightIcon, CheckIcon, TimerIcon, XIcon } from "@phosphor-icons/react"
+import { ArrowRightIcon } from "@phosphor-icons/react"
+import OptionIcon from "../components/OptionIcon"
+import Timer from "../components/Timer";
+import ProgressBar from "../components/ProgressBar";
 
 const AskPage = () => {
     // Mock data - in real app this would come from props/state
-    const currentQuestion = 5
+    const currentQuestion = 2
     const totalQuestions = 10
-    const progress = (currentQuestion / totalQuestions) * 100
-    const timeRemaining = '01:30'
     const question = 'Qual é o lema do Ramo Escoteiro?'
 
     const options = [
@@ -25,54 +26,14 @@ const AskPage = () => {
         return 'bg-surface hover:bg-secondary/20 ring-1 ring-inset ring-black/10 hover:ring-secondary'
     }
 
-    const getOptionIcon = (state: string, id: string) => {
-        if (state === 'incorrect') {
-            return (
-                <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-error text-white">
-                    <XIcon size={16} />
-                </div>
-            )
-        }
-        if (state === 'correct') {
-            return (
-                <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary text-white">
-                    <CheckIcon size={16} />
-                </div>
-            )
-        }
-        return (
-            <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-black/10">
-                <span className="text-sm font-bold">{id}</span>
-            </div>
-        )
-    }
-
     return (
         <div className="relative flex min-h-screen w-full flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
             <div className="w-full max-w-2xl">
                 {/* Header with Progress and Timer */}
                 <div className="mb-8 w-full">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                        {/* Progress Bar */}
-                        <div className="flex-grow">
-                            <p className="text-sm font-medium text-text/80 mb-2">
-                                Pergunta {currentQuestion} de {totalQuestions}
-                            </p>
-                            <div className="h-2 w-full rounded-full bg-surface-subtle shadow-inner">
-                                <div
-                                    className="h-2 rounded-full bg-primary transition-all duration-300"
-                                    style={{ width: `${progress}%` }}
-                                />
-                            </div>
-                        </div>
-
-                        {/* Timer */}
-                        <div className="flex items-center gap-2 rounded-lg bg-surface-subtle p-2 shadow-sm">
-                            <TimerIcon size={24} className="text-primary text-xl" weight="fill" />
-                            <p className="text-lg font-bold tracking-tight text-text">
-                                {timeRemaining}
-                            </p>
-                        </div>
+                        <ProgressBar currentQuestion={currentQuestion} totalQuestions={totalQuestions} />
+                        <Timer startTime="01:30" />
                     </div>
                 </div>
 
@@ -90,7 +51,7 @@ const AskPage = () => {
                                 key={option.id}
                                 className={`flex min-w-[84px] cursor-pointer items-center justify-start gap-4 overflow-hidden rounded-lg h-14 px-5 text-base font-bold leading-normal tracking-[0.015em] w-full transition-all ${getOptionClasses(option.state)}`}
                             >
-                                {getOptionIcon(option.state, option.id)}
+                                <OptionIcon state={option.state} id={option.id} />
                                 <span className="truncate">{option.text}</span>
                             </button>
                         ))}
