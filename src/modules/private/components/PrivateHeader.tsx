@@ -1,5 +1,5 @@
 import Logo from '@/assets/logo.svg?react'
-import { NavLink } from 'react-router'
+import { Link, NavLink } from 'react-router'
 import { useUserStore } from '@/stores/userStore'
 
 const PrivateHeader = () => {
@@ -7,15 +7,15 @@ const PrivateHeader = () => {
 
     return (
         <header className="sticky top-0 z-10 w-full bg-white/80 backdrop-blur-sm">
-            <div className="container mx-auto flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-300 px-4 sm:px-6 lg:px-8 py-3">
-                <div className="flex items-center gap-4 text-gray-900">
+            <div className="container mx-auto flex items-center justify-between whitespace-nowrap px-4 sm:px-6 lg:px-8 py-3">
+                <Link to="/quiz" className="flex items-center gap-4 text-gray-900">
                     <div className="size-8">
                         <Logo className='w-full h-full object-contain' />
                     </div>
                     <h2 className="text-lg font-bold tracking-[-0.015em] text-gray-900">
                         Quiz Escoteiro
                     </h2>
-                </div>
+                </Link>
 
                 <div className="hidden sm:flex flex-1 justify-end gap-8">
                     <div className="flex items-center gap-9">

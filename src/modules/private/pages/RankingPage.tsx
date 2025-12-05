@@ -4,62 +4,80 @@ const RankingPage = () => {
     // Mock data - in real app this would come from props/state/API
     const rankings = [
         {
-            position: 1,
-            name: '🥇 Ana Silva',
+            name: 'Ana Silva',
             group: 'G.E. Tuiuti',
             score: 12500,
-            highlight: 'primary',
         },
         {
-            position: 2,
-            name: '🥈 Bruno Costa',
+            name: 'Bruno Costa',
             group: 'G.E. Acauã',
             score: 11800,
-            highlight: 'secondary',
         },
         {
-            position: 3,
-            name: '🥉 Carla Dias',
+            name: 'Carla Dias',
             group: 'G.E. Falcão Peregrino',
             score: 11250,
-            highlight: 'secondary-light',
         },
         {
-            position: 4,
             name: 'Daniel Martins',
             group: 'G.E. Tuiuti',
             score: 10900,
         },
         {
-            position: 5,
             name: 'Eduarda Lima',
             group: 'G.E. Acauã',
             score: 10500,
         },
         {
-            position: 6,
             name: 'Felipe Almeida',
             group: 'G.E. Falcão Peregrino',
             score: 10100,
         },
         {
-            position: 7,
             name: 'Gabriela Borges',
             group: 'G.E. Tuiuti',
             score: 9800,
         },
-    ]
+        {
+            name: 'Gabriel Matos',
+            group: 'G.E. Marechal Rondon',
+            score: 7800,
+        },
+        {
+            name: 'Maria Eduarda',
+            group: 'G.E. Marechal Rondon',
+            score: 19900,
+        },
+        {
+            name: 'Carlos Moraes',
+            group: 'G.E. Tuiuti',
+            score: 7200,
+        },
+    ].sort((a, b) => b.score - a.score)
 
     const userPosition = { rank: 42, score: 5300 }
 
-    const getRowClasses = (highlight?: string) => {
-        if (highlight === 'primary') {
+    const getIconPosition = (position: number) => {
+        if (position === 1) {
+            return '🥇'
+        }
+        if (position === 2) {
+            return '🥈'
+        }
+        if (position === 3) {
+            return '🥉'
+        }
+        return ''
+    }
+
+    const getRowClasses = (position?: number) => {
+        if (position === 1) {
             return 'border-b border-border bg-[#9EB83B]/20 font-bold text-text'
         }
-        if (highlight === 'secondary') {
+        if (position === 2) {
             return 'border-b border-border bg-[#47A8A5]/20 font-semibold text-text'
         }
-        if (highlight === 'secondary-light') {
+        if (position === 3) {
             return 'border-b border-border bg-[#47A8A5]/10 font-semibold text-text'
         }
         return 'border-b border-border hover:bg-surface-subtle transition-colors'
@@ -113,7 +131,7 @@ const RankingPage = () => {
                         </label>
                         <label className="flex h-full flex-1 cursor-pointer items-center justify-center overflow-hidden rounded-md px-3 has-[:checked]:bg-surface has-[:checked]:shadow-sm has-[:checked]:text-text text-text-muted text-sm font-medium transition-colors">
                             <span className="truncate">
-                                Meu grupo escoteiro
+                                Meu grupo
                             </span>
                             <input
                                 className="sr-only"
@@ -146,31 +164,18 @@ const RankingPage = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {rankings.map((player) => (
-                                    <tr
-                                        key={player.position}
-                                        className={getRowClasses(
-                                            player.highlight
-                                        )}
-                                    >
-                                        <td
-                                            className={`h-[72px] px-6 py-2 ${player.position === 1 ? 'text-lg' : ''} ${!player.highlight ? 'text-text-muted' : ''}`}
-                                        >
-                                            {player.position}
+                                {rankings.map((player, index) => (
+                                    <tr key={index} className={getRowClasses(index + 1)}>
+                                        <td className={`h-[72px] px-6 py-2 ${index === 1 ? 'text-lg' : ''}`}>
+                                            {index + 1}
                                         </td>
-                                        <td
-                                            className={`h-[72px] px-6 py-2 ${player.position === 1 ? 'text-base' : ''}`}
-                                        >
-                                            {player.name}
+                                        <td className={`h-[72px] px-6 py-2 ${index === 1 ? 'text-base' : ''}`}>
+                                            {getIconPosition(index + 1)} {player.name}
                                         </td>
-                                        <td
-                                            className={`h-[72px] px-6 py-2 ${player.position === 1 ? 'text-base' : ''}`}
-                                        >
+                                        <td className={`h-[72px] px-6 py-2 ${index === 1 ? 'text-base' : ''}`}>
                                             {player.group}
                                         </td>
-                                        <td
-                                            className={`h-[72px] px-6 py-2 text-right ${player.position === 1 ? 'text-base' : ''} ${!player.highlight ? 'text-text-muted' : ''}`}
-                                        >
+                                        <td className={`h-[72px] px-6 py-2 text-right ${index === 1 ? 'text-base' : ''}`}>
                                             {player.score.toLocaleString()}
                                         </td>
                                     </tr>

@@ -1,5 +1,7 @@
 import backgroundImage from '@/assets/background.jpg'
 import { QuestionMarkIcon, UsersThreeIcon } from '@phosphor-icons/react'
+import { Link } from 'react-router'
+import CardHome from '../components/CardHome'
 
 const HomePage = () => {
     return (
@@ -7,9 +9,7 @@ const HomePage = () => {
             <section className="relative flex min-h-screen flex-col items-center justify-center px-4 py-20 pt-32 text-center">
                 <div
                     className="absolute inset-0 bg-cover bg-center opacity-10"
-                    style={{
-                        backgroundImage: `url(${backgroundImage})`,
-                    }}
+                    style={{ backgroundImage: `url(${backgroundImage})` }}
                     aria-label="Forest background with tall trees and sunlight filtering through."
                 />
 
@@ -24,9 +24,9 @@ const HomePage = () => {
                         </h2>
                     </div>
 
-                    <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 px-8 bg-primary text-white text-lg font-bold leading-normal tracking-[0.015em] transition-transform hover:scale-105 shadow-lg">
+                    <Link to="/quiz" className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 px-8 bg-primary text-white text-lg font-bold leading-normal tracking-[0.015em] transition-transform hover:scale-105 shadow-lg">
                         <span className="truncate">Começar o Desafio</span>
-                    </button>
+                    </Link>
                 </div>
             </section>
 
@@ -45,36 +45,17 @@ const HomePage = () => {
                         </p>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-                            <div className="rounded-xl border border-gray-200 bg-bg-light p-8 text-center">
-                                <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
-                                    <QuestionMarkIcon size={32} />
-                                </div>
-                                <h3 className="text-2xl font-bold text-gray-800 mb-2">
-                                    O Propósito
-                                </h3>
-                                <p className="text-gray-600">
-                                    Criamos este quiz para que você possa
-                                    aprender, relembrar e se divertir com os
-                                    mais variados temas do Movimento
-                                    Escoteiro, desde nós e amarras até a
-                                    história do nosso fundador.
-                                </p>
-                            </div>
-
-                            <div className="rounded-xl border border-gray-200 bg-bg-light p-8 text-center">
-                                <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-secondary/10 text-secondary">
-                                    <UsersThreeIcon size={32} />
-                                </div>
-                                <h3 className="text-2xl font-bold text-gray-800 mb-2">
-                                    Para Quem?
-                                </h3>
-                                <p className="text-gray-600">
-                                    Para todos! Seja você Lobinho,
-                                    Escoteiro, Sênior, Pioneiro, Chefe ou um
-                                    entusiasta do escotismo, há um desafio
-                                    esperando por você.
-                                </p>
-                            </div>
+                            <CardHome
+                                title="O Propósito"
+                                description="Criamos este quiz para que você possa aprender, relembrar e se divertir com os mais variados temas do Movimento Escoteiro, desde nós e amarras até a história do nosso fundador."
+                                icon={<QuestionMarkIcon size={32} />}
+                            />
+                            <CardHome
+                                title="Para Quem?"
+                                description="Para todos! Seja você Lobinho, Escoteiro, Sênior, Pioneiro, Chefe ou um entusiasta do escotismo, há um desafio esperando por você."
+                                icon={<UsersThreeIcon size={32} />}
+                                type="secondary"
+                            />
                         </div>
                     </div>
                 </div>
