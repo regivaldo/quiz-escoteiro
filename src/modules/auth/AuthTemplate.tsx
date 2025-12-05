@@ -1,9 +1,14 @@
 import { Outlet } from 'react-router'
+import Page from './components/Page'
+import Header from './components/Header'
 
 const AuthTemplate = () => {
     return (
         <div className="bg-bg-light font-display text-text-on-light min-h-screen">
-            <Outlet />
+            <Page>
+                <Header />
+                <Outlet />
+            </Page>
         </div>
     )
 }
