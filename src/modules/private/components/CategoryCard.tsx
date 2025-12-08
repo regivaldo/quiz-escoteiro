@@ -1,3 +1,4 @@
+import useHighlightedIcon from "@/hooks/useHighlightedIcon"
 import type { Category } from "@/types/category"
 import { ArrowRightIcon } from "@phosphor-icons/react"
 import { Link } from "react-router"
@@ -7,6 +8,8 @@ type CategoryCardProps = {
 }
 
 const CategoryCard = ({ category }: CategoryCardProps) => {
+    const { findIcon } = useHighlightedIcon();
+
     const getCardClasses = (color: string | undefined) => {
         if (color === 'primary') {
             return 'bg-primary/10 border-primary'
@@ -35,7 +38,7 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
         >
             <div>
                 <span className={`text-4xl ${getIconClasses(category.color)}`}>
-                    {category.icon}
+                    {findIcon(category.slug)}
                 </span>
                 <h3 className="text-2xl font-bold text-[#171810] mt-3">
                     {category.title}
