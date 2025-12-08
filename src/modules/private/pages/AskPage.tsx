@@ -1,20 +1,59 @@
+import { useState } from "react"
 import { ArrowRightIcon } from "@phosphor-icons/react"
 import OptionIcon from "../components/OptionIcon"
 import Timer from "../components/Timer";
 import ProgressBar from "../components/ProgressBar";
+import { questions } from "../../../data/questions";
+import { useNavigate } from "react-router";
 
 const AskPage = () => {
-    // Mock data - in real app this would come from props/state
-    const currentQuestion = 2
-    const totalQuestions = 10
-    const question = 'Qual é o lema do Ramo Escoteiro?'
+    const navigate = useNavigate()
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+    const [selectedOption, setSelectedOption] = useState<string | null>(null)
+    const [hasConfirmed, setHasConfirmed] = useState(false)
 
-    const options = [
-        { id: 'A', text: 'Sempre Alerta', state: 'incorrect' },
-        { id: 'B', text: 'Servir', state: 'correct' },
-        { id: 'C', text: 'Estar Preparado', state: 'default' },
-        { id: 'D', text: 'O Melhor Possível', state: 'default' },
-    ]
+    const totalQuestions = questions.length
+    const currentQuestionData = questions[currentQuestionIndex]
+    const question = currentQuestionData.question
+    const isLastQuestion = currentQuestionIndex >= totalQuestions - 1
+
+    const optionIds = ['A', 'B', 'C', 'D']
+    const options = currentQuestionData.options.map((text, index) => ({
+        id: optionIds[index],
+        text,
+    }))
+
+    const getOptionState = (optionText: string) => {
+        if (!hasConfirmed) {
+            if (optionText === selectedOption) return 'selected'
+            return 'default'
+        }
+        if (optionText === currentQuestionData.answer) return 'correct'
+        if (optionText === selectedOption) return 'incorrect'
+        return 'default'
+    }
+
+    const handleOptionClick = (optionText: string) => {
+        if (hasConfirmed) return
+        setSelectedOption(optionText)
+    }
+
+    const handleConfirmAnswer = () => {
+        if (!selectedOption) return
+        setHasConfirmed(true)
+    }
+
+    const handleNextQuestion = () => {
+        if (!isLastQuestion) {
+            setCurrentQuestionIndex(currentQuestionIndex + 1)
+            setSelectedOption(null)
+            setHasConfirmed(false)
+        }
+    }
+
+    const handleViewResult = () => {
+        navigate('/quiz/resultado')
+    }
 
     const getOptionClasses = (state: string) => {
         if (state === 'incorrect') {
@@ -22,6 +61,9 @@ const AskPage = () => {
         }
         if (state === 'correct') {
             return 'bg-primary/20 text-text ring-2 ring-primary'
+        }
+        if (state === 'selected') {
+            return 'bg-secondary/20 text-text ring-2 ring-secondary'
         }
         return 'bg-surface hover:bg-secondary/20 ring-1 ring-inset ring-black/10 hover:ring-secondary'
     }
@@ -32,7 +74,7 @@ const AskPage = () => {
                 {/* Header with Progress and Timer */}
                 <div className="mb-8 w-full">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                        <ProgressBar currentQuestion={currentQuestion} totalQuestions={totalQuestions} />
+                        <ProgressBar currentQuestion={currentQuestionIndex + 1} totalQuestions={totalQuestions} />
                         <Timer startTime="01:30" />
                     </div>
                 </div>
@@ -46,23 +88,50 @@ const AskPage = () => {
 
                     {/* Answer Options */}
                     <div className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2">
-                        {options.map((option) => (
-                            <button
-                                key={option.id}
-                                className={`flex min-w-[84px] cursor-pointer items-center justify-start gap-4 overflow-hidden rounded-lg h-14 px-5 text-base font-bold leading-normal tracking-[0.015em] w-full transition-all ${getOptionClasses(option.state)}`}
-                            >
-                                <OptionIcon state={option.state} id={option.id} />
-                                <span className="truncate">{option.text}</span>
-                            </button>
-                        ))}
+                        {options.map((option) => {
+                            const state = getOptionState(option.text)
+                            return (
+                                <button
+                                    key={option.id}
+                                    onClick={() => handleOptionClick(option.text)}
+                                    disabled={hasConfirmed}
+                                    className={`flex min-w-[84px] cursor-pointer items-center justify-start gap-4 overflow-hidden rounded-lg h-14 px-5 text-base font-bold leading-normal tracking-[0.015em] w-full transition-all ${getOptionClasses(state)}`}
+                                >
+                                    <OptionIcon state={state} id={option.id} />
+                                    <span className="truncate">{option.text}</span>
+                                </button>
+                            )
+                        })}
                     </div>
 
-                    {/* Next Question Button */}
+                    {/* Action Button */}
                     <div className="mt-8 flex w-full justify-center">
-                        <button className="flex min-w-[84px] w-full max-w-xs cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-12 px-5 bg-secondary text-white text-base font-bold leading-normal tracking-[0.015em] transition-transform hover:scale-[1.02] active:scale-[0.98]">
-                            <span className="truncate">Próxima Pergunta</span>
-                            <ArrowRightIcon size={24} />
-                        </button>
+                        {!hasConfirmed ? (
+                            <button
+                                onClick={handleConfirmAnswer}
+                                disabled={!selectedOption}
+                                className="flex min-w-[84px] w-full max-w-xs cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-12 px-5 text-white text-base font-bold leading-normal tracking-[0.015em] transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+                                style={{ backgroundColor: '#47a8a5' }}
+                            >
+                                <span className="truncate">Confirmar Resposta</span>
+                            </button>
+                        ) : isLastQuestion ? (
+                            <button
+                                onClick={handleViewResult}
+                                className="flex min-w-[84px] w-full max-w-xs cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                            >
+                                <span className="truncate">Ver Resultado</span>
+                                <ArrowRightIcon size={24} />
+                            </button>
+                        ) : (
+                            <button
+                                onClick={handleNextQuestion}
+                                className="flex min-w-[84px] w-full max-w-xs cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                            >
+                                <span className="truncate">Próxima Pergunta</span>
+                                <ArrowRightIcon size={24} />
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>
