@@ -5,6 +5,8 @@
             "title": "Promessa Escoteira",
             "slug": "promessa-escoteira",
             "description": "Os pilares da promessa escoteira.",
+            "highlighted": true,
+            "color": "primary",
             "questions": [
                 {
                     "id": 1,
@@ -57,6 +59,8 @@
             "title": "Lei Escoteira",
             "slug": "lei-escoteira",
             "description": "Os dez artigos que guiam os escoteiros.",
+            "highlighted": true,
+            "color": "secondary",
             "questions": [
                 {
                     "id": 1,
@@ -109,6 +113,8 @@
             "title": "Promessa do Lobinho",
             "slug": "promessa-do-lobinho",
             "description": "O início da jornada no escotismo.",
+            "highlighted": true,
+            "color": "primary",
             "questions": [
                 {
                     "id": 1,

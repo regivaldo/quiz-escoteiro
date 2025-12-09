@@ -1,10 +1,12 @@
 import CategorySmall from "../components/CategorySmall"
 import CategoryCard from "../components/CategoryCard"
-import type { Category } from "@/types/category"
 import type { Key } from "react"
-import { categories, highlightedCategories } from "@/data/categories"
+import { useGetQuiz, type Quiz } from "@/api/useGetQuiz"
 
 const GamePage = () => {
+    const { data: quizzes } = useGetQuiz();
+    const highlightedQuizzes = quizzes?.filter((quiz: Quiz) => quiz.highlighted);
+
     return (
         <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
             <div className="max-w-4xl mx-auto flex flex-col gap-10">
@@ -19,8 +21,8 @@ const GamePage = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-                    {highlightedCategories.map((category: Category, index: Key | null | undefined) => (
-                        <CategoryCard key={index} category={category} />
+                    {highlightedQuizzes?.map((quiz: Quiz, index: Key | null | undefined) => (
+                        <CategoryCard key={index} category={quiz} />
                     ))}
                 </div>
                 <div className="flex flex-col gap-6 mt-6">
@@ -28,8 +30,8 @@ const GamePage = () => {
                         Todas as Categorias
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {categories.map((category: Category, index: Key | null | undefined) => (
-                            <CategorySmall key={index} category={category} />
+                        {quizzes?.map((quiz: Quiz, index: Key | null | undefined) => (
+                            <CategorySmall key={index} category={quiz} />
                         ))}
                     </div>
                 </div>
