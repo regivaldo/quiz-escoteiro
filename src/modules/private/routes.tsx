@@ -3,6 +3,7 @@ import AskPage from "./pages/AskPage";
 import GamePage from "./pages/GamePage";
 import ProfilePage from "./pages/ProfilePage";
 import RankingPage from "./pages/RankingPage";
+import ResultDetailPage from "./pages/ResultDetailPage";
 import ResultPage from "./pages/ResultPage";
 
 const privateRoutes = [
@@ -17,6 +18,10 @@ const privateRoutes = [
     {
         path: 'resultado',
         Component: ResultPage,
+    },
+    {
+        path: 'respostas',
+        Component: ResultDetailPage,
     },
     {
         path: 'ranking',

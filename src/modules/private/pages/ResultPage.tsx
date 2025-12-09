@@ -1,4 +1,5 @@
 import { ArrowClockwiseIcon, CheckCircleIcon, EyeIcon, HouseIcon, ShareNetworkIcon, XCircleIcon } from "@phosphor-icons/react"
+import { Link, useNavigate } from "react-router"
 
 const ResultPage = () => {
     // Mock data - in real app this would come from props/state
@@ -6,6 +7,16 @@ const ResultPage = () => {
     const correctAnswers = 17
     const incorrectAnswers = 3
     const message = 'Parabéns! Você demonstrou um ótimo conhecimento escoteiro!'
+
+    const navigate = useNavigate();
+
+    const playAgain = () => {
+        navigate('/quiz/')
+    }
+
+    const shareResult = () => {
+        console.log('Share Result');
+    }
 
     return (
         <div className="relative flex min-h-screen w-full flex-col items-center justify-center p-4">
@@ -71,28 +82,28 @@ const ResultPage = () => {
                 {/* Action Buttons */}
                 <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
                     {/* Play Again */}
-                    <button className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-primary px-6 text-base font-bold text-[#1c1e14] shadow-md transition-transform hover:scale-105 active:scale-100 sm:w-auto">
+                    <button className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-primary px-6 text-base font-bold text-[#1c1e14] shadow-md transition-transform hover:scale-105 active:scale-100 sm:w-auto" onClick={playAgain}>
                         <ArrowClockwiseIcon size={24} />
                         <span className="truncate">Jogar Novamente</span>
                     </button>
 
                     {/* Share */}
-                    <button className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-secondary px-6 text-base font-bold text-white shadow-md transition-transform hover:scale-105 active:scale-100 sm:w-auto">
+                    <button className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-secondary px-6 text-base font-bold text-white shadow-md transition-transform hover:scale-105 active:scale-100 sm:w-auto" onClick={shareResult}>
                         <ShareNetworkIcon size={24} />
                         <span className="truncate">Compartilhar Resultado</span>
                     </button>
 
                     {/* View Answers */}
-                    <button className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-gray-200 px-6 text-base font-bold text-gray-800 transition-colors hover:bg-gray-300 sm:w-auto">
+                    <Link to="/quiz/respostas" className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-gray-200 px-6 text-base font-bold text-gray-800 transition-colors hover:bg-gray-300 sm:w-auto">
                         <EyeIcon size={24} />
                         <span className="truncate">Ver Respostas</span>
-                    </button>
+                    </Link>
 
                     {/* Back to Home */}
-                    <button className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg border border-gray-300 bg-transparent px-6 text-base font-bold text-gray-700 transition-colors hover:bg-gray-100 sm:w-auto">
+                    <Link to="/quiz" className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg border border-gray-300 bg-transparent px-6 text-base font-bold text-gray-700 transition-colors hover:bg-gray-100 sm:w-auto">
                         <HouseIcon size={24} />
                         <span className="truncate">Voltar para o Início</span>
-                    </button>
+                    </Link>
                 </div>
             </div>
         </div>
