@@ -18,9 +18,10 @@ const AskPage = () => {
     const isLastQuestion = currentQuestionIndex >= totalQuestions - 1
 
     const optionIds = ['A', 'B', 'C', 'D']
-    const options = currentQuestionData.options.map((text, index) => ({
+    const options = currentQuestionData.options.map((option, index) => ({
         id: optionIds[index],
-        text,
+        text: option.text,
+        isCorrect: option.isCorrect,
     }))
 
     const getOptionState = (optionText: string) => {
@@ -28,7 +29,8 @@ const AskPage = () => {
             if (optionText === selectedOption) return 'selected'
             return 'default'
         }
-        if (optionText === currentQuestionData.answer) return 'correct'
+        const selectedOptionData = options.find(opt => opt.text === optionText)
+        if (selectedOptionData?.isCorrect) return 'correct'
         if (optionText === selectedOption) return 'incorrect'
         return 'default'
     }

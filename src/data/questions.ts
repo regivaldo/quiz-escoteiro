@@ -1,42 +1,48 @@
-export const questions = [
+export interface Option {
+    text: string;
+    isCorrect: boolean;
+}
+
+export interface Question {
+    question: string;
+    options: Option[];
+}
+
+export const questions: Question[] = [
     {
         question: "Qual é a cor do céu?",
-        answer: "Azul",
         options: [
-            "Azul",
-            "Verde",
-            "Amarelo",
-            "Vermelho"
+            { text: "Azul", isCorrect: true },
+            { text: "Verde", isCorrect: false },
+            { text: "Amarelo", isCorrect: false },
+            { text: "Vermelho", isCorrect: false }
         ]
     },
     {
         question: "Em que ano estamos?",
-        answer: "2025",
         options: [
-            "2022",
-            "2023",
-            "2024",
-            "2025"
+            { text: "2022", isCorrect: false },
+            { text: "2023", isCorrect: false },
+            { text: "2024", isCorrect: false },
+            { text: "2025", isCorrect: true }
         ]
     },
     {
         question: "Quantos meses temos no ano?",
-        answer: "12",
         options: [
-            "12",
-            "13",
-            "14",
-            "8"
+            { text: "12", isCorrect: true },
+            { text: "13", isCorrect: false },
+            { text: "14", isCorrect: false },
+            { text: "8", isCorrect: false }
         ]
     },
     {
         question: "Quantos dias temos na semana?",
-        answer: "7",
         options: [
-            "7",
-            "8",
-            "9",
-            "10"
+            { text: "7", isCorrect: true },
+            { text: "8", isCorrect: false },
+            { text: "9", isCorrect: false },
+            { text: "10", isCorrect: false }
         ]
     },
 ];
