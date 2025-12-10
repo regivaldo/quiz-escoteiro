@@ -12,6 +12,8 @@ RUN npm run build
 
 ENV NODE_ENV=production
 
-EXPOSE 8080
+# Expõe porta do frontend e do mock server
+EXPOSE 8080 3000
 
-CMD ["npm", "run", "preview", "--", "--port", "8080", "--host"]
+# Script para rodar frontend e mock em paralelo
+CMD ["sh", "-c", "npm run db & npm run preview -- --port 8080 --host"]
