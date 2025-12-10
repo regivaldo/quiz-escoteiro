@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "quiz-escoteiro",
+    "public": "dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
