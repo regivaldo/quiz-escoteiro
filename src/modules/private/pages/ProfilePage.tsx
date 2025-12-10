@@ -1,5 +1,7 @@
+import { app } from "@/config/firebase";
 import { useUserStore } from "@/stores/userStore";
 import { FloppyDiskIcon, MedalMilitaryIcon, PencilSimpleIcon, QuestionMarkIcon, SignOutIcon, StarIcon } from "@phosphor-icons/react"
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
@@ -7,6 +9,7 @@ const ProfilePage = () => {
     const navigate = useNavigate();
     const [edit, showEdit] = useState<boolean>(false);
     const user = useUserStore((state) => state.user);
+    const setUser = useUserStore((state) => state.setUser);
 
     const stats = [
         {
@@ -44,8 +47,18 @@ const ProfilePage = () => {
         showEdit(!edit);
     }
 
-    const handleLogout = () => {
-        navigate('/');
+    const handleLogout = async () => {
+        const auth = getAuth(app);
+
+        try {
+            await signOut(auth);
+            setUser(null);
+            navigate('/');
+        } catch (error) {
+            const message = error instanceof Error ? error.message : String(error);
+            console.error("Google login error:", message);
+        }
+
     }
 
     return (

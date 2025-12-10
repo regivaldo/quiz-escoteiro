@@ -1,14 +1,35 @@
 import { useNavigate } from "react-router"
 import Subheader from "../components/Subheader";
 import Google from "@/assets/google.svg?react";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { app } from "@/config/firebase";
+import { useUserStore } from "@/stores/userStore";
 
 const LoginPage = () => {
     const navigate = useNavigate();
+    const setUser = useUserStore((state) => state.setUser);
 
-    const handleGoogleLogin = () => {
-        console.log('Login com Google');
-        // TODO: Implementar autenticação com Google
-        navigate('/quiz');
+    const handleGoogleLogin = async () => {
+        const provider = new GoogleAuthProvider();
+        const auth = getAuth(app);
+
+        try {
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
+            console.log("Logged in user:", user);
+            setUser({
+                id: user.uid,
+                name: user.displayName || '',
+                email: user.email || '',
+                photoURL: user.photoURL || '',
+                group: "GEMR 41-SP"
+            });
+
+            navigate('/quiz');
+        } catch (error) {
+            const message = error instanceof Error ? error.message : String(error);
+            console.error("Google login error:", message);
+        }
     }
 
     return (
