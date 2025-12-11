@@ -1,7 +1,7 @@
 import { app } from "@/config/firebase";
 import { useUserStore } from "@/stores/userStore";
 import { FloppyDiskIcon, MedalMilitaryIcon, PencilSimpleIcon, QuestionMarkIcon, SignOutIcon, StarIcon } from "@phosphor-icons/react"
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
