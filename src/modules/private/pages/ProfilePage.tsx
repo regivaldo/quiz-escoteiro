@@ -7,7 +7,6 @@ import { useNavigate } from "react-router";
 
 const ProfilePage = () => {
     const navigate = useNavigate();
-    const [edit, showEdit] = useState<boolean>(false);
     const user = useUserStore((state) => state.user);
     const setUser = useUserStore((state) => state.setUser);
 
@@ -42,10 +41,6 @@ const ProfilePage = () => {
         { name: 'Primeiros Socorros', score: 780, date: '10 de Julho, 2024' },
         { name: 'Leis e Promessas', score: 1000, date: '05 de Julho, 2024' },
     ]
-
-    const handleEditProfile = () => {
-        showEdit(!edit);
-    }
 
     const handleLogout = async () => {
         const auth = getAuth(app);
@@ -86,27 +81,14 @@ const ProfilePage = () => {
                                 aria-label="Avatar do usuário"
                             />
                             <div className="flex flex-col">
-                                <p className={`text-2xl font-bold text-text ${edit ? 'border border-primary' : ''}`} contentEditable={edit}>
+                                <p className={`text-2xl font-bold text-text`}>
                                     {user?.name}
                                 </p>
-                                <p className={`text-sm text-gray-500 ${edit ? 'border border-primary' : ''}`} contentEditable={edit}>
+                                <p className={`text-sm text-gray-500`}>
                                     {user?.email}
                                 </p>
                             </div>
                         </div>
-                        <button className="flex min-w-[84px] cursor-pointer items-center justify-center gap-2 rounded-lg bg-secondary px-5 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90" onClick={handleEditProfile}>
-                            {edit ? (
-                                <>
-                                    <FloppyDiskIcon size={24} />
-                                    Salvar
-                                </>
-                            ) : (
-                                <>
-                                    <PencilSimpleIcon size={24} />
-                                    Editar Perfil
-                                </>
-                            )}
-                        </button>
                     </div>
                 </div>
 
