@@ -25,7 +25,7 @@ const LoginPage = () => {
                 group: "GEMR 41-SP"
             });
 
-            navigate('/quiz');
+            navigate('/game');
         } catch (error) {
             const message = error instanceof Error ? error.message : String(error);
             console.error("Google login error:", message);

@@ -40,7 +40,7 @@ const AboutPage = () => {
                             </div>
 
                             <div className="flex px-4 py-3 justify-center mt-8">
-                                <Link to="/quiz" className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-text-dark text-base font-bold leading-normal tracking-[0.015em] hover:opacity-90 transition-opacity">
+                                <Link to="/game" className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-text-dark text-base font-bold leading-normal tracking-[0.015em] hover:opacity-90 transition-opacity">
                                     <span className="truncate">
                                         Começar a Jogar!
                                     </span>

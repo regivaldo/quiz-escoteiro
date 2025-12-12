@@ -10,7 +10,7 @@ const CategorySmall = ({ category }: CategorySmallProps) => {
     return (
         <Link
             className="flex items-center justify-between p-4 bg-white border border-gray-200/80 rounded-lg hover:bg-gray-50 transition-colors"
-            to={`/quiz/${category.slug}`}
+            to={`/game/quiz/${category.slug}`}
         >
             <span className="font-medium">
                 {category.title}

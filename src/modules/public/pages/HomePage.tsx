@@ -10,7 +10,7 @@ const HomePage = () => {
 
     const handleStartQuiz = () => {
         if (user) {
-            navigate('/quiz');
+            navigate('/game');
         } else {
             navigate('/login');
         }

@@ -34,7 +34,7 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
     return (
         <Link
             className={`group col-span-1 flex flex-col justify-between p-6 border-2 rounded-xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${getCardClasses(category.color)}`}
-            to={`/quiz/${category.slug}`}
+            to={`/game/quiz/${category.slug}`}
         >
             <div>
                 <span className={`text-4xl ${getIconClasses(category.color)}`}>

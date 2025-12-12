@@ -6,7 +6,7 @@ import ProgressBar from "../components/ProgressBar";
 import { questions } from "../../../data/questions";
 import { useNavigate } from "react-router";
 
-const AskPage = () => {
+const QuizPage = () => {
     const navigate = useNavigate()
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [selectedOption, setSelectedOption] = useState<string | null>(null)
@@ -54,7 +54,7 @@ const AskPage = () => {
     }
 
     const handleViewResult = () => {
-        navigate('/quiz/resultado')
+        navigate('/game/resultado')
     }
 
     const getOptionClasses = (state: string) => {
@@ -141,4 +141,4 @@ const AskPage = () => {
     )
 }
 
-export default AskPage
+export default QuizPage

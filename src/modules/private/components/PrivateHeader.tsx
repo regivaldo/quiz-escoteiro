@@ -9,7 +9,7 @@ const PrivateHeader = () => {
     return (
         <header className="sticky top-0 z-10 w-full bg-white/80 backdrop-blur-sm">
             <div className="container mx-auto flex items-center justify-between whitespace-nowrap px-4 sm:px-6 lg:px-8 py-3">
-                <Link to="/quiz" className="flex items-center gap-4 text-gray-900">
+                <Link to="/game" className="flex items-center gap-4 text-gray-900">
                     <div className="size-8">
                         <Logo className='w-full h-full object-contain' />
                     </div>
@@ -21,13 +21,13 @@ const PrivateHeader = () => {
 
                 <div className="hidden sm:flex flex-1 justify-end gap-8">
                     <div className="flex items-center gap-9">
-                        <NavLink to="/quiz" end className={({ isActive }) => isActive ? 'text-primary' : 'text-gray-700 hover:text-primary transition-colors'}>
+                        <NavLink to="/game" end className={({ isActive }) => isActive ? 'text-primary' : 'text-gray-700 hover:text-primary transition-colors'}>
                             Início
                         </NavLink>
-                        <NavLink to="/quiz/ranking" end className={({ isActive }) => isActive ? 'text-primary' : 'text-gray-700 hover:text-primary transition-colors'}>
+                        <NavLink to="/game/ranking" end className={({ isActive }) => isActive ? 'text-primary' : 'text-gray-700 hover:text-primary transition-colors'}>
                             Ranking
                         </NavLink>
-                        <NavLink to="/quiz/perfil" end className={({ isActive }) => isActive ? 'text-primary' : 'text-gray-700 hover:text-primary transition-colors'}>
+                        <NavLink to="/game/perfil" end className={({ isActive }) => isActive ? 'text-primary' : 'text-gray-700 hover:text-primary transition-colors'}>
                             Meu Perfil
                         </NavLink>
                     </div>

@@ -1,7 +1,7 @@
 import ContactPage from "../public/pages/ContactPage";
-import AskPage from "./pages/AskPage";
 import GamePage from "./pages/GamePage";
 import ProfilePage from "./pages/ProfilePage";
+import QuizPage from "./pages/QuizPage";
 import RankingPage from "./pages/RankingPage";
 import ResultDetailPage from "./pages/ResultDetailPage";
 import ResultPage from "./pages/ResultPage";
@@ -12,8 +12,8 @@ const privateRoutes = [
         Component: GamePage,
     },
     {
-        path: ':slug',
-        Component: AskPage,
+        path: 'quiz/:slug',
+        Component: QuizPage,
     },
     {
         path: 'resultado',

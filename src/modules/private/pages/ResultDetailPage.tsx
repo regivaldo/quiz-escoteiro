@@ -86,11 +86,11 @@ const ResultDetailPage = () => {
 
                 {/* Action Buttons */}
                 <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                    <Link to="/quiz/resultado" className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-secondary px-6 text-base font-bold text-white shadow-md transition-transform hover:scale-105 active:scale-100 sm:w-auto">
+                    <Link to="/game/resultado" className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-secondary px-6 text-base font-bold text-white shadow-md transition-transform hover:scale-105 active:scale-100 sm:w-auto">
                         <ArrowLeftIcon size={20} />
                         <span className="truncate">Voltar aos Resultados</span>
                     </Link>
-                    <Link to="/quiz" className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg border border-gray-300 bg-transparent px-6 text-base font-bold text-gray-700 transition-colors hover:bg-gray-100 sm:w-auto">
+                    <Link to="/game" className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg border border-gray-300 bg-transparent px-6 text-base font-bold text-gray-700 transition-colors hover:bg-gray-100 sm:w-auto">
                         <HouseIcon size={20} />
                         <span className="truncate">Voltar para o Início</span>
                     </Link>

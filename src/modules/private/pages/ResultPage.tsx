@@ -11,7 +11,7 @@ const ResultPage = () => {
     const navigate = useNavigate();
 
     const playAgain = () => {
-        navigate('/quiz/')
+        navigate('/game/')
     }
 
     const shareResult = () => {
@@ -94,13 +94,13 @@ const ResultPage = () => {
                     </button>
 
                     {/* View Answers */}
-                    <Link to="/quiz/respostas" className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-gray-200 px-6 text-base font-bold text-gray-800 transition-colors hover:bg-gray-300 sm:w-auto">
+                    <Link to="/game/respostas" className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-gray-200 px-6 text-base font-bold text-gray-800 transition-colors hover:bg-gray-300 sm:w-auto">
                         <EyeIcon size={24} />
                         <span className="truncate">Ver Respostas</span>
                     </Link>
 
                     {/* Back to Home */}
-                    <Link to="/quiz" className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg border border-gray-300 bg-transparent px-6 text-base font-bold text-gray-700 transition-colors hover:bg-gray-100 sm:w-auto">
+                    <Link to="/game" className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg border border-gray-300 bg-transparent px-6 text-base font-bold text-gray-700 transition-colors hover:bg-gray-100 sm:w-auto">
                         <HouseIcon size={24} />
                         <span className="truncate">Voltar para o Início</span>
                     </Link>

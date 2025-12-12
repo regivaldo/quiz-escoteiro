@@ -9,7 +9,7 @@ import publicRoutes from './modules/public/routes'
 
 const router = createBrowserRouter([
     {
-        path: '/quiz',
+        path: '/game',
         Component: PrivateTemplate,
         children: privateRoutes,
     },
