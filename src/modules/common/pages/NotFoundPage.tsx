@@ -29,8 +29,7 @@ export default function NotFoundPage() {
                     </div>
                     <Link
                         className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-11 px-6 bg-primary text-white text-base font-bold leading-normal tracking-wide transition-colors hover:bg-secondary"
-                        to="/"
-                    >
+                        to="/">
                         <span>Voltar ao Acampamento</span>
                     </Link>
                 </div>

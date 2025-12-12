@@ -11,8 +11,7 @@ const ContactPage = () => {
                                 Contato e Perguntas Frequentes
                             </p>
                             <p className="text-subtext-light text-base font-normal leading-normal">
-                                Tem alguma dúvida ou sugestão? Fale
-                                conosco!
+                                Tem alguma dúvida ou sugestão? Fale conosco!
                             </p>
                         </div>
                     </div>

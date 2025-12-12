@@ -1,9 +1,21 @@
 import backgroundImage from '@/assets/background.jpg'
 import { QuestionMarkIcon, UsersThreeIcon } from '@phosphor-icons/react'
-import { Link } from 'react-router'
+import { useNavigate } from 'react-router'
 import CardHome from '../components/CardHome'
+import { useUserStore } from '@/stores/userStore'
 
 const HomePage = () => {
+    const { user } = useUserStore();
+    const navigate = useNavigate();
+
+    const handleStartQuiz = () => {
+        if (user) {
+            navigate('/quiz');
+        } else {
+            navigate('/login');
+        }
+    }
+
     return (
         <main className="flex-grow">
             <section className="relative flex min-h-screen flex-col items-center justify-center px-4 py-20 pt-32 text-center">
@@ -24,9 +36,9 @@ const HomePage = () => {
                         </h2>
                     </div>
 
-                    <Link to="/quiz" className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 px-8 bg-primary text-white text-lg font-bold leading-normal tracking-[0.015em] transition-transform hover:scale-105 shadow-lg">
+                    <button onClick={handleStartQuiz} className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 px-8 bg-primary text-white text-lg font-bold leading-normal tracking-[0.015em] transition-transform hover:scale-105 shadow-lg">
                         <span className="truncate">Começar o Desafio</span>
-                    </Link>
+                    </button>
                 </div>
             </section>
 

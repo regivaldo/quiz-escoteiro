@@ -19,8 +19,7 @@ const AboutPage = () => {
                                         <div
                                             className="bg-center bg-no-repeat aspect-square bg-cover rounded-full min-h-32 w-32 border-4 border-primary bg-secondary"
                                             style={{ backgroundImage: "url('regivaldo.png')" }}
-                                            aria-label="Foto de perfil de Regivaldo Silva"
-                                        ></div>
+                                            aria-label="Foto de perfil de Regivaldo Silva"></div>
                                         <div className="flex flex-col items-center justify-center">
                                             <p className="text-text-dark text-[22px] font-bold leading-tight tracking-[-0.015em] text-center">
                                                 Regivaldo Silva
