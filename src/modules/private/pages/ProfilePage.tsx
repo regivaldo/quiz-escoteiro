@@ -1,8 +1,7 @@
 import { app } from "@/config/firebase";
 import { useUserStore } from "@/stores/userStore";
-import { FloppyDiskIcon, MedalMilitaryIcon, PencilSimpleIcon, QuestionMarkIcon, SignOutIcon, StarIcon } from "@phosphor-icons/react"
+import { MedalMilitaryIcon, QuestionMarkIcon, SignOutIcon, StarIcon } from "@phosphor-icons/react"
 import { getAuth, signOut } from "firebase/auth";
-import { useState } from "react";
 import { useNavigate } from "react-router";
 
 const ProfilePage = () => {
@@ -53,7 +52,6 @@ const ProfilePage = () => {
             const message = error instanceof Error ? error.message : String(error);
             console.error("Google login error:", message);
         }
-
     }
 
     return (
@@ -64,8 +62,7 @@ const ProfilePage = () => {
                         Meu Perfil
                     </h2>
                     <button className="flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-red-500/10 px-4 py-2 text-sm font-bold text-red-500 transition-colors hover:bg-red-500/20" onClick={handleLogout}>
-                        <SignOutIcon size={24} />
-                        Sair
+                        <SignOutIcon size={24} /> Sair
                     </button>
                 </div>
 
@@ -105,9 +102,7 @@ const ProfilePage = () => {
                             className="flex flex-col gap-2 rounded-xl border border-gray-200 bg-white p-6"
                         >
                             <div className="flex items-center gap-2 text-gray-600">
-                                <span
-                                    className={`text-${stat.color} text-xl`}
-                                >
+                                <span className={`text-${stat.color} text-xl`}>
                                     {stat.icon}
                                 </span>
                                 <p className="text-base font-medium">
