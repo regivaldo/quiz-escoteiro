@@ -18,7 +18,7 @@ export interface Quiz {
 }
 
 const fetchQuizzes = async (): Promise<Quiz[]> => {
-    const response = await fetch(import.meta.env.VITE_API_URL + '/quizes');
+    const response = await fetch(import.meta.env.VITE_API_URL + '/games');
     if (!response.ok) {
         throw new Error('Erro ao carregar quizzes');
     }
