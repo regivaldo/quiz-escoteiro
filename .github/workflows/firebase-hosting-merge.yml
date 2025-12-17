@@ -8,8 +8,8 @@ on:
       - main
 
 jobs:
-  # Job de build compartilhado
-  build:
+  # ========== PIPELINE FRONTEND ==========
+  build_frontend:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,28 +17,14 @@ jobs:
       - name: Install and Build Frontend
         run: npm ci && npm run build
       
-      - name: Install and Build Functions
-        run: |
-          cd functions
-          npm ci
-          npm run build
-      
-      # Salva os artefatos para os jobs de deploy
       - name: Upload Frontend Build
         uses: actions/upload-artifact@v4
         with:
           name: frontend-dist
           path: dist/
-      
-      - name: Upload Functions Build
-        uses: actions/upload-artifact@v4
-        with:
-          name: functions-lib
-          path: functions/
 
-  # Deploy do Hosting (roda em paralelo com deploy_functions)
   deploy_hosting:
-    needs: build
+    needs: build_frontend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -57,9 +43,26 @@ jobs:
           channelId: live
           projectId: escoteiros-16816
 
-  # Deploy das Functions (roda em paralelo com deploy_hosting)
+  # ========== PIPELINE FUNCTIONS ==========
+  build_functions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install and Build Functions
+        run: |
+          cd functions
+          npm ci
+          npm run build
+      
+      - name: Upload Functions Build
+        uses: actions/upload-artifact@v4
+        with:
+          name: functions-lib
+          path: functions/
+
   deploy_functions:
-    needs: build
+    needs: build_functions
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
