@@ -6,24 +6,49 @@ on:
   push:
     branches:
       - main
+
 jobs:
-  build_and_deploy:
+  # Job de build compartilhado
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       
-      # Build do frontend
       - name: Install and Build Frontend
         run: npm ci && npm run build
       
-      # Build das functions
       - name: Install and Build Functions
         run: |
           cd functions
           npm ci
           npm run build
       
-      # Deploy do Hosting
+      # Salva os artefatos para os jobs de deploy
+      - name: Upload Frontend Build
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist
+          path: dist/
+      
+      - name: Upload Functions Build
+        uses: actions/upload-artifact@v4
+        with:
+          name: functions-lib
+          path: functions/
+
+  # Deploy do Hosting (roda em paralelo com deploy_functions)
+  deploy_hosting:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Download Frontend Build
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-dist
+          path: dist/
+      
       - name: Deploy Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
@@ -31,8 +56,20 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ESCOTEIROS_16816 }}
           channelId: live
           projectId: escoteiros-16816
+
+  # Deploy das Functions (roda em paralelo com deploy_hosting)
+  deploy_functions:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
       
-      # Deploy das Functions
+      - name: Download Functions Build
+        uses: actions/download-artifact@v4
+        with:
+          name: functions-lib
+          path: functions/
+      
       - name: Deploy Functions
         run: |
           echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ESCOTEIROS_16816 }}' > $HOME/gcloud-key.json
