@@ -10,8 +10,7 @@ const Header = () => {
                     <span>Quiz Escoteiro</span>
                 </Link>
                 <div className="flex items-center gap-2 sm:gap-4">
-                    <Link to="/auth" className="rounded-lg px-4 py-2 text-sm font-bold text-gray-700 transition-colors hover:bg-gray-200/50 sm:text-base">Login</Link>
-                    <Link to="/auth/registro" className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-secondary px-4 py-2 text-sm font-bold text-white shadow-md transition-transform hover:scale-105 sm:px-6 sm:text-base">Registrar</Link>
+                    <Link to="/auth" className="rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white transition-colors hover:brightness-90 sm:text-base">Login</Link>
                 </div>
             </div>
         </header>

@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router"
 import Subheader from "../components/Subheader";
 import Google from "@/assets/google.svg?react";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { app } from "@/config/firebase";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "@/config/firebase";
 import { useUserStore } from "@/stores/userStore";
 
 const LoginPage = () => {
@@ -11,7 +11,6 @@ const LoginPage = () => {
 
     const handleGoogleLogin = async () => {
         const provider = new GoogleAuthProvider();
-        const auth = getAuth(app);
 
         try {
             const result = await signInWithPopup(auth, provider);
