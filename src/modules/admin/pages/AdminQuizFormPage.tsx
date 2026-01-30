@@ -5,6 +5,7 @@ import { db } from '@/config/firebase';
 import type { Category, QuizQuestion } from '@/types/category';
 import { CaretLeftIcon, PlusIcon, TrashIcon, CheckCircleIcon, CircleIcon } from '@phosphor-icons/react';
 import ConfirmationModal from '@/components/ConfirmationModal';
+import { toast } from 'react-toastify';
 
 const AdminQuizFormPage = () => {
     const { id } = useParams();
@@ -43,12 +44,12 @@ const AdminQuizFormPage = () => {
                 if (docSnap.exists()) {
                     setFormData({ id: docSnap.id, ...docSnap.data() } as Category);
                 } else {
-                    alert("Quiz não encontrado!");
+                    toast.error("Quiz não encontrado!");
                     navigate('/admin/quizzes');
                 }
             } catch (error) {
                 console.error("Erro ao carregar quiz:", error);
-                alert("Erro ao carregar dados.");
+                toast.error("Erro ao carregar dados.");
             } finally {
                 setIsLoading(false);
             }
@@ -151,12 +152,12 @@ const AdminQuizFormPage = () => {
         e.preventDefault();
 
         if (!formData.title || !formData.slug) {
-            alert("Título e Slug são obrigatórios.");
+            toast.error("Título e Slug são obrigatórios.");
             return;
         }
 
         if (!formData.questions || formData.questions.length === 0) {
-            alert("Adicione pelo menos uma pergunta.");
+            toast.error("Adicione pelo menos uma pergunta.");
             return;
         }
 
@@ -168,11 +169,11 @@ const AdminQuizFormPage = () => {
 
             await setDoc(doc(db, "quizzes", formData.slug), formData);
 
-            alert("Quiz salvo com sucesso!");
+            toast.success("Quiz salvo com sucesso!");
             navigate('/admin/quizzes');
         } catch (error) {
             console.error("Erro ao salvar:", error);
-            alert("Erro ao salvar quiz: " + (error as any).message);
+            toast.error("Erro ao salvar quiz: " + (error as any).message);
         } finally {
             setIsSaving(false);
         }

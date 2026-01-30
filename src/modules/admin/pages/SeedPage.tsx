@@ -3,6 +3,8 @@ import type { Category } from "@/types/category";
 import { writeBatch, doc, collection } from "firebase/firestore";
 import { useState } from "react";
 import { DatabaseIcon } from "@phosphor-icons/react";
+import ConfirmationModal from "@/components/ConfirmationModal";
+import { toast } from "react-toastify";
 
 const quizzes: Category[] = [
     {
@@ -145,10 +147,9 @@ const quizzes: Category[] = [
 
 const SeedPage = () => {
     const [status, setStatus] = useState("Aguardando ação...");
+    const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
     const handleSeed = async () => {
-        if (!confirm("Isso irá sobrescrever os dados dos quizzes iniciais. Deseja continuar?")) return;
-
         setStatus("Iniciando carga de dados...");
         try {
             const batch = writeBatch(db);
@@ -158,9 +159,12 @@ const SeedPage = () => {
             });
             await batch.commit();
             setStatus("Sucesso! O banco de dados foi populado.");
+            toast.success("Banco de dados populado com sucesso!");
         } catch (error) {
             console.error(error);
-            setStatus("Erro: " + (error as any).message);
+            const msg = "Erro: " + (error as any).message;
+            setStatus(msg);
+            toast.error(msg);
         }
     };
 
@@ -188,7 +192,7 @@ const SeedPage = () => {
 
                 <div className="flex flex-col sm:flex-row items-center gap-4 border-t border-gray-100 pt-6">
                     <button
-                        onClick={handleSeed}
+                        onClick={() => setIsConfirmOpen(true)}
                         className="px-6 py-3 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition-colors w-full sm:w-auto cursor-pointer"
                     >
                         Executar Carga (Seed)
@@ -201,6 +205,15 @@ const SeedPage = () => {
                     )}
                 </div>
             </div>
+            <ConfirmationModal
+                isOpen={isConfirmOpen}
+                onClose={() => setIsConfirmOpen(false)}
+                onConfirm={handleSeed}
+                title="Sobrescrever Dados"
+                message="Isso irá sobrescrever os dados dos quizzes iniciais. Deseja continuar? Dados existentes nesses documentos serão perdidos."
+                isDestructive
+                confirmText="Sobrescrever"
+            />
         </div>
     );
 };

@@ -5,6 +5,7 @@ import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import ConfirmationModal from "@/components/ConfirmationModal";
+import { toast } from "react-toastify";
 
 const AdminQuizList = () => {
     const [quizzes, setQuizzes] = useState<Category[]>([]);
@@ -36,9 +37,10 @@ const AdminQuizList = () => {
             await deleteDoc(doc(db, "quizzes", quizToDelete));
             setQuizzes(prev => prev.filter(q => q.slug !== quizToDelete));
             setQuizToDelete(null);
+            toast.success("Quiz excluído com sucesso!");
         } catch (error) {
             console.error("Erro ao excluir quiz:", error);
-            alert("Erro ao excluir quiz.");
+            toast.error("Erro ao excluir quiz.");
         }
     };
 
