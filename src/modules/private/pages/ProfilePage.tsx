@@ -1,7 +1,5 @@
-import { app } from "@/config/firebase";
 import { useUserStore } from "@/stores/userStore";
 import { MedalMilitaryIcon, QuestionMarkIcon, SignOutIcon, StarIcon } from "@phosphor-icons/react"
-import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router";
 
 const ProfilePage = () => {
@@ -42,15 +40,12 @@ const ProfilePage = () => {
     ]
 
     const handleLogout = async () => {
-        const auth = getAuth(app);
-
         try {
-            await signOut(auth);
             setUser(null);
             navigate('/');
         } catch (error) {
             const message = error instanceof Error ? error.message : String(error);
-            console.error("Google login error:", message);
+            console.error("Logout error:", message);
         }
     }
 
