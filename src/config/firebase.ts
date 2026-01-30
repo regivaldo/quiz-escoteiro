@@ -12,8 +12,11 @@ const firebaseConfig = {
   measurementId: "G-VWCFGNEQJH"
 };
 
+import { getFirestore } from "firebase/firestore";
+
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
+const db = getFirestore(app, "quiz");
 
-export {app, analytics, auth}
+export {app, analytics, auth, db}

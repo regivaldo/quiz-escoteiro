@@ -1,33 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '@/config/firebase';
+import type { Category } from '@/types/category';
 
-interface Question {
-    id: number;
-    question: string;
-    answer: string;
-    options: string[];
-}
-
-export interface Quiz {
-    id: number;
-    title: string;
-    slug: string;
-    description: string;
-    questions: Question[];
-    highlighted?: boolean;
-    color?: string;
-}
+export type Quiz = Category;
 
 const fetchQuizzes = async (): Promise<Quiz[]> => {
-    const response = await fetch(import.meta.env.VITE_API_URL + '/games');
-    if (!response.ok) {
-        throw new Error('Erro ao carregar quizzes');
-    }
-    return response.json();
+    const querySnapshot = await getDocs(collection(db, "quizzes"));
+    return querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+    } as Quiz));
 };
 
 export const useGetQuiz = () => {
     return useQuery({
-        queryKey: ['quizes'],
+        queryKey: ['quizzes'],
         queryFn: fetchQuizzes,
     });
 };

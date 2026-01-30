@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router'
 import NotFoundPage from '@/modules/common/pages/NotFoundPage'
+import SeedPage from './modules/admin/pages/SeedPage'
 import AuthTemplate from '@/modules/auth/AuthTemplate'
 import PublicTemplate from '@/modules/public/PublicTemplate'
 import PrivateTemplate from '@/modules/private/PrivateTemplate'
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
         path: '/',
         Component: PublicTemplate,
         children: publicRoutes,
+    },
+    {
+        path: '/seed',
+        Component: SeedPage,
     },
     {
         path: '*',

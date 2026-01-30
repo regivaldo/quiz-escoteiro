@@ -4,9 +4,17 @@ import { useNavigate } from 'react-router'
 import CardHome from '../components/CardHome'
 import { useUserStore } from '@/stores/userStore'
 
+import { useEffect } from 'react';
+
 const HomePage = () => {
     const { user } = useUserStore();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user) {
+            navigate('/game');
+        }
+    }, [user, navigate]);
 
     const handleStartQuiz = () => {
         if (user) {

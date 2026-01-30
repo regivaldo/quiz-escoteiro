@@ -1,0 +1,26 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Função auxiliar para verificar se é admin
+    function isAdmin() {
+      return request.auth != null && 
+        exists(/databases/$(database)/documents/admins/$(request.auth.token.email)) &&
+        get(/databases/$(database)/documents/admins/$(request.auth.token.email)).data.active == true;
+    }
+
+    // Regras para a coleção de Admins
+    // O usuário só pode ler o documento que corresponde ao seu próprio email
+    match /admins/{email} {
+      allow read: if request.auth != null && request.auth.token.email == email;
+      // Escrita bloqueada por padrão (gerenciado via Console do Firebase)
+    }
+
+    // Regras para Quizzes
+    match /quizzes/{quizId} {
+      allow read: if true; // Público pode ler
+      allow write: if isAdmin(); // Apenas admin pode escrever
+    }
+  }
+}
