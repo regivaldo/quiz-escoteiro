@@ -4,6 +4,7 @@ export type UserType = {
     email: string;
     photoURL?: string;
     group: string;
+    isAdmin?: boolean;
 }
 
 export type UserStoreType = {

@@ -35,6 +35,14 @@ const PrivateHeader = () => {
 
                 {/* User Actions */}
                 <div className="flex items-center gap-4 ml-4">
+                    {user?.isAdmin && (
+                        <Link
+                            to="/admin"
+                            className="hidden sm:inline-flex items-center px-3 py-1 text-sm font-bold text-primary border-2 border-primary rounded-lg hover:bg-primary hover:text-white transition-colors cursor-pointer"
+                        >
+                            Administração
+                        </Link>
+                    )}
                     <div
                         className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
                         style={{ backgroundImage: `url('${user?.photoURL}')` }}

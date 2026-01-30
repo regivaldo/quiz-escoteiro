@@ -8,7 +8,25 @@ import authRoutes from './modules/auth/routes'
 import privateRoutes from './modules/private/routes'
 import publicRoutes from './modules/public/routes'
 
+import AdminTemplate from './modules/admin/AdminTemplate'
+import AdminDashboardPage from './modules/admin/pages/AdminDashboardPage'
+import AdminQuizList from './modules/admin/pages/AdminQuizList'
+
 const router = createBrowserRouter([
+    {
+        path: '/admin',
+        Component: AdminTemplate,
+        children: [
+            {
+                index: true,
+                Component: AdminDashboardPage
+            },
+            {
+                path: 'quizzes',
+                Component: AdminQuizList
+            }
+        ]
+    },
     {
         path: '/game',
         Component: PrivateTemplate,
