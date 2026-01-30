@@ -1,5 +1,7 @@
+import { auth } from "@/config/firebase";
 import { useUserStore } from "@/stores/userStore";
 import { MedalMilitaryIcon, QuestionMarkIcon, SignOutIcon, StarIcon } from "@phosphor-icons/react"
+import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router";
 
 const ProfilePage = () => {
@@ -41,6 +43,7 @@ const ProfilePage = () => {
 
     const handleLogout = async () => {
         try {
+            await signOut(auth);
             setUser(null);
             navigate('/');
         } catch (error) {

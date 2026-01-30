@@ -14,7 +14,7 @@ const router = createBrowserRouter([
         children: privateRoutes,
     },
     {
-        path: '/auth',
+        path: '/login',
         Component: AuthTemplate,
         children: authRoutes,
     },
