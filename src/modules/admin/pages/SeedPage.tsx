@@ -1,10 +1,8 @@
-
 import { db } from "@/config/firebase";
 import type { Category } from "@/types/category";
-import { writeBatch, doc, collection, getDoc } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { useUserStore } from "@/stores/userStore";
-import { useNavigate } from "react-router";
+import { writeBatch, doc, collection } from "firebase/firestore";
+import { useState } from "react";
+import { DatabaseIcon } from "@phosphor-icons/react";
 
 const quizzes: Category[] = [
     {
@@ -146,48 +144,10 @@ const quizzes: Category[] = [
 ];
 
 const SeedPage = () => {
-    const [status, setStatus] = useState("Verificando permissões...");
-    const [isAdmin, setIsAdmin] = useState(false);
-    const user = useUserStore((state) => state.user);
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        const checkAdmin = async () => {
-            if (!user) {
-                // Pequeno delay para garantir que o userStore carregou (opcional, mas bom pra UX)
-                setTimeout(() => {
-                    const currentUser = useUserStore.getState().user;
-                    if (!currentUser) {
-                        alert("Login necessário!");
-                        navigate('/login');
-                    }
-                }, 1000);
-                return;
-            }
-
-            try {
-                // Verifica se existe um documento na coleção 'admins' com o email do usuário
-                const docRef = doc(db, "admins", user.email);
-                const docSnap = await getDoc(docRef);
-
-                if (docSnap.exists() && docSnap.data().active === true) {
-                    setIsAdmin(true);
-                    setStatus("Aguardando...");
-                } else {
-                    setStatus("Acesso Negado: Seu usuário não é administrador ativo.");
-                    setIsAdmin(false);
-                }
-            } catch (error) {
-                console.error("Erro ao verificar admin:", error);
-                setStatus("Erro ao verificar permissões.");
-            }
-        };
-
-        checkAdmin();
-    }, [user, navigate]);
+    const [status, setStatus] = useState("Aguardando ação...");
 
     const handleSeed = async () => {
-        if (!isAdmin) return;
+        if (!confirm("Isso irá sobrescrever os dados dos quizzes iniciais. Deseja continuar?")) return;
 
         setStatus("Iniciando carga de dados...");
         try {
@@ -204,49 +164,42 @@ const SeedPage = () => {
         }
     };
 
-    if (!user && !isAdmin) {
-        return <div className="p-10 text-center">Verificando autenticação...</div>;
-    }
-
-    if (user && !isAdmin) {
-        return (
-            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-                <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full text-center">
-                    <h1 className="text-2xl font-bold mb-4 text-red-600">Acesso Negado</h1>
-                    <p className="text-gray-600">
-                        O usuário <strong>{user.email}</strong> não está na lista de administradores.
-                    </p>
-                    <button onClick={() => navigate('/')} className="mt-6 text-blue-500 hover:underline">Voltar para Home</button>
-                </div>
-            </div>
-        );
-    }
-
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-            <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
-                <h1 className="text-2xl font-bold mb-4 text-center">Popular Banco de Dados</h1>
-                <p className="text-gray-600 mb-2 text-center">
-                    Bem-vindo, <strong>{user?.name}</strong>.
-                </p>
-                <p className="text-gray-500 text-sm mb-6 text-center">
-                    Isso irá criar/sobrescrever os quizzes iniciais no Firestore.
-                </p>
+        <div>
+            <div className="mb-8">
+                <h2 className="text-3xl font-bold text-gray-900">Database Seed</h2>
+                <p className="text-gray-500">Ferramenta para redefinir ou popular o banco de dados com dados iniciais.</p>
+            </div>
 
-                <div className="flex justify-center">
+            <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 max-w-2xl">
+                <div className="flex items-start gap-4 mb-6">
+                    <div className="p-3 bg-red-50 text-red-600 rounded-lg">
+                        <DatabaseIcon size={32} />
+                    </div>
+                    <div>
+                        <h3 className="text-lg font-bold text-gray-900">Popular Banco de Dados</h3>
+                        <p className="text-gray-600 mt-1">
+                            Esta ação irá criar ou sobrescrever os quizzes padrão do sistema (<code>especialidade-de-nos</code>, <code>historia-do-escotismo</code>, etc).
+                            <br /><br />
+                            <strong>Atenção:</strong> Dados existentes nesses documentos serão perdidos.
+                        </p>
+                    </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center gap-4 border-t border-gray-100 pt-6">
                     <button
                         onClick={handleSeed}
-                        className="px-6 py-3 bg-green-600 text-white font-bold rounded hover:bg-green-700 transition-colors"
+                        className="px-6 py-3 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition-colors w-full sm:w-auto cursor-pointer"
                     >
                         Executar Carga (Seed)
                     </button>
-                </div>
 
-                {status && (
-                    <div className="mt-6 p-4 bg-gray-50 rounded border text-center">
-                        <span className="font-mono text-sm">{status}</span>
-                    </div>
-                )}
+                    {status && (
+                        <div className="px-4 py-2 bg-gray-50 rounded border border-gray-200 text-sm font-medium text-gray-700 w-full sm:w-auto text-center font-mono">
+                            {status}
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );

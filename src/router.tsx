@@ -33,6 +33,10 @@ const router = createBrowserRouter([
             {
                 path: 'quizzes/:id',
                 Component: AdminQuizFormPage
+            },
+            {
+                path: 'seed',
+                Component: SeedPage
             }
         ]
     },
@@ -50,10 +54,6 @@ const router = createBrowserRouter([
         path: '/',
         Component: PublicTemplate,
         children: publicRoutes,
-    },
-    {
-        path: '/seed',
-        Component: SeedPage,
     },
     {
         path: '*',
