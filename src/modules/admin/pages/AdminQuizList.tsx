@@ -1,6 +1,6 @@
 import { db } from "@/config/firebase";
 import type { Category } from "@/types/category";
-import { PlusIcon, PencilSimpleIcon, TrashIcon } from "@phosphor-icons/react";
+import { PlusIcon, PencilSimpleIcon, TrashIcon, StarIcon } from "@phosphor-icons/react";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
@@ -66,6 +66,7 @@ const AdminQuizList = () => {
                         <tr className="bg-gray-50 border-b border-gray-200">
                             <th className="px-6 py-4 text-sm font-bold text-gray-500 uppercase">Título</th>
                             <th className="px-6 py-4 text-sm font-bold text-gray-500 uppercase">Slug</th>
+                            <th className="px-6 py-4 text-sm font-bold text-gray-500 uppercase text-center">Destaque</th>
                             <th className="px-6 py-4 text-sm font-bold text-gray-500 uppercase text-center">Perguntas</th>
                             <th className="px-6 py-4 text-sm font-bold text-gray-500 uppercase text-center">Ações</th>
                         </tr>
@@ -81,6 +82,15 @@ const AdminQuizList = () => {
                                     <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs font-mono">
                                         {quiz.slug}
                                     </span>
+                                </td>
+                                <td className="px-6 py-4 text-center">
+                                    {quiz.highlighted ? (
+                                        <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-yellow-100 text-yellow-500">
+                                            <StarIcon size={20} weight="fill" />
+                                        </div>
+                                    ) : (
+                                        <span className="text-gray-300">-</span>
+                                    )}
                                 </td>
                                 <td className="px-6 py-4 text-center">
                                     <span className="font-bold text-gray-700">{quiz.questions?.length || 0}</span>
