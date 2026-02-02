@@ -4,7 +4,6 @@ import { useUserStore } from '@/stores/userStore'
 
 const PrivateHeader = () => {
     const user = useUserStore((state) => state.user);
-    const version = import.meta.env.VITE_APP_VERSION;
 
     return (
         <header className="sticky top-0 z-10 w-full bg-white/80 backdrop-blur-sm">
@@ -15,7 +14,6 @@ const PrivateHeader = () => {
                     </div>
                     <h2 className="text-lg font-bold tracking-[-0.015em] text-gray-900 flex items-center gap-2">
                         Quiz Escoteiro
-                        <small className="text-xs text-gray-500">({version})</small>
                     </h2>
                 </Link>
 
