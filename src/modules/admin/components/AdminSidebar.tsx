@@ -1,5 +1,5 @@
 import { useUserStore } from '@/stores/userStore';
-import { ChartBarIcon, ListDashesIcon, SignOutIcon, CaretLeftIcon, DatabaseIcon } from '@phosphor-icons/react';
+import { ChartBarIcon, ListDashesIcon, SignOutIcon, CaretLeftIcon, DatabaseIcon, UsersThreeIcon } from '@phosphor-icons/react';
 import { NavLink, Link, useNavigate } from 'react-router';
 import { auth } from '@/config/firebase';
 import { signOut } from 'firebase/auth';
@@ -58,6 +58,19 @@ const AdminSidebar = () => {
                 >
                     <ListDashesIcon size={20} />
                     Quizzes
+                </NavLink>
+
+                <NavLink
+                    to="/admin/users"
+                    className={({ isActive }) =>
+                        `flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${isActive
+                            ? 'bg-primary/10 text-primary'
+                            : 'text-gray-700 hover:bg-gray-100'
+                        }`
+                    }
+                >
+                    <UsersThreeIcon size={20} />
+                    Usuários
                 </NavLink>
 
                 <NavLink

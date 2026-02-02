@@ -25,7 +25,13 @@ service cloud.firestore {
 
     // Regras para Users e suas subcoleções
     match /users/{userId}/{document=**} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow read: if (request.auth != null && request.auth.uid == userId) || isAdmin();
+      allow write: if (request.auth != null && request.auth.uid == userId) || isAdmin();
+    }
+    
+    // Regra global para Collection Group Queries (quiz_history)
+    match /{path=**}/quiz_history/{doc} {
+       allow read: if isAdmin();
     }
   }
 }

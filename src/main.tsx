@@ -9,9 +9,7 @@ import { ToastContainer } from 'react-toastify'
 import { auth, db } from './config/firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useUserStore } from './stores/userStore'
-import { doc, getDoc } from 'firebase/firestore'
-
-// ... (existing code remains but I only see lines up to 42 so I will replace the imports and render)
+import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore'
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
@@ -31,16 +29,28 @@ onAuthStateChanged(auth, async (user) => {
         }
 
         try {
-            const userDoc = await getDoc(doc(db, "users", user.uid));
+            const userRef = doc(db, "users", user.uid);
+            const userDoc = await getDoc(userRef);
+
             if (userDoc.exists()) {
                 const data = userDoc.data();
                 group = data.group || "Escoteiro";
                 numeral = data.numeral;
                 city = data.city;
                 state = data.state;
+            } else {
+                // Create user document if it doesn't exist
+                await setDoc(userRef, {
+                    name: user.displayName || 'Escoteiro',
+                    email: user.email || '',
+                    photoURL: user.photoURL || '',
+                    group, // default "Escoteiro"
+                    createdAt: serverTimestamp(),
+                    uid: user.uid
+                });
             }
         } catch (error) {
-            console.error("Error checking user status", error);
+            console.error("Error checking/creating user status", error);
         }
 
         useUserStore.getState().setUser({

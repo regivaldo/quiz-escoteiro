@@ -12,6 +12,7 @@ import AdminTemplate from './modules/admin/AdminTemplate'
 import AdminDashboardPage from './modules/admin/pages/AdminDashboardPage'
 import AdminQuizList from './modules/admin/pages/AdminQuizList'
 import AdminQuizFormPage from './modules/admin/pages/AdminQuizFormPage'
+import AdminUsersPage from './modules/admin/pages/AdminUsersPage'
 
 const router = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
             {
                 path: 'quizzes',
                 Component: AdminQuizList
+            },
+            {
+                path: 'users',
+                Component: AdminUsersPage
             },
             {
                 path: 'quizzes/new',
