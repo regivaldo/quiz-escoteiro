@@ -1,60 +1,65 @@
 @import 'tailwindcss';
 
 @theme {
-    /* ========================================
+  /* ========================================
      CORES PRINCIPAIS
      ======================================== */
-    --color-primary: #9eb83b;
-    /* Verde escoteiro */
-    --color-secondary: #47a8a5;
-    /* Azul-turquesa */
-    --color-error: #e57373;
-    /* Vermelho para erros/incorreto */
+  --color-primary: #9eb83b;
+  /* Verde escoteiro */
+  --color-secondary: #47a8a5;
+  /* Azul-turquesa */
+  --color-error: #e57373;
+  /* Vermelho para erros/incorreto */
 
-    /* ========================================
+  /* ========================================
      CORES
      ======================================== */
-    --color-background: #f7f8f6;
-    /* Fundo principal */
-    --color-surface: #ffffff;
-    /* Superfície (cards, containers) */
-    --color-surface-subtle: #eff1e9;
-    /* Superfície sutil */
-    --color-text: #1c1e14;
-    /* Texto principal */
-    --color-text-dark: #171910;
-    /* Texto escuro */
-    --color-text-muted: #6b7280;
-    /* Texto secundário */
-    --color-border: #e0e3d4;
-    /* Bordas */
+  --color-background: #f7f8f6;
+  /* Fundo principal */
+  --color-surface: #ffffff;
+  /* Superfície (cards, containers) */
+  --color-surface-subtle: #eff1e9;
+  /* Superfície sutil */
+  --color-text: #1c1e14;
+  /* Texto principal */
+  --color-text-dark: #171910;
+  /* Texto escuro */
+  --color-text-muted: #6b7280;
+  /* Texto secundário */
+  --color-border: #e0e3d4;
+  /* Bordas */
 
-    /* ========================================
+  /* ========================================
      TIPOGRAFIA
      ======================================== */
-    --font-display: 'Lexend', sans-serif;
+  --font-display: 'Lexend', sans-serif;
 
-    /* ========================================
+  /* ========================================
      BORDER RADIUS
      ======================================== */
-    --radius-DEFAULT: 0.25rem;
-    --radius-lg: 0.75rem;
-    --radius-xl: 1rem;
-    --radius-full: 9999px;
+  --radius-DEFAULT: 0.25rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
 }
 
-::-webkit-input-placeholder { /* WebKit browsers */
-    text-transform: none;
+::-webkit-input-placeholder {
+  /* WebKit browsers */
+  text-transform: none;
 }
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    text-transform: none;
+:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  text-transform: none;
 }
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-    text-transform: none;
+::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  text-transform: none;
 }
-:-ms-input-placeholder { /* Internet Explorer 10+ */
-    text-transform: none;
+:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  text-transform: none;
 }
-::placeholder { /* Recent browsers */
-    text-transform: none;
+::placeholder {
+  /* Recent browsers */
+  text-transform: none;
 }

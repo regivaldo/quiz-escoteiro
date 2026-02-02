@@ -6,16 +6,19 @@ import type { Category } from '@/types/category';
 export type Quiz = Category;
 
 const fetchQuizzes = async (): Promise<Quiz[]> => {
-    const querySnapshot = await getDocs(collection(db, "quizzes"));
-    return querySnapshot.docs.map(doc => ({
+  const querySnapshot = await getDocs(collection(db, 'quizzes'));
+  return querySnapshot.docs.map(
+    (doc) =>
+      ({
         id: doc.id,
-        ...doc.data()
-    } as Quiz));
+        ...doc.data(),
+      }) as Quiz,
+  );
 };
 
 export const useGetQuiz = () => {
-    return useQuery({
-        queryKey: ['quizzes'],
-        queryFn: fetchQuizzes,
-    });
+  return useQuery({
+    queryKey: ['quizzes'],
+    queryFn: fetchQuizzes,
+  });
 };
