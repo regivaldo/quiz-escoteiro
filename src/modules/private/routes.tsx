@@ -5,6 +5,7 @@ import QuizPage from "./pages/QuizPage";
 import RankingPage from "./pages/RankingPage";
 import ResultDetailPage from "./pages/ResultDetailPage";
 import ResultPage from "./pages/ResultPage";
+import FirstAccessPage from "./pages/FirstAccessPage";
 
 const privateRoutes = [
     {
@@ -34,6 +35,10 @@ const privateRoutes = [
     {
         path: 'contato',
         Component: ContactPage,
+    },
+    {
+        path: 'primeiro-acesso',
+        Component: FirstAccessPage,
     },
 ];
 

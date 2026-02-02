@@ -22,5 +22,10 @@ service cloud.firestore {
       allow read: if true; // Público pode ler
       allow write: if isAdmin(); // Apenas admin pode escrever
     }
+
+    // Regras para Users
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
   }
 }

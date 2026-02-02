@@ -4,6 +4,9 @@ export type UserType = {
     email: string;
     photoURL?: string;
     group: string;
+    numeral?: string;
+    city?: string;
+    state?: string;
     isAdmin?: boolean;
 }
 

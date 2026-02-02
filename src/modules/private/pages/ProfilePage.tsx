@@ -82,6 +82,9 @@ const ProfilePage = () => {
                                 <p className={`text-sm text-gray-500`}>
                                     {user?.email}
                                 </p>
+                                <p className={`text-sm text-gray-500`}>
+                                    {user?.group} - {user?.numeral}{user?.state}
+                                </p>
                             </div>
                         </div>
                     </div>

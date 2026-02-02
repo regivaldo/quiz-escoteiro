@@ -16,6 +16,11 @@ import { doc, getDoc } from 'firebase/firestore'
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         let isAdmin = false;
+        let group = "Escoteiro";
+        let numeral = undefined;
+        let city = undefined;
+        let state = undefined;
+
         try {
             if (user.email) {
                 const adminDoc = await getDoc(doc(db, "admins", user.email));
@@ -25,12 +30,28 @@ onAuthStateChanged(auth, async (user) => {
             console.error("Error checking admin status", error);
         }
 
+        try {
+            const userDoc = await getDoc(doc(db, "users", user.uid));
+            if (userDoc.exists()) {
+                const data = userDoc.data();
+                group = data.group || "Escoteiro";
+                numeral = data.numeral;
+                city = data.city;
+                state = data.state;
+            }
+        } catch (error) {
+            console.error("Error checking user status", error);
+        }
+
         useUserStore.getState().setUser({
             id: user.uid,
             name: user.displayName || 'Escoteiro',
             email: user.email || '',
             photoURL: user.photoURL || '',
-            group: "Escoteiro",
+            group,
+            numeral,
+            city,
+            state,
             isAdmin: isAdmin
         });
     } else {
