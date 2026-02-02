@@ -1,44 +1,61 @@
-import { auth } from "@/config/firebase";
+import { auth, db } from "@/config/firebase";
 import { useUserStore } from "@/stores/userStore";
-import { MedalMilitaryIcon, QuestionMarkIcon, SignOutIcon, StarIcon } from "@phosphor-icons/react"
+import { QuestionMarkIcon, SignOutIcon, StarIcon } from "@phosphor-icons/react"
 import { signOut } from "firebase/auth";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 const ProfilePage = () => {
     const navigate = useNavigate();
     const user = useUserStore((state) => state.user);
     const setUser = useUserStore((state) => state.setUser);
+    const [quizHistory, setQuizHistory] = useState<any[]>([]);
+
+    useEffect(() => {
+        const fetchHistory = async () => {
+            if (!user) return;
+            try {
+                const historyRef = collection(db, "users", user.id, "quiz_history");
+                const q = query(historyRef, orderBy("respondedAt", "desc"));
+                const querySnapshot = await getDocs(q);
+
+                const historyData = querySnapshot.docs.map(doc => {
+                    const data = doc.data();
+                    return {
+                        id: doc.id,
+                        name: data.quizTitle || data.quizSlug || 'Quiz Sem Nome',
+                        score: Number(data.totalPoints) || 0,
+                        date: data.respondedAt?.toDate().toLocaleDateString('pt-BR', {
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric'
+                        }) || 'Data desconhecida'
+                    };
+                });
+
+                setQuizHistory(historyData);
+            } catch (error) {
+                console.error("Error fetching quiz history:", error);
+            }
+        };
+
+        fetchHistory();
+    }, [user]);
 
     const stats = [
         {
             icon: <StarIcon size={24} />,
             label: 'Pontuação Total',
-            value: '12,450',
+            value: quizHistory.reduce((acc, curr) => acc + curr.score, 0).toLocaleString('pt-BR'),
             color: 'primary',
         },
         {
             icon: <QuestionMarkIcon size={24} />,
             label: 'Quizzes Concluídos',
-            value: '15',
+            value: quizHistory.length.toString(),
             color: 'primary',
-        },
-        {
-            icon: <MedalMilitaryIcon size={24} />,
-            label: 'Conquistas',
-            value: '8',
-            color: 'primary',
-        },
-    ]
-
-    const quizHistory = [
-        { name: 'Especialidade de Nós', score: 850, date: '15 de Julho, 2024' },
-        {
-            name: 'História do Escotismo',
-            score: 920,
-            date: '12 de Julho, 2024',
-        },
-        { name: 'Primeiros Socorros', score: 780, date: '10 de Julho, 2024' },
-        { name: 'Leis e Promessas', score: 1000, date: '05 de Julho, 2024' },
+        }
     ]
 
     const handleLogout = async () => {
@@ -83,7 +100,7 @@ const ProfilePage = () => {
                                     {user?.email}
                                 </p>
                                 <p className={`text-sm text-gray-500`}>
-                                    {user?.group} - {user?.numeral}{user?.state}
+                                    {user?.group} - {user?.numeral}/{user?.state}
                                 </p>
                             </div>
                         </div>
@@ -96,7 +113,7 @@ const ProfilePage = () => {
                 </h3>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-1 lg:grid-cols-2">
                     {stats.map((stat, index) => (
                         <div
                             key={index}
@@ -149,19 +166,27 @@ const ProfilePage = () => {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-200">
-                                {quizHistory.map((quiz, index) => (
-                                    <tr key={index}>
-                                        <td className="whitespace-nowrap px-6 py-4 font-medium text-text">
-                                            {quiz.name}
-                                        </td>
-                                        <td className="whitespace-nowrap px-6 py-4 text-gray-700">
-                                            {quiz.score}
-                                        </td>
-                                        <td className="whitespace-nowrap px-6 py-4 text-gray-700">
-                                            {quiz.date}
+                                {quizHistory.length > 0 ? (
+                                    quizHistory.map((quiz) => (
+                                        <tr key={quiz.id}>
+                                            <td className="whitespace-nowrap px-6 py-4 font-medium text-text">
+                                                {quiz.name}
+                                            </td>
+                                            <td className="whitespace-nowrap px-6 py-4 text-gray-700">
+                                                {quiz.score}
+                                            </td>
+                                            <td className="whitespace-nowrap px-6 py-4 text-gray-700">
+                                                {quiz.date}
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan={3} className="px-6 py-4 text-center text-gray-500">
+                                            Nenhum quiz realizado ainda.
                                         </td>
                                     </tr>
-                                ))}
+                                )}
                             </tbody>
                         </table>
                     </div>

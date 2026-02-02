@@ -1,21 +1,47 @@
 import { ArrowClockwiseIcon, CheckCircleIcon, EyeIcon, HouseIcon, ShareNetworkIcon, XCircleIcon } from "@phosphor-icons/react"
-import { Link, useNavigate } from "react-router"
+import { Link, useLocation, useNavigate } from "react-router"
+import { useEffect, useMemo } from "react"
 
 const ResultPage = () => {
-    // Mock data - in real app this would come from props/state
-    const score = 85
-    const correctAnswers = 17
-    const incorrectAnswers = 3
-    const message = 'Parabéns! Você demonstrou um ótimo conhecimento escoteiro!'
-
     const navigate = useNavigate();
+    const location = useLocation();
+    const result = location.state?.result;
+
+    // Redirect if direct access without result
+    useEffect(() => {
+        if (!result) {
+            navigate('/game');
+        }
+    }, [result, navigate]);
+
+    if (!result) return null;
+
+    const { totalPoints, correctAnswers, wrongAnswers: incorrectAnswers } = result;
+
+    const message = useMemo(() => {
+        const totalQuestions = correctAnswers + incorrectAnswers;
+        const accuracy = correctAnswers / totalQuestions;
+
+        if (accuracy === 1) return 'Perfeito! Você é um mestre escoteiro!';
+        if (accuracy >= 0.8) return 'Parabéns! Você demonstrou um ótimo conhecimento escoteiro!';
+        if (accuracy >= 0.5) return 'Muito bem! Continue estudando para melhorar ainda mais.';
+        return 'Continue praticando! O conhecimento vem com o tempo.';
+    }, [correctAnswers, incorrectAnswers]);
 
     const playAgain = () => {
-        navigate('/game/')
+        navigate(result.quizSlug && result.quizSlug !== 'unknown' ? `/game/quiz/${result.quizSlug}` : '/game');
     }
 
     const shareResult = () => {
-        console.log('Share Result');
+        if (navigator.share) {
+            navigator.share({
+                title: 'Quiz Escoteiro',
+                text: `Fiz ${totalPoints} pontos no Quiz Escoteiro! Você consegue me superar?`,
+                url: window.location.origin
+            }).catch(console.error);
+        } else {
+            console.log('Share API not supported');
+        }
     }
 
     return (
@@ -38,10 +64,10 @@ const ResultPage = () => {
                         </p>
                         <div className="mt-4 flex items-baseline justify-center gap-2">
                             <span className="text-7xl font-bold tracking-tighter text-primary">
-                                {score}
+                                {totalPoints}
                             </span>
-                            <span className="text-4xl font-semibold text-gray-400">
-                                %
+                            <span className="text-2xl font-semibold text-gray-400">
+                                pontos
                             </span>
                         </div>
                         <p className="mt-4 text-lg text-gray-600">

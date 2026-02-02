@@ -4,13 +4,51 @@ import OptionIcon from "../components/OptionIcon"
 import Timer from "../components/Timer";
 import ProgressBar from "../components/ProgressBar";
 import { questions } from "../../../data/questions";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import { useUserStore } from "@/stores/userStore";
+import { db } from "@/config/firebase";
+import { addDoc, collection, doc, getDoc, serverTimestamp } from "firebase/firestore";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 const QuizPage = () => {
     const navigate = useNavigate()
+    const { slug } = useParams();
+    const { user } = useUserStore();
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [selectedOption, setSelectedOption] = useState<string | null>(null)
     const [hasConfirmed, setHasConfirmed] = useState(false)
+
+    // Score state
+    const [correctCount, setCorrectCount] = useState(0);
+    const [incorrectCount, setIncorrectCount] = useState(0);
+    const [isSaving, setIsSaving] = useState(false);
+
+    // Fetch Quiz Title (using dummy simple approach for now or proper fetch)
+    // Ideally we should have the full quiz object here, but for now we fetch to save the name.
+    // If the QuizPage is supposed to show *fetched* questions, we should refactor to fetch the whole quiz.
+    // For this specific request, I will fetch the title just before saving or on mount.
+    // Since we are already here, let's fetch on mount if slug is present.
+    const [quizTitle, setQuizTitle] = useState(slug);
+
+    useEffect(() => {
+        const fetchQuizTitle = async () => {
+            if (!slug) return;
+            try {
+                // Assuming slug equals document ID for now based on AdminQuizList logic
+                // If storing by slug field, we need a query.
+                // AdminQuizList uses: doc(db, "quizzes", quizToDelete) which implies ID = slug.
+                const docRef = doc(db, "quizzes", slug);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    setQuizTitle(docSnap.data().title);
+                }
+            } catch (error) {
+                console.error("Error fetching quiz title:", error);
+            }
+        };
+        fetchQuizTitle();
+    }, [slug]);
 
     const totalQuestions = questions.length
     const currentQuestionData = questions[currentQuestionIndex]
@@ -42,6 +80,14 @@ const QuizPage = () => {
 
     const handleConfirmAnswer = () => {
         if (!selectedOption) return
+
+        const selectedOptionData = options.find(opt => opt.text === selectedOption);
+        if (selectedOptionData?.isCorrect) {
+            setCorrectCount(prev => prev + 1);
+        } else {
+            setIncorrectCount(prev => prev + 1);
+        }
+
         setHasConfirmed(true)
     }
 
@@ -53,8 +99,41 @@ const QuizPage = () => {
         }
     }
 
-    const handleViewResult = () => {
-        navigate('/game/resultado')
+    const handleViewResult = async () => {
+        if (!user) return;
+        setIsSaving(true);
+
+        try {
+            const accuracy = correctCount / totalQuestions;
+            const pointsPerCorrect = 100;
+            const bonusPoints = accuracy >= 0.8 ? 500 : 0;
+            const totalPoints = (correctCount * pointsPerCorrect) + bonusPoints;
+
+            const resultData = {
+                quizSlug: slug || 'unknown',
+                quizTitle: quizTitle || slug || 'Quiz Sem Título',
+                correctAnswers: correctCount,
+                wrongAnswers: incorrectCount,
+                totalPoints: totalPoints,
+                respondedAt: serverTimestamp(),
+                totalQuestions: totalQuestions
+            };
+
+            await addDoc(collection(db, "users", user.id, "quiz_history"), resultData);
+
+            navigate('/game/resultado', {
+                state: {
+                    result: {
+                        ...resultData,
+                        respondedAt: new Date().toISOString() // Serializable date for state
+                    }
+                }
+            });
+        } catch (error) {
+            console.error("Error saving quiz result:", error);
+            toast.error("Erro ao salvar resultado.");
+            setIsSaving(false);
+        }
     }
 
     const getOptionClasses = (state: string) => {
@@ -120,10 +199,11 @@ const QuizPage = () => {
                         ) : isLastQuestion ? (
                             <button
                                 onClick={handleViewResult}
-                                className="flex min-w-[84px] w-full max-w-xs cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                                disabled={isSaving}
+                                className="flex min-w-[84px] w-full max-w-xs cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-wait"
                             >
-                                <span className="truncate">Ver Resultado</span>
-                                <ArrowRightIcon size={24} />
+                                <span className="truncate">{isSaving ? 'Salvando...' : 'Ver Resultado'}</span>
+                                {!isSaving && <ArrowRightIcon size={24} />}
                             </button>
                         ) : (
                             <button
