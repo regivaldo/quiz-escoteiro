@@ -24,7 +24,14 @@ service cloud.firestore {
     }
 
     // Regras para Users e suas subcoleções
-    match /users/{userId}/{document=**} {
+    // Permitir leitura da lista de users (para ranking) por usuários autenticados
+    match /users/{userId} {
+      allow read: if request.auth != null;
+      allow write: if (request.auth != null && request.auth.uid == userId) || isAdmin();
+    }
+    
+    // Subcoleções de users (quiz_history)
+    match /users/{userId}/quiz_history/{docId} {
       allow read: if (request.auth != null && request.auth.uid == userId) || isAdmin();
       allow write: if (request.auth != null && request.auth.uid == userId) || isAdmin();
     }

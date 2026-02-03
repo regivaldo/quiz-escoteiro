@@ -7,7 +7,7 @@ import { questions } from '../../../data/questions';
 import { useNavigate, useParams } from 'react-router';
 import { useUserStore } from '@/stores/userStore';
 import { db } from '@/config/firebase';
-import { addDoc, collection, doc, getDoc, serverTimestamp } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, serverTimestamp, updateDoc, increment } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
 
@@ -120,6 +120,11 @@ const QuizPage = () => {
       };
 
       await addDoc(collection(db, 'users', user.id, 'quiz_history'), resultData);
+
+      // Atualiza o totalPoints do usuário para o ranking
+      await updateDoc(doc(db, 'users', user.id), {
+        totalPoints: increment(totalPoints),
+      });
 
       navigate('/game/resultado', {
         state: {

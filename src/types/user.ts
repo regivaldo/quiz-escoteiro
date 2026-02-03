@@ -8,9 +8,5 @@ export type UserType = {
   city?: string;
   state?: string;
   isAdmin?: boolean;
-};
-
-export type UserStoreType = {
-  user: UserType | null;
-  setUser: (user: UserType | null) => void;
+  totalPoints?: number;
 };

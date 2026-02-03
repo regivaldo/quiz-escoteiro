@@ -4,34 +4,36 @@ import { auth } from '@/config/firebase';
 import { useUserStore } from '@/stores/userStore';
 import Subheader from '../components/Subheader';
 import Google from '@/assets/google.svg?react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const setUser = useUserStore((state) => state.setUser);
+  const { user, isLoading } = useUserStore();
   const [error, setError] = useState<string | null>(null);
+  const [isSigningIn, setIsSigningIn] = useState(false);
+
+  // Redireciona quando o usuário estiver carregado (via onAuthStateChanged no main.tsx)
+  useEffect(() => {
+    if (!isLoading && user) {
+      navigate('/game');
+    }
+  }, [user, isLoading, navigate]);
 
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
     setError(null);
+    setIsSigningIn(true);
 
     try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      console.log('Logged in user:', user);
-      setUser({
-        id: user.uid,
-        name: user.displayName || '',
-        email: user.email || '',
-        photoURL: user.photoURL || '',
-        group: 'Escoteiro', // Default Group or fetch from DB later
-      });
-
-      navigate('/game');
+      await signInWithPopup(auth, provider);
+      // Não faz setUser nem navigate aqui!
+      // O onAuthStateChanged no main.tsx cuida de carregar os dados do Firestore
+      // e o useEffect acima cuida da navegação quando o usuário estiver pronto
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       console.error('Google login error:', message);
       setError('Erro ao fazer login: ' + message);
+      setIsSigningIn(false);
     }
   };
 
@@ -44,10 +46,20 @@ const LoginPage = () => {
 
         <button
           onClick={handleGoogleLogin}
-          className="flex items-center justify-center gap-3 w-full max-w-sm bg-white hover:bg-gray-50 text-gray-700 font-medium py-3 px-6 rounded-lg border border-gray-300 shadow-sm transition-all duration-200 hover:shadow-md cursor-pointer"
+          disabled={isSigningIn}
+          className="flex items-center justify-center gap-3 w-full max-w-sm bg-white hover:bg-gray-50 text-gray-700 font-medium py-3 px-6 rounded-lg border border-gray-300 shadow-sm transition-all duration-200 hover:shadow-md cursor-pointer disabled:opacity-70 disabled:cursor-wait"
         >
-          <Google />
-          Entrar com Google
+          {isSigningIn ? (
+            <>
+              <div className="w-5 h-5 border-2 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
+              Entrando...
+            </>
+          ) : (
+            <>
+              <Google />
+              Entrar com Google
+            </>
+          )}
         </button>
 
         <p className="text-sm text-text-on-dark-muted text-center">

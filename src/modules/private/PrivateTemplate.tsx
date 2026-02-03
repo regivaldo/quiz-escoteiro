@@ -7,11 +7,14 @@ import { useEffect } from 'react';
 
 const PrivateTemplate = () => {
   const queryClient = new QueryClient();
-  const { user } = useUserStore();
+  const { user, isLoading } = useUserStore();
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Aguarda o carregamento dos dados do usuário antes de verificar
+    if (isLoading) return;
+
     if (user) {
       // Check if profile is complete (ignoring group as it has a default)
       const isSetupComplete = user.numeral && user.city && user.state;
@@ -21,7 +24,19 @@ const PrivateTemplate = () => {
         navigate('/game/primeiro-acesso');
       }
     }
-  }, [user, location.pathname, navigate]);
+  }, [user, isLoading, location.pathname, navigate]);
+
+  // Mostra loading enquanto carrega dados do usuário
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-text-muted">Carregando...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <QueryClientProvider client={queryClient}>

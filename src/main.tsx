@@ -18,6 +18,7 @@ onAuthStateChanged(auth, async (user) => {
     let numeral = undefined;
     let city = undefined;
     let state = undefined;
+    let totalPoints = 0;
 
     try {
       if (user.email) {
@@ -38,6 +39,7 @@ onAuthStateChanged(auth, async (user) => {
         numeral = data.numeral;
         city = data.city;
         state = data.state;
+        totalPoints = data.totalPoints || 0;
       } else {
         // Create user document if it doesn't exist
         await setDoc(userRef, {
@@ -63,6 +65,7 @@ onAuthStateChanged(auth, async (user) => {
       city,
       state,
       isAdmin: isAdmin,
+      totalPoints,
     });
   } else {
     useUserStore.getState().setUser(null);
