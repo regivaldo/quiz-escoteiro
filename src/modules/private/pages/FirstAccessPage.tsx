@@ -62,7 +62,14 @@ const FirstAccessPage = () => {
     const { name, value } = e.target;
 
     setFormData((prev) => {
-      const updates: typeof prev = { ...prev, [name]: value };
+      let processedValue = value;
+
+      // Remove "Grupo Escoteiro" do início se o usuário digitar
+      if (name === 'group') {
+        processedValue = value.replace(/^(grupo\s+escoteiro\s*)/i, '').trim();
+      }
+
+      const updates: typeof prev = { ...prev, [name]: processedValue };
       if (name === 'state') {
         updates.city = ''; // Reset city when state changes
       }
@@ -129,9 +136,10 @@ const FirstAccessPage = () => {
               name="group"
               value={formData.group}
               onChange={handleChange}
-              placeholder="Ex: Grupo Escoteiro Marechal Rondon"
+              placeholder="Ex: Marechal Rondon"
               className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-dark focus:outline-0 focus:ring-0 border border-border bg-background focus:border-primary h-14 p-[15px] text-base font-normal leading-normal placeholder:text-text-muted"
             />
+            <span className="text-text-muted text-sm mt-1">Digite apenas o nome do grupo, sem "Grupo Escoteiro".</span>
           </label>
 
           <label className="flex flex-col">

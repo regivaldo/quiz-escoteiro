@@ -1,7 +1,7 @@
 import { db } from '@/config/firebase';
 import { useUserStore } from '@/stores/userStore';
 import type { UserType } from '@/types/user';
-import { CaretLeftIcon, CaretRightIcon, UsersIcon, TrashIcon } from '@phosphor-icons/react';
+import { CaretLeftIcon, CaretRightIcon, UsersIcon, TrashIcon, UserMinusIcon } from '@phosphor-icons/react';
 import {
   collection,
   getDocs,
@@ -15,6 +15,8 @@ import {
   endBefore,
   limitToLast,
   writeBatch,
+  doc,
+  deleteDoc,
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -34,6 +36,7 @@ const AdminUsersPage = () => {
   const [page, setPage] = useState(1);
   const [isNextPageAvailable, setIsNextPageAvailable] = useState(true);
   const [userToClear, setUserToClear] = useState<UserWithStats | null>(null);
+  const [userToDelete, setUserToDelete] = useState<UserWithStats | null>(null);
 
   // Get current logged-in user to highlight
   const { user: currentUser } = useUserStore();
@@ -130,6 +133,37 @@ const AdminUsersPage = () => {
     }
   };
 
+  const handleDeleteUser = async () => {
+    if (!userToDelete) return;
+
+    try {
+      const batch = writeBatch(db);
+
+      // Primeiro, deletar todo o histórico de quizzes
+      const historyRef = collection(db, 'users', userToDelete.id, 'quiz_history');
+      const snapshot = await getDocs(historyRef);
+
+      snapshot.docs.forEach((docSnapshot) => {
+        batch.delete(docSnapshot.ref);
+      });
+
+      await batch.commit();
+
+      // Depois, deletar o documento do usuário
+      await deleteDoc(doc(db, 'users', userToDelete.id));
+
+      // Remover da lista local
+      setUsers((prev) => prev.filter((u) => u.id !== userToDelete.id));
+
+      toast.success(`Usuário ${userToDelete.name} deletado com sucesso!`);
+    } catch (error) {
+      console.error('Erro ao deletar usuário:', error);
+      toast.error('Erro ao deletar usuário.');
+    } finally {
+      setUserToDelete(null);
+    }
+  };
+
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -207,13 +241,24 @@ const AdminUsersPage = () => {
                       </span>
                     </td>
                     <td className="px-6 py-4 text-center">
-                      <button
-                        onClick={() => setUserToClear(user)}
-                        className="inline-flex items-center justify-center p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
-                        title="Limpar Histórico de Quizzes"
-                      >
-                        <TrashIcon size={20} />
-                      </button>
+                      <div className="flex items-center justify-center gap-1">
+                        <button
+                          onClick={() => setUserToClear(user)}
+                          className="inline-flex items-center justify-center p-2 text-orange-500 hover:bg-orange-50 rounded-lg transition-colors cursor-pointer"
+                          title="Limpar Histórico de Quizzes"
+                        >
+                          <TrashIcon size={20} />
+                        </button>
+                        {currentUser?.id !== user.id && (
+                          <button
+                            onClick={() => setUserToDelete(user)}
+                            className="inline-flex items-center justify-center p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
+                            title="Deletar Usuário"
+                          >
+                            <UserMinusIcon size={20} />
+                          </button>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))
@@ -271,6 +316,17 @@ const AdminUsersPage = () => {
         message={`Tem certeza que deseja limpar todo o histórico de quizzes de ${userToClear?.name}? Esta ação não pode ser desfeita.`}
         isDestructive
         confirmText="Limpar"
+        cancelText="Cancelar"
+      />
+
+      <ConfirmationModal
+        isOpen={userToDelete !== null}
+        onClose={() => setUserToDelete(null)}
+        onConfirm={handleDeleteUser}
+        title="Deletar Usuário"
+        message={`Tem certeza que deseja DELETAR permanentemente o usuário ${userToDelete?.name}? Isso removerá todos os dados, incluindo histórico de quizzes. Esta ação NÃO pode ser desfeita.`}
+        isDestructive
+        confirmText="Deletar Usuário"
         cancelText="Cancelar"
       />
     </div>
