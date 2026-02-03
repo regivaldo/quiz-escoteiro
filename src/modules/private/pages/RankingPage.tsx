@@ -9,6 +9,8 @@ type RankingEntry = {
   id: string;
   name: string;
   group: string;
+  numeral: string;
+  state: string;
   score: number;
 };
 
@@ -45,6 +47,8 @@ const RankingPage = () => {
             id: doc.id,
             name: data.name || 'Usuário',
             group: data.group || '-',
+            numeral: data.numeral || '',
+            state: data.state || '',
             score: data.totalPoints || 0,
           };
         });
@@ -177,7 +181,9 @@ const RankingPage = () => {
                       <td className={`h-[72px] px-6 py-2 ${index === 0 ? 'text-base' : ''}`}>
                         {getIconPosition(index + 1)} {player.name}
                       </td>
-                      <td className={`h-[72px] px-6 py-2 ${index === 0 ? 'text-base' : ''}`}>{player.group}</td>
+                      <td className={`h-[72px] px-6 py-2 ${index === 0 ? 'text-base' : ''}`}>
+                        {player.group} {player.numeral}-{player.state}
+                      </td>
                       <td className={`h-[72px] px-6 py-2 text-right ${index === 0 ? 'text-base' : ''}`}>
                         {player.score.toLocaleString()}
                       </td>
