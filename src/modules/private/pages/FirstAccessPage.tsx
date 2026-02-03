@@ -19,6 +19,8 @@ const FirstAccessPage = () => {
     state: '',
   });
 
+  const [groupError, setGroupError] = useState(false);
+
   useEffect(() => {
     const fetchStates = async () => {
       try {
@@ -64,11 +66,6 @@ const FirstAccessPage = () => {
     setFormData((prev) => {
       let processedValue = value;
 
-      // Remove "Grupo Escoteiro" do início se o usuário digitar
-      if (name === 'group') {
-        processedValue = value.replace(/^(grupo\s+escoteiro\s*)/i, '').trim();
-      }
-
       const updates: typeof prev = { ...prev, [name]: processedValue };
       if (name === 'state') {
         updates.city = ''; // Reset city when state changes
@@ -76,6 +73,21 @@ const FirstAccessPage = () => {
       return updates;
     });
   };
+
+  const handleGroupBlur = () => {
+    if (formData.group && /(grupo|escoteiro)/i.test(formData.group)) {
+      setGroupError(true);
+    } else {
+      setGroupError(false);
+    }
+  };
+
+  const isFormValid =
+    formData.group.trim() !== '' &&
+    formData.numeral.trim() !== '' &&
+    formData.city !== '' &&
+    formData.state !== '' &&
+    !/(grupo|escoteiro)/i.test(formData.group);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -85,8 +97,8 @@ const FirstAccessPage = () => {
       return;
     }
 
-    if (!formData.group || !formData.numeral || !formData.city || !formData.state) {
-      toast.warning('Por favor, preencha todos os campos.');
+    if (!isFormValid) {
+      toast.warning('Por favor, preencha todos os campos corretamente.');
       return;
     }
 
@@ -136,10 +148,21 @@ const FirstAccessPage = () => {
               name="group"
               value={formData.group}
               onChange={handleChange}
+              onBlur={handleGroupBlur}
               placeholder="Ex: Marechal Rondon"
-              className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-dark focus:outline-0 focus:ring-0 border border-border bg-background focus:border-primary h-14 p-[15px] text-base font-normal leading-normal placeholder:text-text-muted"
+              className={`form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-dark focus:outline-0 focus:ring-0 border bg-background focus:border-primary h-14 p-[15px] text-base font-normal leading-normal placeholder:text-text-muted ${
+                groupError ? 'border-red-500' : 'border-border'
+              }`}
             />
-            <span className="text-text-muted text-sm mt-1">Digite apenas o nome do grupo, sem "Grupo Escoteiro".</span>
+            {groupError ? (
+              <span className="text-red-500 text-sm mt-1">
+                Os termos "Grupo" e "Escoteiro" não precisam ser adicionados
+              </span>
+            ) : (
+              <span className="text-text-muted text-sm mt-1">
+                Digite apenas o nome do grupo, sem "Grupo Escoteiro".
+              </span>
+            )}
           </label>
 
           <label className="flex flex-col">
@@ -198,8 +221,8 @@ const FirstAccessPage = () => {
           <div className="flex justify-end pt-4">
             <button
               type="submit"
-              disabled={isLoading}
-              className={`flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-background-dark text-base font-bold leading-normal tracking-[0.015em] hover:bg-opacity-90 transition-colors ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
+              disabled={isLoading || !isFormValid}
+              className={`flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-background-dark text-base font-bold leading-normal tracking-[0.015em] hover:bg-opacity-90 transition-colors ${isLoading || !isFormValid ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               {isLoading ? 'Salvando...' : 'Salvar Cadastro'}
             </button>
