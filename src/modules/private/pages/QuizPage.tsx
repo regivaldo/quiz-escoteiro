@@ -155,7 +155,10 @@ const QuizPage = () => {
   };
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
+    <div
+      className="relative flex w-full flex-col items-center justify-center p-4 sm:p-6 lg:p-8"
+      style={{ minHeight: 'calc(100vh - 144px - 64px - 64px)' }}
+    >
       <div className="w-full max-w-2xl">
         {/* Header with Progress and Timer */}
         <div className="mb-8 w-full">
