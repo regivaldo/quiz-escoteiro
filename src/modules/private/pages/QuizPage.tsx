@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { ArrowRightIcon } from '@phosphor-icons/react';
 import OptionIcon from '../components/OptionIcon';
-import Timer from '../components/Timer';
+import Timer, { type TimerRef } from '../components/Timer';
 import ProgressBar from '../components/ProgressBar';
 import { questions } from '../../../data/questions';
 import { useNavigate, useParams } from 'react-router';
@@ -9,7 +9,12 @@ import { useUserStore } from '@/stores/userStore';
 import { db } from '@/config/firebase';
 import { addDoc, collection, doc, getDoc, serverTimestamp, updateDoc, increment } from 'firebase/firestore';
 import { toast } from 'react-toastify';
-import { useEffect } from 'react';
+
+// Constantes para pontuação
+const TIMER_TOTAL_SECONDS = 90; // 01:30
+const POINTS_FAST = 200; // Até 10 segundos
+const POINTS_MEDIUM = 150; // Até metade do tempo
+const POINTS_SLOW = 100; // Acima da metade do tempo
 
 const QuizPage = () => {
   const navigate = useNavigate();
@@ -23,6 +28,20 @@ const QuizPage = () => {
   const [correctCount, setCorrectCount] = useState(0);
   const [incorrectCount, setIncorrectCount] = useState(0);
   const [isSaving, setIsSaving] = useState(false);
+  const [totalScore, setTotalScore] = useState(0); // Pontuação acumulada
+
+  // Ref do Timer para obter tempo restante
+  const timerRef = useRef<TimerRef>(null);
+
+  // Armazena as respostas do usuário para exibir no resultado
+  type UserAnswer = {
+    question: string;
+    userAnswer: string | null; // null significa que o tempo acabou
+    correctAnswer: string;
+    isCorrect: boolean;
+    timedOut: boolean;
+  };
+  const [userAnswers, setUserAnswers] = useState<UserAnswer[]>([]);
 
   // Fetch Quiz Title (using dummy simple approach for now or proper fetch)
   // Ideally we should have the full quiz object here, but for now we fetch to save the name.
@@ -78,15 +97,49 @@ const QuizPage = () => {
     setSelectedOption(optionText);
   };
 
+  // Calcula pontos baseado no tempo de resposta
+  const calculatePoints = (): number => {
+    if (!timerRef.current) return POINTS_SLOW;
+
+    const timeRemaining = timerRef.current.getTimeRemaining();
+    const timeElapsed = TIMER_TOTAL_SECONDS - timeRemaining;
+    const halfTime = TIMER_TOTAL_SECONDS / 2;
+
+    if (timeElapsed <= 10) {
+      return POINTS_FAST; // 200 pontos - respondeu muito rápido
+    } else if (timeElapsed <= halfTime) {
+      return POINTS_MEDIUM; // 150 pontos - respondeu até a metade do tempo
+    } else {
+      return POINTS_SLOW; // 100 pontos - respondeu depois da metade
+    }
+  };
+
   const handleConfirmAnswer = () => {
     if (!selectedOption) return;
 
     const selectedOptionData = options.find((opt) => opt.text === selectedOption);
-    if (selectedOptionData?.isCorrect) {
+    const correctOption = options.find((opt) => opt.isCorrect);
+    const isCorrect = selectedOptionData?.isCorrect || false;
+
+    if (isCorrect) {
+      const points = calculatePoints();
       setCorrectCount((prev) => prev + 1);
+      setTotalScore((prev) => prev + points);
     } else {
       setIncorrectCount((prev) => prev + 1);
     }
+
+    // Salva a resposta do usuário
+    setUserAnswers((prev) => [
+      ...prev,
+      {
+        question: question,
+        userAnswer: selectedOption,
+        correctAnswer: correctOption?.text || '',
+        isCorrect: isCorrect,
+        timedOut: false,
+      },
+    ]);
 
     setHasConfirmed(true);
   };
@@ -99,22 +152,109 @@ const QuizPage = () => {
     }
   };
 
+  // Chamado quando o tempo do timer acaba
+  const handleTimeUp = useCallback(async () => {
+    // Não faz nada se já confirmou a resposta
+    if (hasConfirmed) return;
+
+    // Busca a resposta correta da pergunta atual
+    const currentOptions = questions[currentQuestionIndex].options;
+    const correctOption = currentOptions.find((opt) => opt.isCorrect);
+
+    // Salva a resposta como timeout
+    const timedOutAnswer = {
+      question: questions[currentQuestionIndex].question,
+      userAnswer: null,
+      correctAnswer: correctOption?.text || '',
+      isCorrect: false,
+      timedOut: true,
+    };
+
+    // Atualiza contagem de incorretas (a resposta atual será incorreta)
+    const newIncorrectCount = incorrectCount + 1;
+    setIncorrectCount(newIncorrectCount);
+
+    // Se for a última pergunta, salva e navega para resultado
+    if (isLastQuestion) {
+      toast.warning('Tempo esgotado!');
+
+      if (!user) return;
+      setIsSaving(true);
+
+      try {
+        const accuracy = correctCount / totalQuestions;
+        const bonusPoints = accuracy >= 0.8 ? 500 : 0;
+        const finalTotalPoints = totalScore + bonusPoints;
+
+        const resultData = {
+          quizSlug: slug || 'unknown',
+          quizTitle: quizTitle || slug || 'Quiz Sem Título',
+          correctAnswers: correctCount,
+          wrongAnswers: newIncorrectCount,
+          totalPoints: finalTotalPoints,
+          respondedAt: serverTimestamp(),
+          totalQuestions: totalQuestions,
+        };
+
+        await addDoc(collection(db, 'users', user.id, 'quiz_history'), resultData);
+
+        // Atualiza o totalPoints do usuário para o ranking
+        await updateDoc(doc(db, 'users', user.id), {
+          totalPoints: increment(finalTotalPoints),
+        });
+
+        navigate('/game/resultado', {
+          state: {
+            result: {
+              ...resultData,
+              respondedAt: new Date().toISOString(),
+            },
+            userAnswers: [...userAnswers, timedOutAnswer],
+          },
+        });
+      } catch (error) {
+        console.error('Error saving quiz result:', error);
+        toast.error('Erro ao salvar resultado.');
+        setIsSaving(false);
+      }
+    } else {
+      // Salva a resposta e pula para a próxima pergunta
+      setUserAnswers((prev) => [...prev, timedOutAnswer]);
+      toast.warning('Tempo esgotado! Pulando para a próxima pergunta.');
+      setCurrentQuestionIndex((prev) => prev + 1);
+      setSelectedOption(null);
+      setHasConfirmed(false);
+    }
+  }, [
+    hasConfirmed,
+    isLastQuestion,
+    incorrectCount,
+    correctCount,
+    totalQuestions,
+    user,
+    slug,
+    quizTitle,
+    navigate,
+    currentQuestionIndex,
+    userAnswers,
+    totalScore,
+  ]);
+
   const handleViewResult = async () => {
     if (!user) return;
     setIsSaving(true);
 
     try {
       const accuracy = correctCount / totalQuestions;
-      const pointsPerCorrect = 100;
       const bonusPoints = accuracy >= 0.8 ? 500 : 0;
-      const totalPoints = correctCount * pointsPerCorrect + bonusPoints;
+      const finalTotalPoints = totalScore + bonusPoints;
 
       const resultData = {
         quizSlug: slug || 'unknown',
         quizTitle: quizTitle || slug || 'Quiz Sem Título',
         correctAnswers: correctCount,
         wrongAnswers: incorrectCount,
-        totalPoints: totalPoints,
+        totalPoints: finalTotalPoints,
         respondedAt: serverTimestamp(),
         totalQuestions: totalQuestions,
       };
@@ -123,7 +263,7 @@ const QuizPage = () => {
 
       // Atualiza o totalPoints do usuário para o ranking
       await updateDoc(doc(db, 'users', user.id), {
-        totalPoints: increment(totalPoints),
+        totalPoints: increment(finalTotalPoints),
       });
 
       navigate('/game/resultado', {
@@ -132,6 +272,7 @@ const QuizPage = () => {
             ...resultData,
             respondedAt: new Date().toISOString(), // Serializable date for state
           },
+          userAnswers: userAnswers,
         },
       });
     } catch (error) {
@@ -164,7 +305,7 @@ const QuizPage = () => {
         <div className="mb-8 w-full">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <ProgressBar currentQuestion={currentQuestionIndex + 1} totalQuestions={totalQuestions} />
-            <Timer startTime="01:30" />
+            <Timer ref={timerRef} startTime="01:30" onTimeUp={handleTimeUp} resetKey={currentQuestionIndex} />
           </div>
         </div>
 

@@ -54,7 +54,10 @@ const ResultPage = () => {
   };
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col items-center justify-center p-4">
+    <div
+      className="relative flex w-full flex-col items-center justify-center p-4"
+      style={{ minHeight: 'calc(100vh - 144px - 64px - 64px)' }}
+    >
       <div className="w-full max-w-2xl px-4 py-8">
         {/* Header */}
         <div className="text-center">
@@ -121,6 +124,7 @@ const ResultPage = () => {
           {/* View Answers */}
           <Link
             to="/game/respostas"
+            state={{ userAnswers: location.state?.userAnswers }}
             className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-gray-200 px-6 text-base font-bold text-gray-800 transition-colors hover:bg-gray-300 sm:w-auto"
           >
             <EyeIcon size={24} />

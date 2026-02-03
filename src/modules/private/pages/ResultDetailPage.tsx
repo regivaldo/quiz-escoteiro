@@ -1,35 +1,34 @@
-import { ArrowLeftIcon, CheckIcon, HouseIcon, XIcon } from '@phosphor-icons/react';
-import { Link } from 'react-router';
+import { ArrowLeftIcon, CheckIcon, HouseIcon, XIcon, ClockIcon } from '@phosphor-icons/react';
+import { Link, useLocation, useNavigate } from 'react-router';
+import { useEffect } from 'react';
+
+type UserAnswer = {
+  question: string;
+  userAnswer: string | null;
+  correctAnswer: string;
+  isCorrect: boolean;
+  timedOut: boolean;
+};
 
 const ResultDetailPage = () => {
-  // Mock data - in real app this would come from props/state
-  const answers = [
-    {
-      question: 'Qual é o lema do Ramo Lobinho?',
-      userAnswer: 'Melhor Possível',
-      isCorrect: true,
-    },
-    {
-      question: 'Em que ano foi realizado o primeiro Acampamento Escoteiro Experimental por Baden-Powell?',
-      userAnswer: '1905',
-      correctAnswer: '1907',
-      isCorrect: false,
-    },
-    {
-      question: 'Qual o nó utilizado para unir duas cordas de mesma espessura?',
-      userAnswer: 'Nó Direito',
-      isCorrect: true,
-    },
-    {
-      question: 'Qual flor de lis é o símbolo mundial do escotismo?',
-      userAnswer: 'A flor de lis dourada com um fundo roxo',
-      correctAnswer: 'A flor de lis branca com um fundo roxo',
-      isCorrect: false,
-    },
-  ];
+  const location = useLocation();
+  const navigate = useNavigate();
+  const userAnswers: UserAnswer[] = location.state?.userAnswers || [];
+
+  // Redireciona se acessar diretamente sem dados
+  useEffect(() => {
+    if (!userAnswers || userAnswers.length === 0) {
+      navigate('/game');
+    }
+  }, [userAnswers, navigate]);
+
+  if (!userAnswers || userAnswers.length === 0) return null;
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col items-center justify-center p-4">
+    <div
+      className="relative flex w-full flex-col items-center justify-center p-4"
+      style={{ minHeight: 'calc(100vh - 144px - 64px - 64px)' }}
+    >
       <div className="w-full max-w-3xl px-4 py-8">
         {/* Header */}
         <div className="text-center">
@@ -41,24 +40,42 @@ const ResultDetailPage = () => {
 
         {/* Answers List */}
         <div className="mt-8 space-y-6">
-          {answers.map((answer, index) => (
+          {userAnswers.map((answer, index) => (
             <div key={index} className="overflow-hidden rounded-xl bg-white shadow-lg">
-              <div className={`border-l-8 p-6 ${answer.isCorrect ? 'border-primary' : 'border-red-500'}`}>
+              <div
+                className={`border-l-8 p-6 ${
+                  answer.timedOut ? 'border-orange-500' : answer.isCorrect ? 'border-primary' : 'border-red-500'
+                }`}
+              >
                 <p className="text-lg font-semibold text-[#1c1e14]">
                   {index + 1}. {answer.question}
                 </p>
                 <div className="mt-4 flex flex-col gap-3">
                   <div className="flex items-center gap-3">
                     <div
-                      className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-white ${answer.isCorrect ? 'bg-primary' : 'bg-red-500'}`}
+                      className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-white ${
+                        answer.timedOut ? 'bg-orange-500' : answer.isCorrect ? 'bg-primary' : 'bg-red-500'
+                      }`}
                     >
-                      {answer.isCorrect ? <CheckIcon size={20} weight="bold" /> : <XIcon size={20} weight="bold" />}
+                      {answer.timedOut ? (
+                        <ClockIcon size={20} weight="bold" />
+                      ) : answer.isCorrect ? (
+                        <CheckIcon size={20} weight="bold" />
+                      ) : (
+                        <XIcon size={20} weight="bold" />
+                      )}
                     </div>
                     <p className="text-gray-700">
-                      Sua resposta:{' '}
-                      <span className={`font-medium ${!answer.isCorrect ? 'text-red-500 line-through' : ''}`}>
-                        {answer.userAnswer}
-                      </span>
+                      {answer.timedOut ? (
+                        <span className="font-medium text-orange-600">O tempo acabou e você não respondeu</span>
+                      ) : (
+                        <>
+                          Sua resposta:{' '}
+                          <span className={`font-medium ${!answer.isCorrect ? 'text-red-500 line-through' : ''}`}>
+                            {answer.userAnswer}
+                          </span>
+                        </>
+                      )}
                     </p>
                   </div>
                   {!answer.isCorrect && answer.correctAnswer && (
