@@ -14,7 +14,7 @@ type RankingEntry = {
   score: number;
 };
 
-type RankingPeriod = 'Diário' | 'Semanal' | 'Geral' | 'Meu grupo';
+type RankingPeriod = 'Geral' | 'Meu grupo escoteiro';
 
 const RankingPage = () => {
   const { user } = useUserStore();
@@ -30,12 +30,11 @@ const RankingPage = () => {
         const usersRef = collection(db, 'users');
         let q;
 
-        if (selectedPeriod === 'Meu grupo' && user?.group) {
+        if (selectedPeriod === 'Meu grupo escoteiro' && user?.group) {
           // Filtra por grupo do usuário logado
           q = query(usersRef, where('group', '==', user.group), orderBy('totalPoints', 'desc'), limit(50));
         } else {
-          // Ranking geral - por enquanto Diário e Semanal também mostram Geral
-          // TODO: Implementar filtro por período quando houver dados de data
+          // Ranking geral
           q = query(usersRef, orderBy('totalPoints', 'desc'), limit(50));
         }
 
@@ -112,7 +111,7 @@ const RankingPage = () => {
     setSelectedPeriod(period);
   };
 
-  const periods: RankingPeriod[] = ['Diário', 'Semanal', 'Geral', 'Meu grupo'];
+  const periods: RankingPeriod[] = ['Geral', 'Meu grupo escoteiro'];
 
   return (
     <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
