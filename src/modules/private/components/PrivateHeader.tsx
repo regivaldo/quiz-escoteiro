@@ -1,9 +1,12 @@
 import Logo from '@/assets/logo.svg?react';
 import { Link, NavLink } from 'react-router';
 import { useUserStore } from '@/stores/userStore';
+import { useState } from 'react';
+import { ListIcon, XIcon } from '@phosphor-icons/react';
 
 const PrivateHeader = () => {
   const user = useUserStore((state) => state.user);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-10 w-full bg-white/80 backdrop-blur-sm">
@@ -64,8 +67,56 @@ const PrivateHeader = () => {
             style={{ backgroundImage: `url('${user?.photoURL}')` }}
             aria-label="User avatar"
           />
+          <button
+            className="sm:hidden text-gray-900 p-1"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <XIcon size={24} /> : <ListIcon size={24} />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="absolute top-full left-0 right-0 bg-white border-t border-gray-100 shadow-lg sm:hidden flex flex-col p-4 gap-4 animate-in slide-in-from-top-2">
+          <NavLink
+            to="/game"
+            end
+            onClick={() => setIsMenuOpen(false)}
+            className={({ isActive }) =>
+              isActive ? 'text-primary font-medium py-2' : 'text-gray-700 hover:text-primary transition-colors py-2'
+            }
+          >
+            Início
+          </NavLink>
+          <NavLink
+            to="/game/ranking"
+            end
+            onClick={() => setIsMenuOpen(false)}
+            className={({ isActive }) =>
+              isActive ? 'text-primary font-medium py-2' : 'text-gray-700 hover:text-primary transition-colors py-2'
+            }
+          >
+            Ranking
+          </NavLink>
+          <NavLink
+            to="/game/perfil"
+            end
+            onClick={() => setIsMenuOpen(false)}
+            className={({ isActive }) =>
+              isActive ? 'text-primary font-medium py-2' : 'text-gray-700 hover:text-primary transition-colors py-2'
+            }
+          >
+            Meu Perfil
+          </NavLink>
+          {user?.isAdmin && (
+            <Link to="/admin" onClick={() => setIsMenuOpen(false)} className="text-primary font-bold py-2">
+              Administração
+            </Link>
+          )}
+        </div>
+      )}
     </header>
   );
 };
